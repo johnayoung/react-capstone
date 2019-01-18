@@ -1,11 +1,23 @@
 'use strict';
 
 const express = require('express');
+const morgan = require('morgan');
+const mongoose = require('mongoose');
+const passport = require('passport');
+const localStrategy = require('./passport/local');
+const jwtStrategy = require('./passport/jwt');
 
-const { PORT } = require('./config');
-const router = require('./routes/notes.router');
+const { PORT, MONGODB_URI } = require('./config');
+
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const app = express();
+
+// Log all requests. Skip logging during testing
+app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
+  skip: () => process.env.NODE_ENV === 'test'
+}));
 
 // Create a static webserver
 app.use(express.static('public'));
@@ -13,8 +25,9 @@ app.use(express.static('public'));
 // Parse request body
 app.use(express.json());
 
-// Mount router on "/api"
-app.use('/api', router);
+// Mount routers
+app.use('/api/users', usersRouter);
+app.use('/api', authRouter);
 
 // Catch-all 404
 app.use(function (req, res, next) {
@@ -23,13 +36,14 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-// Catch-all Error handler
-app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.json({
-    message: err.message,
-    error: app.get('env') === 'development' ? err : {}
-  });
+// Custom Error Handler
+app.use((err, req, res, next) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
   
 app.startServer = function (port) {
@@ -43,13 +57,21 @@ app.startServer = function (port) {
   
 // Listen for incoming connections
 if (require.main === module) {
-  app.startServer(PORT).catch(err => {
-    if (err.code === 'EADDRINUSE') {
-      const stars = '*'.repeat(80);
-      console.error(`${stars}\nEADDRINUSE (Error Address In Use). Please stop other web servers using port ${PORT}\n${stars}`);
-    }
+  // Connect to DB and Listen for incoming connections
+  mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
+    .then(instance => {
+      const conn = instance.connections[0];
+      console.info(`Connected to: mongodb://${conn.host}:${conn.port}/${conn.name}`);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+  app.listen(PORT, function () {
+    console.info(`Server listening on ${this.address().port}`);
+  }).on('error', err => {
     console.error(err);
   });
 }
-  
+
 module.exports = app; // Export for testing
