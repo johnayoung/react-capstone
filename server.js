@@ -25,6 +25,10 @@ app.use(express.static('public'));
 // Parse request body
 app.use(express.json());
 
+// Configure passport to utilize strategies
+passport.use(localStrategy);
+passport.use(jwtStrategy);
+
 // Mount routers
 app.use('/api/users', usersRouter);
 app.use('/api', authRouter);
