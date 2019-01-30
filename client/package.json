@@ -26,6 +26,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "redux-devtools-extension": "^2.13.7"
+    "redux-devtools-extension": "^2.13.7",
+    "react-scripts": "2.1.3"
   }
 }
