@@ -1,3 +1,3 @@
-# Boilerplate
+# React Capstone
 
-Various boilerplates to use when creating a project
+React capstone for John Young
