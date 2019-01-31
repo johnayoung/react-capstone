@@ -43,3 +43,20 @@ const state = {
         'Social'
     ]
 }
+
+const state = {
+    addEndpoint: {
+        fullUrl: '',
+        name: '',
+        description: '',
+        parameters: [
+            {
+                id: '',
+                name: '',
+                condition: 'required',
+                type: '',
+                value: ''
+            }
+        ]
+    }
+}

@@ -10,6 +10,7 @@ const jwtStrategy = require('./passport/jwt');
 const { PORT, MONGODB_URI } = require('./config');
 
 const usersRouter = require('./routes/users');
+const endpointsRouter = require('./routes/endpoints');
 const authRouter = require('./routes/auth');
 
 const app = express();
@@ -31,6 +32,7 @@ passport.use(jwtStrategy);
 
 // Mount routers
 app.use('/api/users', usersRouter);
+app.use('/api/endpoints', endpointsRouter);
 app.use('/api', authRouter);
 
 // Catch-all 404
