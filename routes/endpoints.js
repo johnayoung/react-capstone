@@ -21,6 +21,7 @@ const validBody = [
 function createEndpoint(name, description, fullUrl) {
   const parsedURI = Endpoint.parseURL(fullUrl);
   const { domain } = parsedURI;
+  const favicon = `https://api.faviconkit.com/${domain}/144`;
 
   if (!description) {
     description = `An endpoint from ${domain}`;
@@ -29,8 +30,11 @@ function createEndpoint(name, description, fullUrl) {
   return Object.assign({}, {
     name,
     description,
-    fullUrl
+    fullUrl,
+    favicon
   }, parsedURI);
+
+//   return Object.assign({}, firstObj, {favicon});
 }
 
 /* ========== GET ENDPOINTS ========== */

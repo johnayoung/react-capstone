@@ -41,7 +41,7 @@ endpointSchema.statics.parseURL = (uri) => {
     protocol: wurl('protocol', uri),
     path: wurl('path', uri),
     query: wurl('query', uri),
-    queryObj: wurl('?', uri)
+    queryObj: wurl('?', uri),
   };
 };
 
