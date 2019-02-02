@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const passport = require('passport');
@@ -22,6 +23,7 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
 
 // Create a static webserver
 // app.use(express.static('public'));
+app.use(cors());
 
 // Parse request body
 app.use(express.json());

@@ -25,6 +25,7 @@
   "homepage": "https://github.com/johnatspreadstreet/boilerplate#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
@@ -35,6 +36,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "query-string": "^6.2.0",
+    "redux-thunk": "^2.3.0",
     "wurl": "^2.5.3"
   },
   "devDependencies": {

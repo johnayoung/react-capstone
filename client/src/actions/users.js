@@ -5,7 +5,7 @@ import axios from 'axios';
 export const registerUser = user => dispatch => {
     const config = {
         method: 'post',
-        url: `${API_BASE_URL}/auth/login`,
+        url: `${API_BASE_URL}/users`,
         headers: {
             'Content-Type': 'application/json'
         },

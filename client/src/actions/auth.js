@@ -1,9 +1,10 @@
 import jwtDecode from 'jwt-decode';
+import {SubmissionError} from 'redux-form';
 import axios from 'axios';
 
 import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
-import {saveAuthToken, clearAuthToken} from '../local-storage';
+import {saveAuthToken, clearAuthToken} from '../localStorage';
 
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const CLEAR_AUTH = 'CLEAR_AUTH'
@@ -48,7 +49,7 @@ export const login = (username, password) => dispatch => {
     dispatch(authRequest());
     const config = {
         method: 'post',
-        url: `${API_BASE_URL}/auth/login`,
+        url: `${API_BASE_URL}/login`,
         headers: {
             'Content-Type': 'application/json'
         },
@@ -59,8 +60,10 @@ export const login = (username, password) => dispatch => {
     }
     return (
         axios(config)
-        .then(res => res.json())
-        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        .then(res => {
+            const {authToken} = res.data
+            return storeAuthInfo(authToken, dispatch)
+        })
         .catch(err => {
             const {code} = err;
             const message = 
@@ -68,6 +71,34 @@ export const login = (username, password) => dispatch => {
                 ? 'Incorrect username or password'
                 : 'Unable to login, please try again';
             dispatch(authError(err));
+            // Could not authenticate, so return a SubmissionError for Redux
+            // Form
+            return new SubmissionError({
+                _error: message
+            })
         })
     )
 }
+
+export const refreshAuthToken = () => (dispatch, getState) => {
+    dispatch(authRequest());
+    const authToken = getState().auth.authToken;
+    return fetch(`${API_BASE_URL}/auth/refresh`, {
+        method: 'POST',
+        headers: {
+            // Provide our existing token as credentials to get a new one
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(({authToken}) => storeAuthInfo(authToken, dispatch))
+        .catch(err => {
+            // We couldn't get a refresh token because our current credentials
+            // are invalid or expired, or something else went wrong, so clear
+            // them and sign us out
+            dispatch(authError(err));
+            dispatch(clearAuth());
+            clearAuthToken(authToken);
+        });
+};

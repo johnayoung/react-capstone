@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './responsive.css';
+// import './responsive.css';
+import './normalize.css';
+import './skeleton.css';
 import App from './App';
 import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
-import { FormContainer } from './containers/FormContainer';
 
 ReactDOM.render(
     <Provider store={store}>
