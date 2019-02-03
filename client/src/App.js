@@ -5,13 +5,8 @@ import {Route, withRouter, Link} from 'react-router-dom';
 import Header from './containers/Header';
 import Registration from './containers/Registration';
 import Login from './containers/Login';
-// import CardContainer from './containers/CardContainer';
+import CardContainer from './containers/CardContainer';
 import { fetchEndpoints } from './actions/endpoints';
-
-const testObj = [
-  {name: 'test', description: 'test description', logo: 'logo'},
-  {name: 'test2', description: 'test description 2', logo: 'logo'}
-]
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +18,7 @@ class App extends Component {
       <div className='container'>
         {/* <Header /> */}
         {/* <Route exact path="/:cardName" component={CardContainer} /> */}
+        {(this.props.endpoints) ? <CardContainer endpoints={this.props.endpoints}/> : <div>Loading...</div>}
         <Route exact path="/signup" component={Registration} />
         <Route exact path="/login" component={Login} />
       </div>
@@ -32,7 +28,8 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   hasAuthToken: state.auth.authToken !== null,
-  loggedIn: state.auth.currentUser !== null
+  loggedIn: state.auth.currentUser !== null,
+  endpoints: state.endpoints.endpoints
 })
 
 export default withRouter(connect(mapStateToProps)(App));

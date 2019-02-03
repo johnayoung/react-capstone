@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import CardContent from '../components/CardContent';
-import { connect } from 'mongoose';
+import { connect } from 'react-redux';
 
 export class CardContainer extends Component {
   render() {
-    const cards = this.props.cardList.map(card => {
+    const cards = this.props.endpoints.map(endpoint => {
         return (
             <CardContent 
-                cardName={card.name}
-                cardImage='logo'
-                cardDescription={card.description} 
-            />
+            cardName={endpoint.name}
+            cardImage='logo'
+            cardDescription={endpoint.description} 
+        />
         )
-    })
+    });
     return (
       <div className='cardList'>
         {cards}
@@ -21,10 +21,4 @@ export class CardContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        cardList: state.endpoints
-    };
-};
-
-export default connect(mapStateToProps)(CardContainer);
+export default connect()(CardContainer);
