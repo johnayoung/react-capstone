@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <div className='container'>
-        {/* <Header /> */}
+        <Header />
         {/* <Route exact path="/:cardName" component={CardContainer} /> */}
         {(this.props.endpoints) ? <CardContainer endpoints={this.props.endpoints}/> : <div>Loading...</div>}
         <Route exact path="/signup" component={Registration} />

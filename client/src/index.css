@@ -15,6 +15,9 @@ code {
 
 .container {
   max-width: 800px; }
+.cardContainer {
+  width: 100px;
+}
 .header {
   margin-top: 6rem;
   text-align: center; }

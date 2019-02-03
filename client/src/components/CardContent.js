@@ -4,7 +4,7 @@ import Icon from './icons/Index';
 export default class CardContent extends Component {
   render() {
     return (   
-        <div className='container'>        
+        <div className='container cardContainer'>        
             <div className='cardContent'>
                 <div className='cardContentTop'>
                     <span>{this.props.cardName}</span>
