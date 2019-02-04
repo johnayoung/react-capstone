@@ -2,13 +2,36 @@ import {API_BASE_URL} from '../config';
 import {SubmissionError} from 'redux-form';
 import axios from 'axios';
 
+export const FETCH_ENDPOINTS_REQUEST = 'FETCH_ENDPOINTS_REQUEST';
+export const fetchEndpointsRequest = endpoints => ({
+    type: FETCH_ENDPOINTS_REQUEST,
+});
+
 export const FETCH_ENDPOINTS_SUCCESS = 'FETCH_ENDPOINTS_SUCCESS';
 export const fetchEndpointsSuccess = endpoints => ({
     type: FETCH_ENDPOINTS_SUCCESS,
     endpoints
 });
 
+export const FETCH_ENDPOINTS_ERROR = 'FETCH_ENDPOINTS_ERROR'
+export const fetchEndpointsError = (error) => ({
+  type: FETCH_ENDPOINTS_ERROR,
+  error
+})
+
+export const SET_CURRENT_ENDPOINT_REQUEST = 'SET_CURRENT_ENDPOINT_REQUEST';
+export const setCurrentEndpointRequest = () => ({
+    type: SET_CURRENT_ENDPOINT_REQUEST
+});
+
+export const SET_CURRENT_ENDPOINT_SUCCESS = 'SET_CURRENT_ENDPOINT_SUCCESS';
+export const setCurrentEndpointSuccess = endpoint => ({
+    type: SET_CURRENT_ENDPOINT_SUCCESS,
+    endpoint
+});
+
 export const fetchEndpoints = () => dispatch => {
+    dispatch(fetchEndpointsRequest());
     const config = {
         method: 'get',
         url: `${API_BASE_URL}/endpoints`,
@@ -20,7 +43,6 @@ export const fetchEndpoints = () => dispatch => {
     return axios(config)
             .then(res => {
                 const endpoints = res.data;
-                console.log(endpoints);
                 return dispatch(fetchEndpointsSuccess(endpoints));
             })
             .catch(err => {
@@ -33,4 +55,9 @@ export const fetchEndpoints = () => dispatch => {
                     })
                 }
             })
+}
+
+export const setCurrentEndpoint = () => dispatch => {
+    dispatch(setCurrentEndpointRequest());
+    return dispatch(setCurrentEndpointSuccess());
 }

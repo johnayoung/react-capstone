@@ -16,7 +16,10 @@ const endpointSchema = new mongoose.Schema({
   protocol: {type: String},
   path: {type: String},
   query: {type: String},
-//   queryObj: [{type: String}]
+  queryObj: {
+    type: Map,
+    of: String
+  }
 //   collection: {type: Schema.Types.ObjectId, ref: 'Collection'}
 }, {strict: false});
 

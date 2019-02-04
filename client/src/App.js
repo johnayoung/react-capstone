@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Route, withRouter, Link} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 import Header from './containers/Header';
-import Registration from './containers/Registration';
-import Login from './containers/Login';
-import CardContainer from './containers/CardContainer';
 import { fetchEndpoints } from './actions/endpoints';
+import Dashboard from './containers/Dashboard';
 
 class App extends Component {
   componentDidMount() {
@@ -17,10 +15,7 @@ class App extends Component {
     return (
       <div className='container'>
         <Header />
-        {/* <Route exact path="/:cardName" component={CardContainer} /> */}
-        {(this.props.endpoints) ? <CardContainer endpoints={this.props.endpoints}/> : <div>Loading...</div>}
-        <Route exact path="/signup" component={Registration} />
-        <Route exact path="/login" component={Login} />
+        <Dashboard />
       </div>
     );
   }
