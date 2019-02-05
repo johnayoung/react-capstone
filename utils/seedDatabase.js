@@ -7,7 +7,7 @@ const { MONGODB_URI } = require('../config');
 // const User = require('../models/user');
 // const { users } = require('../db/data');
 const Endpoint = require('../models/endpoint');
-const {endpoints} = require('../db/data');
+const {stockEndpoints} = require('../db/data');
 
 console.log(`Connecting to mongodb at ${MONGODB_URI}`);
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
@@ -22,7 +22,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
     console.info('Seeding Database...');
     return Promise.all([
       // User.insertMany(users)
-      Endpoint.insertMany(endpoints)
+      Endpoint.insertMany(stockEndpoints)
     ]);
   })
   .then(results => {

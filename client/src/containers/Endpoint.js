@@ -8,6 +8,7 @@ import {required, nonEmpty} from '../validators';
 import hljs from 'highlight.js/lib/highlight';
 import 'highlight.js/styles/github.css';
 import javascript from 'highlight.js/lib/languages/javascript';
+import { query } from 'express-validator/check';
 hljs.registerLanguage('javascript', javascript);
 
 class Endpoint extends Component {
@@ -28,7 +29,8 @@ class Endpoint extends Component {
             return <div>Loading...</div>
         } else {
             const {name, description, fullUrl, queryObj} = this.props.currentEndpoint;
-            const fields = Object.keys(queryObj).map((key, index) => {
+            const fields = (!queryObj) ? <div>No params, push send to get data.</div>
+            : Object.keys(queryObj).map((key, index) => {
                 return (
                     <div className='parameter'>                    
                         <label htmlFor={key}>{key}</label>
