@@ -28,6 +28,13 @@ const RenderParameters = ({ fields, meta: { error } }) => (
           component={RenderField}
           label={`Parameter #${index + 1}: Value`}
         />
+        <Field
+          name={`${parameter}.type`}
+          type="select"
+          component={RenderField}
+          label={`Parameter #${index + 1}: Type`}
+          props={{options: ['input', 'list']}}
+        />
       </li>
     ))}
     {error && <li className="error">{error}</li>}

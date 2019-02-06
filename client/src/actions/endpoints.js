@@ -85,10 +85,15 @@ export const postEndpoint = (postObject) => dispatch => {
             name
         }
     }
-    return api.post('/endpoints', config.data)
-        .then(response => {
-            const endpoint = response.data;
-            return dispatch(postEndpointSuccess(endpoint));
+    return axios.all(endpoints.map(endpoint => api.post('/endpoints', {name: endpoint.name, fullUrl: endpoint.fullUrl, parameters: endpoint.parameters})))
+    // return api.post('/endpoints', config.data)
+        .then(([responses]) => {
+            console.log(responses);
+            return responses;
+        })
+        .then(() => {
+            // const endpoint = response.data;
+            return dispatch(postEndpointSuccess());
         })
         .catch(err => {
             console.log(err.response.data);

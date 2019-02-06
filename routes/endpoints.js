@@ -18,7 +18,7 @@ const validBody = [
     .isURL()
 ];
 
-function createEndpoint(name, description, fullUrl) {
+function createEndpoint(name, description, fullUrl, parameters) {
   const parsedURI = Endpoint.parseURL(fullUrl);
   const { domain } = parsedURI;
   const favicon = `https://api.faviconkit.com/${domain}/144`;
@@ -31,6 +31,7 @@ function createEndpoint(name, description, fullUrl) {
     name,
     description,
     fullUrl,
+    parameters,
     favicon
   }, parsedURI);
 
@@ -67,9 +68,9 @@ router.get('/:name', (req, res, next) => {
 
 /* ========== POST ENDPOINTS ========== */
 router.post('/', validBody, (req, res, next) => {
-  const {name, description, fullUrl} = req.body;
+  const {name, description, fullUrl, parameters} = req.body;
 
-  const newEndpoint = createEndpoint(name, description, fullUrl);
+  const newEndpoint = createEndpoint(name, description, fullUrl, parameters);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

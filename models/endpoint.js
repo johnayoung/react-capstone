@@ -19,7 +19,8 @@ const endpointSchema = new mongoose.Schema({
   queryObj: {
     type: Map,
     of: String
-  }
+  },
+  parameters: {type: Array},
 //   collection: {type: Schema.Types.ObjectId, ref: 'Collection'}
 }, {strict: false});
 
