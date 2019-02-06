@@ -22,7 +22,7 @@ export class Header extends Component {
                 <Link to='/browse' className='navbar-link'>Browse</Link>
               </li> */}
               <li className='navbar-item'>
-                <Link to={'/add'} className='navbar-link'>Add API</Link>
+                <Link to={'/add'} className='navbar-link'>Add</Link>
               </li>
               <li className='navbar-item'>
                 <Link to={'/signup'} className='navbar-link'>Sign Up</Link>

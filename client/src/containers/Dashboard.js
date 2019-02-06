@@ -6,6 +6,7 @@ import Registration from './Registration';
 import Login from './Login';
 import CardContainer from './CardContainer';
 import Endpoint from './Endpoint';
+import AddEndpoint from './AddEndpoint';
 
 export class Dashboard extends Component {
     content() {
@@ -17,6 +18,7 @@ export class Dashboard extends Component {
                 <Route exact path="/" component={CardContainer}/>
                 <Route path="/signup" component={Registration} />
                 <Route path="/login" component={Login} />
+                <Route path="/add" component={AddEndpoint} />
                 <Route path="/endpoint/:cardName" component={Endpoint} />
             </Switch>
             )
