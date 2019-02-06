@@ -2,6 +2,13 @@ import {API_BASE_URL} from '../config';
 import {SubmissionError} from 'redux-form';
 import axios from 'axios';
 
+const api = axios.create({
+    baseURL: `${API_BASE_URL}`,
+    headers: {
+        'Content-Type': 'application/json'
+    },    
+})
+
 export const FETCH_ENDPOINTS_REQUEST = 'FETCH_ENDPOINTS_REQUEST';
 export const fetchEndpointsRequest = endpoints => ({
     type: FETCH_ENDPOINTS_REQUEST,
@@ -46,6 +53,50 @@ export const fetchUserError = (error) => ({
   type: FETCH_ENDPOINTS_ERROR,
   error
 })
+
+// Actions around a user submitting a new endpoint
+export const POST_ENDPOINT_REQUEST = 'POST_ENDPOINT_REQUEST';
+export const POST_ENDPOINT_SUCCESS = 'POST_ENDPOINT_SUCCESS';
+export const POST_ENDPOINT_ERROR = 'POST_ENDPOINT_ERROR';
+
+export const postEndpointRequest = () => ({
+  type: POST_ENDPOINT_REQUEST,
+})
+
+export const postEndpointSuccess = (endpoints) => ({
+  type: POST_ENDPOINT_SUCCESS,
+  endpoints
+})
+
+export const postEndpointError = (error) => ({
+  type: POST_ENDPOINT_ERROR,
+  error
+})
+
+export const postEndpoint = (postObject) => dispatch => {
+    dispatch(postEndpointRequest());
+    const {endpoints, collectionName} = postObject;
+    const {fullUrl, name} = endpoints[0];
+    console.log('full url and name is ', fullUrl, name);
+    const config = {
+        // url: `/api/endpoints`,
+        data: {
+            fullUrl,
+            name
+        }
+    }
+    return api.post('/endpoints', config.data)
+        .then(response => {
+            const endpoint = response.data;
+            return dispatch(postEndpointSuccess(endpoint));
+        })
+        .catch(err => {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+        })
+}
+
 
 export const fetchEndpoints = () => dispatch => {
     dispatch(fetchEndpointsRequest());

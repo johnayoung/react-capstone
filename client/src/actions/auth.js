@@ -56,7 +56,7 @@ export const login = (username, password) => dispatch => {
         data: JSON.stringify({
             username,
             password
-        })
+        }),
     }
     return (
         axios(config)
@@ -65,15 +65,19 @@ export const login = (username, password) => dispatch => {
             return storeAuthInfo(authToken, dispatch)
         })
         .catch(err => {
-            const {code} = err;
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+            const code = err.response.status;
             const message = 
                 code === 401
                 ? 'Incorrect username or password'
                 : 'Unable to login, please try again';
+
             dispatch(authError(err));
             // Could not authenticate, so return a SubmissionError for Redux
             // Form
-            return new SubmissionError({
+            throw new SubmissionError({
                 _error: message
             })
         })

@@ -5,10 +5,6 @@ import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
 export class Login extends React.Component {
-    onSubmit(values) {
-        return this.props.dispatch(login(values.username, values.password));
-    }
-
     render() {
         let error;
         if (this.props.error) {
@@ -23,9 +19,7 @@ export class Login extends React.Component {
                 <h2>Hey there, welcome back :)</h2>
                 <form
                     className="login-form"
-                    onSubmit={this.props.handleSubmit(values =>
-                        this.onSubmit(values)
-                    )}>
+                    onSubmit={this.props.handleSubmit}>
                     {error}
                     <label htmlFor="username">Username</label>
                     <Field
@@ -54,5 +48,6 @@ export class Login extends React.Component {
 
 export default reduxForm({
     form: 'login',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username')),
+    onSubmit: (values, dispatch) => dispatch(login(values.username, values.password))
 })(Login);

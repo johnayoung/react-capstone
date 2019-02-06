@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
-import {Route, Switch, withRouter, Link} from 'react-router-dom';
+import {Route, Switch, withRouter} from 'react-router-dom';
 
-import Registration from './Registration';
-import Login from './Login';
+import RegistrationPage from './RegistrationPage';
+import LoginPage from './LoginPage';
 import CardContainer from './CardContainer';
 import Endpoint from './Endpoint';
-import AddEndpoint from './AddEndpoint';
+import FieldArraysForm from './FieldArraysForm';
 
 export class Dashboard extends Component {
     content() {
@@ -16,9 +16,9 @@ export class Dashboard extends Component {
             return (
             <Switch>
                 <Route exact path="/" component={CardContainer}/>
-                <Route path="/signup" component={Registration} />
-                <Route path="/login" component={Login} />
-                <Route path="/add" component={AddEndpoint} />
+                <Route path="/signup" component={RegistrationPage} />
+                <Route path="/login" component={LoginPage} />
+                <Route path="/add" component={FieldArraysForm} />
                 <Route path="/endpoint/:cardName" component={Endpoint} />
             </Switch>
             )

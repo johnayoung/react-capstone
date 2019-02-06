@@ -3,7 +3,10 @@ import {
     FETCH_ENDPOINTS_SUCCESS,
     FETCH_ENDPOINTS_ERROR,
     SET_CURRENT_ENDPOINT_SUCCESS,
-    SET_CURRENT_ENDPOINT_REQUEST
+    SET_CURRENT_ENDPOINT_REQUEST,
+    POST_ENDPOINT_REQUEST,
+    POST_ENDPOINT_SUCCESS,
+    POST_ENDPOINT_ERROR
 } from '../actions/endpoints';
 
 const initialState = {
@@ -39,6 +42,20 @@ export default function reducer(state=initialState, action) {
         return Object.assign({}, state, {
             currentEndpoint: action.endpoint,
             loadingCurrent: false
+        })
+    } else if (action.type === POST_ENDPOINT_REQUEST) {
+        return Object.assign({}, state, {
+            loading: true,
+            error: null
+        })
+    } else if (action.type === POST_ENDPOINT_SUCCESS) {
+        return Object.assign({}, state, {
+            loading: false
+        })
+    } else if (action.type === POST_ENDPOINT_ERROR) {
+        return Object.assign({}, state, {
+            loading: false,
+            error: action.error
         })
     }
     return state;

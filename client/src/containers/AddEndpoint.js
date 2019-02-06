@@ -8,30 +8,12 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => {
         <div>
           <label>{label}</label>
           <div>
-            <input {...input} type={type}/>
+            <input {...input} type={type} placeholder={label}/>
             {touched && error && <span>{error}</span>}
           </div>
         </div>
     )
 }
-
-
-// const renderSubParam = (parameter, index, fields) => {
-//     return (
-//         <li key={index}>
-//         <button
-//             type='button'
-//             title='Remove Parameter'
-//             onClick={() => fields.remove(index)}
-//             style={{backgroundColor: 'red'}} />
-//         <Field
-//             name={`dynamic-${parameter}`}
-//             type='text'
-//             component={renderField}
-//             label={`${parameter}`} />
-//         </li>
-//     )
-// }
 
 const renderUrl = ({fields, submitting, hasUrlValue}) => {
     const {url, query} = (!hasUrlValue) ? '' : queryString.parseUrl(hasUrlValue);
@@ -40,28 +22,41 @@ const renderUrl = ({fields, submitting, hasUrlValue}) => {
         ...query
     }
     const keys = Object.keys(values);
-    console.log(Object.keys(values));
+
     return (
         <div className='container'>
-            <button 
+            {/* <button 
                 type='button' 
                 disabled={submitting}
                 onClick={() => {
-                    return Object.keys(values).map(value => fields.push(value))
-                    }}>Fill</button>
+                    return Object.keys(values).map(value => fields.push({}))
+                    }}>Fill</button> */}
+            <li>
+                <button
+                    type='button'
+                    onClick={() => fields.push({})}>
+                    Add Param
+                </button>
+            </li>
             <ul>
-                {fields.map((parameter, index) => (
+                {fields.map((parameter, index, fields) => (
                     <li key={index}>
                     <button
                         type='button'
                         title='Remove Parameter'
                         onClick={() => fields.remove(index)}
                         style={{backgroundColor: 'red'}} />
+                    <h4>Parameter #{index +1}</h4>
                     <Field
-                        name={`dynamic-${parameter}`}
+                        name={`dynamic-${parameter}.name`}
                         type='text'
                         component={renderField}
-                        label={`${parameter}. ${keys[index]}`} />
+                        label={`Name`} />
+                    <Field
+                        name={`dynamic-${parameter}.value`}
+                        type='text'
+                        component={renderField}
+                        label={`Value`} />
                     </li>
                 ))}
             </ul>
@@ -71,8 +66,6 @@ const renderUrl = ({fields, submitting, hasUrlValue}) => {
 
 let FieldArraysForm = (props) => {
     const {handleSubmit, submitting, hasUrlValue, fields} = props;
-    // const successMessage = (!hasUrlValue) ? <div>loading</div> : renderUrl(hasUrlValue);
-    // const successMessage = renderUrl(hasUrlValue);
     return (
         <form onSubmit={handleSubmit(data => console.log(data))}>
             <h2>Add an endpoint</h2>
@@ -81,8 +74,8 @@ let FieldArraysForm = (props) => {
                 type='text'
                 component={renderField}
                 label={`Enter a URL`}
-                onChange={console.log(props)} />
-            {/* {successMessage} */}
+                onChange={console.log(`Props are ${props}`)} 
+            />
             <FieldArray name="parameters" component={renderUrl} props={{hasUrlValue}}/>
             <button
                 type='submit'
