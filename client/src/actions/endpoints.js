@@ -1,7 +1,7 @@
 import {API_BASE_URL} from '../config';
 import {SubmissionError} from 'redux-form';
 import axios from 'axios';
-
+console.log('auth token is', localStorage.authToken);
 const api = axios.create({
     baseURL: `${API_BASE_URL}`,
     headers: {
@@ -75,6 +75,13 @@ export const postEndpointError = (error) => ({
 })
 
 export const postEndpoint = (postObject) => dispatch => {
+    const api = axios.create({
+        baseURL: `${API_BASE_URL}`,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.authToken}`
+        },    
+    })
     dispatch(postEndpointRequest());
     const {endpoints, collectionName} = postObject;
     const {fullUrl, name} = endpoints[0];
@@ -93,6 +100,10 @@ export const postEndpoint = (postObject) => dispatch => {
             console.log(err.response.data);
             console.log(err.response.status);
             console.log(err.response.headers);
+            dispatch(postEndpointError(err));
+            throw new SubmissionError({
+                _error: 'Unauthorized'
+            })
         })
 }
 

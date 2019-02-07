@@ -32,7 +32,9 @@ export class CardContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    endpoints: state.endpoints.endpoints
+    endpoints: state.endpoints.endpoints,
+    hasAuthToken: state.auth.authToken !== null,
+    loggedIn: state.auth.currentUser !== null,
   }
 }
 

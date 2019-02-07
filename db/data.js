@@ -267,7 +267,7 @@ const stockEndpoints = stockName.map((name, index) => {
     description: `The ${name} endpoint, from the IEX API`,
     userId: '333333333333333333333300',
     parameters: [
-      {name: 'chartReset', value: true, type: 'text', required: false}
+      {name: 'chartReset', value: 'true', type: 'text', required: false}
     ]
   };
 }).map(newObj => createEndpoint(newObj.name, newObj.description, newObj.fullUrl, newObj.userId, newObj.parameters));

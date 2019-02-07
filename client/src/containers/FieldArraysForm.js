@@ -44,18 +44,18 @@ const initialValues = {
       fullUrl: 'https://api.iextrading.com/1.0/stock/aapl/financials', 
       name: 'Financials',
       parameters: [
-        {name: 'period', value: 'annual'}
+        {name: 'period', value: 'annual', type: 'textarea', required: false}
       ]
     },
     {
       fullUrl: 'https://api.iextrading.com/1.0/stock/aapl/chart/5y?chartReset=true&chartSimplify=true&chartInterval=2&changeFromClose=true&chartLast=100', 
       name: 'Chart',
       parameters: [
-        {name: 'chartReset', value: 'true', type: 'input'},
-        {name: 'chartSimplify', value: 'true', type: 'input'},
-        {name: 'chartInterval', value: 2, type: 'input'},
-        {name: 'changeFromClose', value: true, type: 'input'},
-        {name: 'chartLast', value: '100', type: 'input'}
+        {name: 'chartReset', value: 'true', type: 'input', required: false},
+        {name: 'chartSimplify', value: 'true', type: 'input', required: false},
+        {name: 'chartInterval', value: 2, type: 'input', required: false},
+        {name: 'changeFromClose', value: true, type: 'input', required: false},
+        {name: 'chartLast', value: '100', type: 'input', required: false}
       ]
     }
   ]

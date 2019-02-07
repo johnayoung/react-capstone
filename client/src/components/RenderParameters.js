@@ -35,6 +35,13 @@ const RenderParameters = ({ fields, meta: { error } }) => (
           label={`Parameter #${index + 1}: Type`}
           props={{options: ['input', 'list']}}
         />
+        <Field
+          name={`${parameter}.type`}
+          type="select"
+          component={RenderField}
+          label={`Parameter #${index + 1}: Type`}
+          props={{options: ['Yes', 'No']}}
+        />
       </li>
     ))}
     {error && <li className="error">{error}</li>}

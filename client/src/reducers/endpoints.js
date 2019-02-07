@@ -12,6 +12,7 @@ import {
 const initialState = {
     endpoints: null,
     currentEndpoint: null,
+    currentEndpointParams: null,
     loading: true,
     loadingCurrent: true,
     error: null
@@ -41,6 +42,7 @@ export default function reducer(state=initialState, action) {
     } else if (action.type === SET_CURRENT_ENDPOINT_SUCCESS) {
         return Object.assign({}, state, {
             currentEndpoint: action.endpoint,
+            currentEndpointParams: action.endpoint.parameters,
             loadingCurrent: false
         })
     } else if (action.type === POST_ENDPOINT_REQUEST) {
