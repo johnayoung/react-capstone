@@ -1,12 +1,34 @@
 'use strict';
 const Endpoint = require('../models/endpoint');
 
-function createEndpoint(name, description, fullUrl) {
+const users = [
+  {  '_id': '222222222222222222222200',
+    'username': 'johnnysalt',
+    'password': '$2a$10$F3WxoCmNFelMJuUbFMTXWO.nrEhQg1GNfuwgItE3l6fb8Bfso0cLa'
+  },
+  {
+    '_id': '333333333333333333333300',
+    'fullname': 'Bob User',
+    'username': 'bobuser',
+    // hash digest for the string 'password'
+    'password': '$2a$10$0S5GdCkGJTDeaAH272/bmeZmmpC4rv6ItXIOZKwVQIfQOqSURhkhu'
+  },
+  {
+    '_id' : '5c3f5ca9ec37422f44bdaa82',
+    'username' : 'thejohnnysalt',
+    'password' : '$2a$10$hpBGDg4mlyzVM/7g4staJuA4fuaznzY64b6/s0SwkLWrblT7vEgDK',
+    'fullname' : 'John Young'
+  }
+];
+
+function createEndpoint(name, description, fullUrl, userId, parameters) {
   const parsedURI = Endpoint.parseURL(fullUrl);
   return Object.assign({}, {
     name,
     description,
-    fullUrl
+    fullUrl,
+    userId,
+    parameters
   }, parsedURI);
 }
 
@@ -242,76 +264,17 @@ const stockEndpoints = stockName.map((name, index) => {
   return {
     name: name,
     fullUrl: stockUrls[index],
-    description: `The ${name} endpoint, from the IEX API`
+    description: `The ${name} endpoint, from the IEX API`,
+    userId: '333333333333333333333300',
+    parameters: [
+      {name: 'chartReset', value: true, type: 'text', required: false}
+    ]
   };
-}).map(newObj => createEndpoint(newObj.name, newObj.description, newObj.fullUrl));
+}).map(newObj => createEndpoint(newObj.name, newObj.description, newObj.fullUrl, newObj.userId, newObj.parameters));
 
 console.log('stock endpoints are', stockEndpoints);
 
-
-// const names = [
-//   'getResources', 
-//   'getPerson(id)', 
-//   'getPeople([page]', 
-//   'getFilm(id)', 
-//   'getFilms([page])', 
-//   'getPlanet(id)', 
-//   'getPlanets([page])', 
-//   'getSpecies(id)', 
-//   'getAllSpecies([page])', 
-//   'getStarship(id)', 
-//   'getStarships([page])', 
-//   'getVehicle(id)', 
-//   'getVehicles([page])', 
-// ];
-
-// const descriptions = [
-//   'Returns a list of all available resources. Not really useful for this library.',
-//   'Returns one person.',
-//   'Returns everyone, paged. Defaults to page 1.',
-//   'Returns one film.',
-//   'Returns all films, paged. Defaults to page 1.',
-//   'Returns a planet.',
-//   'Returns all planets, paged. Defaults to page 1.',
-//   'Returns one species.',
-//   'Returns all species, paged. Defaults to page 1.',
-//   'Returns a starship.',
-//   'Returns all starships, paged. Defaults to page 1.',
-//   'Returns a vehicle.',
-//   'Returns all vehicles, paged. Defaults to page 1.',
-// ];
-
-// const rootDesc = [
-//   'films string -- The URL root for Film resources',
-//   'people string -- The URL root for People resources',
-//   'planets string -- The URL root for Planet resources',
-//   'species string -- The URL root for Species resources',
-//   'starships string -- The URL root for Starships resources',
-//   'vehicles string -- The URL root for Vehicles resources',
-// ];
-
-// const swapiEndpoints = rootDesc.map((item, index) => {
-//   const rooter = {
-//     'films': 'https://swapi.co/api/films/',
-//     'people': 'https://swapi.co/api/people/',
-//     'planets': 'https://swapi.co/api/planets/',
-//     'species': 'https://swapi.co/api/species/',
-//     'starships': 'https://swapi.co/api/starships/',
-//     'vehicles': 'https://swapi.co/api/vehicles/'
-//   };
-//   return {
-//     name: Object.keys(rooter)[index],
-//     fullUrl: rooter[Object.keys(rooter)[index ]],
-//     description: item
-//   };
-// });
-
-// // const testFuncObj = createEndpoint('Chart', 'Testing a chart desc', iexChart);
-
-// const swapiMap = swapiEndpoints.map(endpoint => createEndpoint(endpoint.name, endpoint.description, endpoint.fullUrl));
-
-// console.log(swapiMap);
-
 module.exports = {
+  users,
   stockEndpoints
 };

@@ -6,13 +6,15 @@ import { connect } from 'react-redux';
 export class CardContainer extends Component {
   render() {
     const cards = this.props.endpoints.map(endpoint => {
+      const {id, userId, name, description} = endpoint;
+      const username = userId.username;
         return (
-          <li key={endpoint.id}>
-            <Link to={`/endpoint/${endpoint.name}`}>            
+          <li key={id}>
+            <Link to={`/${username}/${name}`}>            
               <CardContent 
-                cardName={endpoint.name}
+                cardName={name}
                 cardImage='logo'
-                cardDescription={endpoint.description} 
+                cardDescription={description} 
               />
             </Link>
           </li>

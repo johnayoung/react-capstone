@@ -5,6 +5,10 @@ const mongoose = require('mongoose');
 
 const router = express.Router();
 const Endpoint = require('../models/endpoint');
+const User = require('../models/user');
+
+// Authenticated endpoint only on post
+const passport = require('passport');
 
 const { check, validationResult, body } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
@@ -18,7 +22,7 @@ const validBody = [
     .isURL()
 ];
 
-function createEndpoint(name, description, fullUrl, parameters) {
+function createEndpoint(name, description, fullUrl, parameters, userId) {
   const parsedURI = Endpoint.parseURL(fullUrl);
   const { domain } = parsedURI;
   const favicon = `https://api.faviconkit.com/${domain}/144`;
@@ -32,7 +36,8 @@ function createEndpoint(name, description, fullUrl, parameters) {
     description,
     fullUrl,
     parameters,
-    favicon
+    favicon,
+    userId
   }, parsedURI);
 
 //   return Object.assign({}, firstObj, {favicon});
@@ -42,6 +47,7 @@ function createEndpoint(name, description, fullUrl, parameters) {
 router.get('/', (req, res, next) => {
   Endpoint
     .find()
+    .populate('userId', 'username')
     .then(endpoints => {
       res.json(endpoints);
     })
@@ -50,16 +56,31 @@ router.get('/', (req, res, next) => {
     });
 });
 
-router.get('/:name', (req, res, next) => {
+router.get('/:username/:name', (req, res, next) => {
   const { name } = req.params;
-  Endpoint
-    .findOne({name: name})
-    .then(result => {
-      if (result) {
-        res.json(result);
+  const { username } = req.params;
+  
+  User.findOne({username})
+    .then(response => {    
+      if (response) {
+        return response._id;
       } else {
         next();
       }
+    })
+    .then(userId => {
+      Endpoint
+        .findOne({name: name, userId})
+        .then(result => {
+          if (result) {
+            res.json(result);
+          } else {
+            next();
+          }
+        })
+        .catch(err => {
+          next(err);
+        });
     })
     .catch(err => {
       next(err);
@@ -67,10 +88,11 @@ router.get('/:name', (req, res, next) => {
 });
 
 /* ========== POST ENDPOINTS ========== */
-router.post('/', validBody, (req, res, next) => {
+router.post('/', validBody, passport.authenticate('jwt', {session: false, failWithError: true}), (req, res, next) => {
   const {name, description, fullUrl, parameters} = req.body;
+  const userId = req.user.id;
 
-  const newEndpoint = createEndpoint(name, description, fullUrl, parameters);
+  const newEndpoint = createEndpoint(name, description, fullUrl, parameters, userId);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

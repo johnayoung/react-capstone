@@ -21,6 +21,7 @@ const endpointSchema = new mongoose.Schema({
     of: String
   },
   parameters: {type: Array},
+  userId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required:true}
 //   collection: {type: Schema.Types.ObjectId, ref: 'Collection'}
 }, {strict: false});
 

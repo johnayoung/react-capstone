@@ -19,7 +19,7 @@ export class Dashboard extends Component {
                 <Route path="/signup" component={RegistrationPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/add" component={FieldArraysForm} />
-                <Route path="/endpoint/:cardName" component={Endpoint} />
+                <Route path="/:username/:endpointName" component={Endpoint} />
             </Switch>
             )
         }

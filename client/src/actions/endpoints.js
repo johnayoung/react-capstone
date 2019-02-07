@@ -5,7 +5,8 @@ import axios from 'axios';
 const api = axios.create({
     baseURL: `${API_BASE_URL}`,
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.authToken}`
     },    
 })
 
@@ -78,13 +79,6 @@ export const postEndpoint = (postObject) => dispatch => {
     const {endpoints, collectionName} = postObject;
     const {fullUrl, name} = endpoints[0];
     console.log('full url and name is ', fullUrl, name);
-    const config = {
-        // url: `/api/endpoints`,
-        data: {
-            fullUrl,
-            name
-        }
-    }
     return axios.all(endpoints.map(endpoint => api.post('/endpoints', {name: endpoint.name, fullUrl: endpoint.fullUrl, parameters: endpoint.parameters})))
     // return api.post('/endpoints', config.data)
         .then(([responses]) => {
@@ -136,7 +130,7 @@ export const fetchUserEndpoint = () => dispatch => {
         method: 'get',
         url: `${API_BASE_URL}/endpoints`,
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
         // data: JSON.stringify(endpoints) 
     };
