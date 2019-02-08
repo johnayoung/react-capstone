@@ -24,6 +24,7 @@ const RenderParameters = (props) => {
         </button>
       </li>
       {fields.map((parameter, index, fields) => {
+        
         return (
           <li key={index}>
             <button
