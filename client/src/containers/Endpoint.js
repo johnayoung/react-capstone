@@ -33,9 +33,10 @@ class Endpoint extends Component {
                         {parameters.map((param, index) => (
                             <Field
                                 name={param.name}
-                                type={param.type}
+                                type={(param.type==='list') ? 'select' : 'text'}
                                 component={RenderField}
                                 label={`${param.name} (${param.required ? 'required' : 'optional'})`}
+                                options={(param.type === 'list' ? [param.value] : '')}
                             />
                         ))}
                     </ul>

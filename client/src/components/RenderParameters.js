@@ -36,10 +36,10 @@ const RenderParameters = ({ fields, meta: { error } }) => (
           props={{options: ['input', 'list']}}
         />
         <Field
-          name={`${parameter}.type`}
+          name={`${parameter}.required`}
           type="select"
           component={RenderField}
-          label={`Parameter #${index + 1}: Type`}
+          label={`Parameter #${index + 1}: Required`}
           props={{options: ['Yes', 'No']}}
         />
       </li>

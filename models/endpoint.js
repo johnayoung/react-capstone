@@ -25,6 +25,8 @@ const endpointSchema = new mongoose.Schema({
 //   collection: {type: Schema.Types.ObjectId, ref: 'Collection'}
 }, {strict: false});
 
+endpointSchema.index({name: 1, userId: 1}, {unique: true});
+
 // Add `createdAt` and `updatedAt` fields
 endpointSchema.set('timestamps', true);
 

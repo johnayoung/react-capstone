@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import CardContent from '../components/CardContent';
+import {Field, reduxForm, formValueSelector} from 'redux-form';
 import { connect } from 'react-redux';
+import RenderField from '../components/RenderField';
 
 export class CardContainer extends Component {
   render() {
-    const cards = this.props.endpoints.map(endpoint => {
+    const {searchBox} = this.props;
+    console.log('search box values are ', searchBox)
+    const cards = this.props.endpoints.filter(endpoint => {
+      return (!searchBox) ? endpoint : endpoint.name.toLowerCase().includes(searchBox)
+    }).map(endpoint => {
       const {id, userId, name, description} = endpoint;
       const username = userId.username;
         return (
@@ -22,6 +28,14 @@ export class CardContainer extends Component {
     });
     return (
       <div className='cardList'>
+        <form>
+          <Field 
+            name='searchBox'
+            component={RenderField}
+            type='text'
+            onChange={this.props.handleChange}
+          />
+        </form>
         <ul>
           {cards}
         </ul>
@@ -30,11 +44,22 @@ export class CardContainer extends Component {
   }
 }
 
+CardContainer = reduxForm({
+  form: 'liveSearch', // a unique identifier for this form
+  // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
+  onSubmit: (values, dispatch) => console.log(values),
+  onChange: (values, dispatch) => console.log(values)
+})(CardContainer)
+
+const selector = formValueSelector('liveSearch')
+
 function mapStateToProps(state) {
+  const searchBox = selector(state, 'searchBox')
   return {
     endpoints: state.endpoints.endpoints,
     hasAuthToken: state.auth.authToken !== null,
     loggedIn: state.auth.currentUser !== null,
+    searchBox
   }
 }
 

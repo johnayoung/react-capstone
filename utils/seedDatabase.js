@@ -13,9 +13,13 @@ console.log(`Connecting to mongodb at ${MONGODB_URI}`);
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
   .then(() => {
     console.info('Deleting Data...');
+    return mongoose.connection.db.dropDatabase();
+  })
+  .then(() => {
+    console.info('Creating Indexes');
     return Promise.all([
-      User.deleteMany(),
-      Endpoint.deleteMany()
+      User.ensureIndexes(),
+      Endpoint.ensureIndexes()
     ]);
   })
   .then(() => {

@@ -51,11 +51,11 @@ const initialValues = {
       fullUrl: 'https://api.iextrading.com/1.0/stock/aapl/chart/5y?chartReset=true&chartSimplify=true&chartInterval=2&changeFromClose=true&chartLast=100', 
       name: 'Chart',
       parameters: [
-        {name: 'chartReset', value: 'true', type: 'input', required: false},
-        {name: 'chartSimplify', value: 'true', type: 'input', required: false},
-        {name: 'chartInterval', value: 2, type: 'input', required: false},
-        {name: 'changeFromClose', value: true, type: 'input', required: false},
-        {name: 'chartLast', value: '100', type: 'input', required: false}
+        {name: 'chartReset', value: 'true', type: 'text', required: false},
+        {name: 'chartSimplify', value: 'true', type: 'text', required: false},
+        {name: 'chartInterval', value: 2, type: 'text', required: false},
+        {name: 'changeFromClose', value: true, type: 'list', required: false},
+        {name: 'chartLast', value: '100', type: 'text', required: false}
       ]
     }
   ]
