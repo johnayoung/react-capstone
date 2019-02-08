@@ -4,12 +4,14 @@
   "description": "A neat way to visualize an API response",
   "main": "server.js",
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "server": "node server.js",
     "client": "node utils/client.js",
     "test": "cross-env NODE_ENV=test mocha",
     "cover": "nyc --reporter=lcov --reporter=text-summary npm test",
     "seed": "node utils/seed-database.js",
+    "proxy": "concurrently \"npm run server\" \"npm run client\"",
     "hash": "node utils/hash-password.js"
   },
   "repository": {
