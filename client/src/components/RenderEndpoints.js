@@ -27,7 +27,7 @@ const RenderEndpoints = ({ fields, meta: { error, submitFailed } }) => (
         />
         <Field
           name={`${endpoint}.fullUrl`}
-          type="text"
+          type='text'
           component={RenderField}
           label="Full Url"
         />

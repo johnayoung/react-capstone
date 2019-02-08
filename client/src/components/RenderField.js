@@ -1,5 +1,8 @@
 import React from 'react'
 
+// type can be: text, password, submit, reset, radio, checkbox, button, 
+// type can be: color, date, datetime-local, email, month, number, range, search, tel, time, url, week
+
 const RenderField = ({ options, input, label, type, meta: { touched, error } }) => {
     return (type === 'text' || type === 'email' || type === 'number' || type === 'checkbox') ?
     (

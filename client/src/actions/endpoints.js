@@ -200,9 +200,10 @@ export const userEndpoint = (urlString) => dispatch => {
             return dispatch(userEndpointSuccess(data));
         })
         .catch(err => {
-            console.log(err.response.data);
-            console.log(err.response.status);
-            console.log(err.response.headers);
+            // console.log(err.response.data);
+            // console.log(err.response.status);
+            // console.log(err.response.headers);
+            console.log(err);
             dispatch(postEndpointError(err));
             throw new SubmissionError({
                 _error: 'Unauthorized'

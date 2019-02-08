@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import {Field, reduxForm} from 'redux-form';
+import {Field, reduxForm, getFormValues} from 'redux-form';
 import RenderField from '../components/RenderField'
 import Code from '../components/Code';
 import { setCurrentEndpointSuccess, userEndpoint } from '../actions/endpoints';
@@ -28,9 +28,11 @@ class Endpoint extends Component {
               sub,
               domain,
               path,
-              query
+              query,
             } = this.props.currentEndpoint;
-            submittedUrl = `${protocol}://${sub}.${domain}${path}${query}`;
+            const {formValues} = this.props;
+            // submittedUrl = `${protocol}://${sub}.${domain}${path}${query}`;
+            if (formValues) {submittedUrl = urlBuilder(formValues);}
             baseUrl = `${protocol}://${sub}.${domain}`
           displayedEndpoint = (
               <div className='container'>              
@@ -81,8 +83,8 @@ const connectedForm = reduxForm({
     form: 'endpointSubmit', // a unique identifier for this form
     // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
     onSubmit: (values, dispatch) => {
+        console.log(values);
         const builder = urlBuilder(values);
-        // console.log(values, builder);
         return dispatch(userEndpoint(builder))
     },
     enableReinitialize: true,
@@ -105,6 +107,7 @@ export default connect((state) => {
         endpoints: state.endpoints.endpoints,
         currentEndpoint: state.endpoints.currentEndpoint,
         currentEndpointParams: state.endpoints.currentEndpointParams,
-        initialValues
+        initialValues,
+        formValues: getFormValues('endpointSubmit')(state)
     }
 })(connectedForm);
