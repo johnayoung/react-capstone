@@ -162,6 +162,54 @@ export const fetchUserEndpoint = () => dispatch => {
             })
 }
 
+// Actions around a user pulling an existing endpoint
+export const USER_ENDPOINT_REQUEST = 'USER_ENDPOINT_REQUEST';
+export const USER_ENDPOINT_SUCCESS = 'USER_ENDPOINT_SUCCESS';
+export const USER_ENDPOINT_ERROR = 'USER_ENDPOINT_ERROR';
+
+export const userEndpointRequest = () => ({
+  type: USER_ENDPOINT_REQUEST,
+})
+
+export const userEndpointSuccess = (apiResponse) => ({
+  type: USER_ENDPOINT_SUCCESS,
+  apiResponse
+})
+
+export const userEndpointError = (error) => ({
+  type: USER_ENDPOINT_ERROR,
+  error
+})
+
+export const userEndpoint = (urlString) => dispatch => {
+    const config = {
+        method: 'get',
+        url: urlString,
+        headers: {
+            'Content-Type': 'application/json',
+        },    
+    }
+    dispatch(userEndpointRequest());
+    return axios(config)
+        .then(response => {
+            const {data} = response;
+            console.log('data is', data);
+            return data;
+        })
+        .then((data) => {
+            return dispatch(userEndpointSuccess(data));
+        })
+        .catch(err => {
+            console.log(err.response.data);
+            console.log(err.response.status);
+            console.log(err.response.headers);
+            dispatch(postEndpointError(err));
+            throw new SubmissionError({
+                _error: 'Unauthorized'
+            })
+        })
+}
+
 export const setCurrentEndpoint = () => dispatch => {
     dispatch(setCurrentEndpointRequest());
     return dispatch(setCurrentEndpointSuccess());

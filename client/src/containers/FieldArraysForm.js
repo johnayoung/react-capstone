@@ -14,7 +14,7 @@ const FieldArraysForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
     <div className='container addEndpoints'>
-      <h4>Add an endpoint</h4>
+      <h2>Add an endpoint</h2>
       <form onSubmit={handleSubmit}>
         <Field
           name="collectionName"

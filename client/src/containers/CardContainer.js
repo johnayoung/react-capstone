@@ -29,11 +29,13 @@ export class CardContainer extends Component {
     return (
       <div className='cardList'>
         <form>
+          <h4>Discover and connect to thousands of API endpoints</h4>
           <Field 
             name='searchBox'
-            component={RenderField}
+            component='input'
             type='text'
             onChange={this.props.handleChange}
+            placeholder='Search API endpoints'
           />
         </form>
         <ul>

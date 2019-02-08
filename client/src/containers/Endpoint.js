@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import {Field, reduxForm} from 'redux-form';
 import RenderField from '../components/RenderField'
-import { setCurrentEndpointSuccess } from '../actions/endpoints';
+import Code from '../components/Code';
+import { setCurrentEndpointSuccess, userEndpoint } from '../actions/endpoints';
+import urlBuilder from '../utils/urlBuilder';
 
 class Endpoint extends Component {
     componentDidMount() {
@@ -15,21 +17,31 @@ class Endpoint extends Component {
     }
   render() {
       let displayedEndpoint;
+      let submittedUrl;
+      let baseUrl;
       if (this.props.currentEndpoint) {
-          const {name, description, fullUrl, parameters} = this.props.currentEndpoint;
+          const {
+              name, 
+              description,
+              parameters,
+              protocol,
+              sub,
+              domain,
+              path,
+              query
+            } = this.props.currentEndpoint;
+            submittedUrl = `${protocol}://${sub}.${domain}${path}${query}`;
+            baseUrl = `${protocol}://${sub}.${domain}`
           displayedEndpoint = (
               <div className='container'>              
                 <h4>{name}</h4>
                 <p>{description}</p>
                 <form onSubmit={this.props.handleSubmit}>
+                    <label>Base Url</label>
+                    <p>{baseUrl}</p>
+                    <label>Path</label>
+                    <p>{path}</p>
                     <ul>
-                        <Field
-                            name='fullUrl'
-                            type='text'
-                            component={RenderField}
-                            label={`Full Url`}
-                            value={fullUrl}
-                        />
                         {parameters.map((param, index) => (
                             <Field
                                 name={param.name}
@@ -40,6 +52,9 @@ class Endpoint extends Component {
                             />
                         ))}
                     </ul>
+                    <div className='submittedUrl'>
+                        <p>Submitted URL will be: {submittedUrl}</p>
+                    </div>
                     <div>
                     <button type="submit">
                         Submit
@@ -56,6 +71,7 @@ class Endpoint extends Component {
     return (
       <div>
         {displayedEndpoint}
+        <Code />
       </div>
     )
   }
@@ -64,7 +80,11 @@ class Endpoint extends Component {
 const connectedForm = reduxForm({
     form: 'endpointSubmit', // a unique identifier for this form
     // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
-    onSubmit: (values, dispatch) => console.log(values),
+    onSubmit: (values, dispatch) => {
+        const builder = urlBuilder(values);
+        // console.log(values, builder);
+        return dispatch(userEndpoint(builder))
+    },
     enableReinitialize: true,
 })(Endpoint)
 
@@ -72,12 +92,13 @@ export default connect((state) => {
     let initialValues = {};
     const {currentEndpoint, currentEndpointParams} = state.endpoints;
     if (currentEndpointParams) {
+        const {name, description, sub, domain, path, query, protocol} = currentEndpoint;
         initialValues = currentEndpointParams.reduce((obj, param) => {
             obj[param.name] = param.value
             return obj
         }, {})
         initialValues = Object.assign({}, initialValues, {
-            ...currentEndpoint
+            name, description, sub, domain, path, query, protocol
         })
     }
     return {
