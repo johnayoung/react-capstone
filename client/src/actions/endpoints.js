@@ -1,4 +1,4 @@
-import {API_BASE_URL} from '../config';
+import API_BASE_URL from '../config';
 import {SubmissionError} from 'redux-form';
 import axios from 'axios';
 console.log('auth token is', localStorage.authToken);
