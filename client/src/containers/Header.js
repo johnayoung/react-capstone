@@ -45,7 +45,7 @@ export class Header extends Component {
     return (
         <nav className='navbar'>            
           <div className='container' style={styles}>
-            <ul className='navbar-list'>
+            <ul className='navbar-list flex list-reset p-6'>
               <li className='navbar-item'>
                 <Link to='/' className='navbar-link'>Browse</Link>
               </li>

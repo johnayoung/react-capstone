@@ -38,7 +38,7 @@ export class CardContainer extends Component {
             placeholder='Search API endpoints'
           />
         </form>
-        <ul>
+        <ul className='list-reset'>
           {cards}
         </ul>
       </div>
