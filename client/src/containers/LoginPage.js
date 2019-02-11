@@ -12,7 +12,7 @@ export function LoginPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <div className="home">
+        <div className="home flex justify-center items-center mx-auto h-full">
             <Login />
         </div>
     );
