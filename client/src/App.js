@@ -5,6 +5,7 @@ import {withRouter} from 'react-router-dom';
 import Header from './containers/Header';
 import { fetchEndpoints } from './actions/endpoints';
 import Dashboard from './containers/Dashboard';
+import MobileMenu from './containers/MobileMenu';
 
 class App extends Component {
   componentDidMount() {
@@ -14,8 +15,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Header />
-        <Dashboard />
+        {/* <Header />
+        <Dashboard /> */}
+        <MobileMenu />
       </div>
     );
   }

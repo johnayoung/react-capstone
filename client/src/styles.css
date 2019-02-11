@@ -62,13 +62,17 @@
   */
 
 .navbar-list {
-    @apply p-8;
+    @apply p-4;
 }
 
 .navbar-link {
-    @apply  p-2 text-grey-darker no-underline;
+    @apply  pr-4 text-grey-darker no-underline;
 }
 
 .navbar-link:hover {
     @apply  text-green no-underline;
+}
+
+.navbarActive {
+    @apply border-green border-b-4
 }
