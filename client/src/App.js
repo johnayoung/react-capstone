@@ -15,9 +15,9 @@ class App extends Component {
   render() {
     return (
       <div>
-        {/* <Header />
-        <Dashboard /> */}
-        <MobileMenu />
+        <Header />
+        <Dashboard />
+        {/* <MobileMenu /> */}
       </div>
     );
   }

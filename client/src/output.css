@@ -7980,6 +7980,46 @@ table {
   * @import "utilities/skew-transforms";
   */
 
+/*
+    Buttons
+*/
+
+.btn {
+  font-weight: 700;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: .25rem;
+}
+
+.btn-green {
+  background-color: #7bc47f;
+  color: #fff;
+}
+
+.btn-green:hover {
+  background-color: #3f9142;
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-width: 1px;
+  border-color: #c1eac5;
+  color: #c1eac5;
+  font-weight: 600;
+}
+
+.btn-outline:hover {
+  background-color: #7bc47f;
+  color: #fff;
+  border-color: transparent;
+}
+
+/*
+    Navigation
+*/
+
 .navbar-list {
   padding: 1rem;
 }

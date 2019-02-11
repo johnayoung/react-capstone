@@ -61,6 +61,34 @@
   * @import "utilities/skew-transforms";
   */
 
+/*
+    Buttons
+*/
+
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+}
+
+.btn-green {
+    @apply bg-green-300 text-white;
+}
+
+.btn-green:hover {
+    @apply bg-green-500;
+}
+
+.btn-outline {
+    @apply bg-transparent border border-green-100 text-green-100 font-semibold 
+}
+
+.btn-outline:hover {
+    @apply bg-green-300 text-white border-transparent
+}
+
+/*
+    Navigation
+*/
+
 .navbar-list {
     @apply p-4;
 }
