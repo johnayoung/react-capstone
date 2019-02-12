@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function NavbarItem(props) {
   return (
-    <li className='navbar-item'>
+    <li key={props.keyValue} className='navbar-item'>
         <NavLink 
             to={props.link} 
             className='navbar-link' 

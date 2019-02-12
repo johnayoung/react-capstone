@@ -1,5 +1,3 @@
-const testString = 'endpoint[0].parameters[0]';
-
 const stringToPath = (path) => {
 
 	// If the path isn't a string, return it
@@ -27,5 +25,4 @@ const stringToPath = (path) => {
 
 };
 
-console.log(stringToPath(testString));
 export default stringToPath;

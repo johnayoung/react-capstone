@@ -1,14 +1,14 @@
 import API_BASE_URL from '../config';
 import {SubmissionError} from 'redux-form';
 import axios from 'axios';
-console.log('auth token is', localStorage.authToken);
-const api = axios.create({
-    baseURL: `${API_BASE_URL}`,
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.authToken}`
-    },    
-})
+
+// const api = axios.create({
+//     baseURL: `${API_BASE_URL}`,
+//     headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': `Bearer ${localStorage.authToken}`
+//     },    
+// })
 
 export const FETCH_ENDPOINTS_REQUEST = 'FETCH_ENDPOINTS_REQUEST';
 export const fetchEndpointsRequest = endpoints => ({
@@ -83,7 +83,7 @@ export const postEndpoint = (postObject) => dispatch => {
         },    
     })
     dispatch(postEndpointRequest());
-    const {endpoints, collectionName} = postObject;
+    const {endpoints} = postObject;
     const {fullUrl, name} = endpoints[0];
     console.log('full url and name is ', fullUrl, name);
     return axios.all(endpoints.map(endpoint => api.post('/endpoints', {name: endpoint.name, fullUrl: endpoint.fullUrl, parameters: endpoint.parameters})))

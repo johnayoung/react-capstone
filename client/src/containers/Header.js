@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import Icon from '../components/icons/Index';
 import {connect} from 'react-redux';
 import { Link } from "react-router-dom";
 import { withRouter } from 'react-router-dom'
@@ -28,7 +27,6 @@ export class Header extends Component {
   }
 
   handleMobileMenu() {
-    console.log('')
     this.setState({
       showMenu: true
     })
@@ -47,30 +45,32 @@ export class Header extends Component {
     if (this.props.loggedIn) {
       const hidden = ['Sign Up', 'Login'];
       signout = (
-        <li className='navbar-item'>
+        <li key='navbar-item-signout' className='navbar-item'>
             <Link to={'/login'} className='navbar-link' onClick={() => this.logOut()}>Sign out</Link>
         </li>
       );
       testNav = this.state.menuItems
         .filter(item => !(hidden.includes(item.name)))
-        .map(item => {
+        .map((item, index) => {
           return (
-            <div onClick={() => this.hideMobileMenu()}>
+            <div key={index} onClick={() => this.hideMobileMenu()}>
               <NavbarItem 
                 link={`${item.redirect}`} 
                 name={item.name}
+                keyValue={item.name}
               />
             </div>
           )
         });
     } else {
       testNav = this.state.menuItems
-        .map(item => {
+        .map((item, index) => {
           return (
-            <div onClick={() => this.hideMobileMenu()}>
+            <div key={index} onClick={() => this.hideMobileMenu()}>
             <NavbarItem 
               link={`${item.redirect}`} 
               name={item.name}
+              keyValue={item.name}
             />
             </div>
           )
@@ -88,14 +88,14 @@ export class Header extends Component {
               {testNav}
               {signout}
             </div>
-            <li className='navbar-item lg:invisible absolute pin-r' onClick={() => this.handleMobileMenu()}>
+            <li key='icon-menu' className='navbar-item lg:invisible absolute pin-r' onClick={() => this.handleMobileMenu()}>
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
                 viewBox="0 0 24 24" 
                 className="icon-menu fill-current text-green-900 inline-block h-8 w-8">
                 <path 
                   className="secondary" 
-                  fill-rule="evenodd" 
+                  fillRule="evenodd" 
                   d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
               </svg>
             </li>
@@ -104,7 +104,7 @@ export class Header extends Component {
       )
     }
     return (
-        <nav className='max-w-full shadow flex fixed pin-t pin-x z-100 h-16 items-center bg-white'>
+        <nav className='max-w-full w-screen shadow flex fixed pin-t pin-x z-100 h-16 items-center bg-white'>
           {navbar}
         </nav>
     )

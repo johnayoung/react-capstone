@@ -3,7 +3,6 @@ import {Link} from 'react-router-dom';
 import CardContent from '../components/CardContent';
 import {Field, reduxForm, formValueSelector} from 'redux-form';
 import { connect } from 'react-redux';
-import RenderField from '../components/RenderField';
 
 export class CardContainer extends Component {
   render() {
@@ -12,7 +11,7 @@ export class CardContainer extends Component {
     const cards = this.props.endpoints.filter(endpoint => {
       return (!searchBox) ? endpoint : endpoint.name.toLowerCase().includes(searchBox)
     }).map(endpoint => {
-      const {id, userId, name, description, favicon} = endpoint;
+      const {id, userId, name, description} = endpoint;
       const username = userId.username;
         return (
           <li key={id} className=' bg-white w-full p-4 border-t hover:bg-grey-lighter text-grey-darker'>

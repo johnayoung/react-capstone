@@ -28,7 +28,6 @@ class Endpoint extends Component {
               sub,
               domain,
               path,
-              query,
             } = this.props.currentEndpoint;
             const {formValues} = this.props;
             // submittedUrl = `${protocol}://${sub}.${domain}${path}${query}`;
@@ -49,7 +48,7 @@ class Endpoint extends Component {
                     <p className='mb-4'>{path}</p>
                     <ul className='list-reset mb-4'>
                         {parameters.map((param, index) => (
-                            <div className='mb-4'>                            
+                            <div key={index} className='mb-4'>                            
                                 <Field
                                     name={param.name}
                                     type={(param.type==='list') ? 'select' : 'text'}
