@@ -10,7 +10,7 @@ class Code extends React.Component {
       <div className='container'>
         <Highlight 
           className='json'>
-          {!this.props.userEndpoint ? 'nothing' : JSON.stringify(this.props.userEndpoint, null, 2)}
+          {!this.props.userEndpoint ? 'Pull JSON will appear here' : JSON.stringify(this.props.userEndpoint, null, 2)}
         </Highlight>
       </div>
     )}

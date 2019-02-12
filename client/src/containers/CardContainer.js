@@ -15,7 +15,7 @@ export class CardContainer extends Component {
       const {id, userId, name, description, favicon} = endpoint;
       const username = userId.username;
         return (
-          <li key={id} className='w-full p-4 border-t hover:bg-grey-lighter text-grey-darker'>
+          <li key={id} className=' bg-white w-full p-4 border-t hover:bg-grey-lighter text-grey-darker'>
             <Link to={`/${username}/${name}`} className='hover:bg-grey-lighter no-underline text-grey-darker'>          
                 <CardContent 
                   cardName={name}
@@ -27,9 +27,12 @@ export class CardContainer extends Component {
         )
     });
     return (
-      <div className='cardList bg-white'>
+      <div className='cardList'>
         <form className='p-6'>
-          {/* <h4>Discover and connect to thousands of API endpoints</h4> */}
+          <h1 className='text-center font-semibold tracking-tight mb-1'>API Hub</h1>
+          <div className='max-w-sm mx-auto text-center text-grey-dark mb-16'>
+            <p className='leading-tight'>An easy way to find and connect to (a few) APIs</p>
+          </div>
           <Field 
             name='searchBox'
             component='input'

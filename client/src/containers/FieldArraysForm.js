@@ -13,8 +13,10 @@ import RenderEndpoints from '../components/RenderEndpoints'
 const FieldArraysForm = props => {
   const { handleSubmit, pristine, reset, submitting } = props
   return (
-    <div className='container addEndpoints'>
-      <h2>Add an endpoint</h2>
+    <div className='container addEndpoints bg-white p-2'>
+      <div className='mb-6 max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:px-12 xl:w-3/4'>
+        <h1 className='mb-4'>Add an endpoint</h1>
+      </div>
       <form onSubmit={handleSubmit}>
         <Field
           name="collectionName"
@@ -24,7 +26,7 @@ const FieldArraysForm = props => {
         />
         <FieldArray name="endpoints" component={RenderEndpoints} />
         <div>
-          <button type="submit" disabled={submitting}>
+          <button className='btn btn-green' type="submit" disabled={submitting}>
             Submit
           </button>
           <button type="button" disabled={pristine || submitting} onClick={reset}>
@@ -69,18 +71,3 @@ export default withRouter(reduxForm({
   enableReinitialize : true,
   validate
 })(FieldArraysForm))
-
-// FieldArraysForm = reduxForm({
-//   form: 'fieldArrays',
-//   onSubmit: (values, dispatch) => console.log(values),
-//   onChange: (values, dispatch) => console.log(values),
-//   initialValues,
-//   enableReinitialize: true,
-//   validate
-// })(FieldArraysForm)
-
-// const selector = formValueSelector('fieldArrays');
-
-// const mapStateToProps = (state) => {
-//   const 
-// }

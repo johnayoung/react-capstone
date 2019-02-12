@@ -8040,6 +8040,39 @@ table {
   border-bottom-width: 4px;
 }
 
+/*
+    Forms
+*/
+
+.field-input {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-width: 1px;
+  border-radius: .25rem;
+  width: 100%;
+  padding-top: .5rem;
+  padding-bottom: .5rem;
+  padding-left: .75rem;
+  padding-right: .75rem;
+  color: #606f7b;
+  line-height: 1.25;
+}
+
+.field-input:focus {
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(52, 144, 220, .5);
+}
+
+.label-input {
+  display: block;
+  color: #606f7b;
+  font-size: .875rem;
+  font-weight: 700;
+  margin-bottom: .5rem;
+}
+
 @media (min-width: 576px) {
   .sm\:list-reset {
     list-style: none;

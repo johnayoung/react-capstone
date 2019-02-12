@@ -12,7 +12,7 @@ export function RegistrationPage(props) {
         return <Redirect to="/" />;
     }
     return (
-        <div className="home flex justify-center items-center mx-auto h-full">
+        <div className="home flex justify-center items-center mx-auto">
             <Registration />
         </div>
     );

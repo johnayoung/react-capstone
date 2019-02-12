@@ -26,7 +26,7 @@ export class Dashboard extends Component {
     }
   render() {
     return (
-      <div className='dashboard bg-grey-lightest h-screen'>
+      <div className='dashboard pt-20 px-2'>
         {this.content()}
       </div>
     )

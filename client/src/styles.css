@@ -104,3 +104,19 @@
 .navbarActive {
     @apply border-green border-b-4
 }
+
+/*
+    Forms
+*/
+
+.field-input {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight
+}
+
+.field-input:focus {
+    @apply outline-none shadow-outline
+}
+
+.label-input {
+    @apply block text-grey-darker text-sm font-bold mb-2
+}

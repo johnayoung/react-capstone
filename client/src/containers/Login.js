@@ -50,7 +50,7 @@ export class Login extends React.Component {
                     </div>
                     <div className='flex items-center justify-between'>
                         <button 
-                            className='bg-green-500 hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline'
+                            className='btn btn-green hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline'
                             disabled={this.props.pristine || this.props.submitting}>
                             Log in
                         </button>

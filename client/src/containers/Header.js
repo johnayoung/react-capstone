@@ -28,6 +28,7 @@ export class Header extends Component {
   }
 
   handleMobileMenu() {
+    console.log('')
     this.setState({
       showMenu: true
     })
@@ -54,20 +55,24 @@ export class Header extends Component {
         .filter(item => !(hidden.includes(item.name)))
         .map(item => {
           return (
-            <NavbarItem 
-              link={`${item.redirect}`} 
-              name={item.name}
-            />
+            <div onClick={() => this.hideMobileMenu()}>
+              <NavbarItem 
+                link={`${item.redirect}`} 
+                name={item.name}
+              />
+            </div>
           )
         });
     } else {
       testNav = this.state.menuItems
         .map(item => {
           return (
+            <div onClick={() => this.hideMobileMenu()}>
             <NavbarItem 
               link={`${item.redirect}`} 
               name={item.name}
             />
+            </div>
           )
         });
     }
@@ -89,7 +94,7 @@ export class Header extends Component {
                 viewBox="0 0 24 24" 
                 className="icon-menu fill-current text-green-900 inline-block h-8 w-8">
                 <path 
-                  class="secondary" 
+                  className="secondary" 
                   fill-rule="evenodd" 
                   d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
               </svg>
@@ -99,7 +104,7 @@ export class Header extends Component {
       )
     }
     return (
-        <nav className='shadow navbar'>
+        <nav className='shadow flex fixed pin-t pin-x z-100 h-16 navbar items-center bg-white'>
           {navbar}
         </nav>
     )

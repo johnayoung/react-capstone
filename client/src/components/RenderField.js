@@ -7,16 +7,16 @@ const RenderField = ({ options, input, label, type, meta: { touched, error } }) 
     return (type === 'text' || type === 'email' || type === 'number' || type === 'checkbox') ?
     (
         <div>
-          <label>{label}</label>
+          <label className='label-input'>{label}</label>
           <div>
-            <input {...input} type={type} placeholder={label}/>
+            <input {...input} type={type} placeholder={label} className='field-input' />
             {touched && error && <span>{error}</span>}
           </div>
         </div>
     ) : (type === 'select') ?
     (
         <div>
-          <label>{label}</label>
+          <label className='label-input'>{label}</label>
           <div>
             <select {...input} type={type} placeholder={label}>
                 {options.map((option, index) => {

@@ -35,30 +35,39 @@ class Endpoint extends Component {
             if (formValues) {submittedUrl = urlBuilder(formValues);}
             baseUrl = `${protocol}://${sub}.${domain}`
           displayedEndpoint = (
-              <div className='container'>              
-                <h4>{name}</h4>
-                <p>{description}</p>
-                <form onSubmit={this.props.handleSubmit}>
-                    <label>Base Url</label>
-                    <p>{baseUrl}</p>
-                    <label>Path</label>
-                    <p>{path}</p>
-                    <ul>
+              <div className='container pt-12 pb-8 lg:pt-28 w-full'>
+                <div className='mb-6 max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:px-12 xl:w-3/4'>
+                    <h1 className='mb-4'>{name}</h1>
+                    <p className='mb-4 text-xl text-grey-dark'>{description}</p>
+                </div>          
+                <form 
+                    className='xl:px-12 w-full max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4'
+                    onSubmit={this.props.handleSubmit}>
+                    <label className='block text-grey-darker text-sm font-bold mb-2'>Base Url</label>
+                    <p className='mb-4'>{baseUrl}</p>
+                    <label className='block text-grey-darker text-sm font-bold mb-2'>Path</label>
+                    <p className='mb-4'>{path}</p>
+                    <ul className='list-reset mb-4'>
                         {parameters.map((param, index) => (
-                            <Field
-                                name={param.name}
-                                type={(param.type==='list') ? 'select' : 'text'}
-                                component={RenderField}
-                                label={`${param.name} (${param.required ? 'required' : 'optional'})`}
-                                options={(param.type === 'list' ? [param.value] : '')}
-                            />
+                            <div className='mb-4'>                            
+                                <Field
+                                    name={param.name}
+                                    type={(param.type==='list') ? 'select' : 'text'}
+                                    component={RenderField}
+                                    label={`${param.name} (${param.required ? 'required' : 'optional'})`}
+                                    options={(param.type === 'list' ? [param.value] : '')}
+                                />
+                            </div>
                         ))}
                     </ul>
-                    <div className='submittedUrl'>
-                        <p>Submitted URL will be: {submittedUrl}</p>
+                    <div className='submittedUrl mb-4'>
+                        <label className='block text-grey-darker text-sm font-bold mb-2'>
+                            Submitted URL will be: 
+                        </label>
+                        <p>{submittedUrl}</p>
                     </div>
                     <div>
-                    <button type="submit">
+                    <button className='btn btn-green' type="submit">
                         Submit
                     </button>
                     </div>
@@ -71,7 +80,7 @@ class Endpoint extends Component {
           )
       }
     return (
-      <div>
+      <div className='px-6 pb-6 bg-white shadow-md rounded'>
         {displayedEndpoint}
         <Code />
       </div>
