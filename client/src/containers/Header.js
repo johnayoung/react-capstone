@@ -6,6 +6,7 @@ import {clearAuth} from '../actions/auth';
 import { clearAuthToken } from '../localStorage';
 import MobileMenu from './MobileMenu';
 import NavbarItem from '../components/NavbarItem';
+import Icon from '../components/icons/Index';
 
 export class Header extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ export class Header extends Component {
     this.state = {
       showMenu: false,
       menuItems: [
-        {name: 'Browse', redirect: '/'},
+        {name: 'Browse', redirect: '/browse'},
         {name: 'Add', redirect: '/add'},
         {name: 'Sign Up', redirect: '/signup'},
         {name: 'Login', redirect: '/login'}
@@ -83,21 +84,16 @@ export class Header extends Component {
     } else {
       navbar = (           
         <div className=''>
-          <ul className='navbar-list flex items-center justify-center list-reset'>
-            <div className='hidden sm:flex'>
+          <ul className='navbar-list flex list-reset items-center'>
+            <Link to='/'>
+              <Icon name='logo' className='fill-current text-green w-8 h-8 lg:w-12 lg:h-12 block' />
+            </Link>
+            <div className='hidden sm:flex mx-auto'>
               {testNav}
               {signout}
             </div>
-            <li key='icon-menu' className='navbar-item lg:invisible absolute pin-r' onClick={() => this.handleMobileMenu()}>
-              <svg 
-                xmlns="http://www.w3.org/2000/svg" 
-                viewBox="0 0 24 24" 
-                className="icon-menu fill-current text-green-900 inline-block h-8 w-8">
-                <path 
-                  className="secondary" 
-                  fillRule="evenodd" 
-                  d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"/>
-              </svg>
+            <li key='icon-menu' className='navbar-item sm:invisible absolute pin-r pr-4' onClick={() => this.handleMobileMenu()}>
+              <Icon name='menu' className='fill-current text-grey w-8 h-8 lg:w-12 lg:h-12 block' />
             </li>
           </ul>
         </div>
@@ -105,7 +101,9 @@ export class Header extends Component {
     }
     return (
         <nav className='max-w-full w-screen shadow flex fixed pin-t pin-x z-100 h-16 items-center bg-white'>
-          {navbar}
+          <div className='container mx-auto'>
+            {navbar}
+          </div>
         </nav>
     )
   }

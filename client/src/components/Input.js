@@ -1,15 +1,10 @@
 
 import React from 'react'
 import {connect} from 'react-redux';
-// import { handleInput } from '../actions';
 
 function Input(props) {
     return (
         <div className="form-group">
-            {/* <label htmlFor={props.name} className="form-label">
-                {props.title}
-            </label>
-            {' '}<br /> */}
             <input 
                 {...props.input}
                 className="form-control"
@@ -24,12 +19,5 @@ function Input(props) {
         </div>
     )
 }
-
-// function mapStateToProps(state) {
-//     console.log(`State is ${state}`)
-//     return {
-//         value: state.newUser.name,
-//     }
-// }
 
 export default connect()(Input);

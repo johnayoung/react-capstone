@@ -9,7 +9,7 @@ export function LoginPage(props) {
     // If we are logged in (which happens automatically when registration
     // is successful) redirect to the main browse area
     if (props.loggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to="/browse" />;
     }
     return (
         <div className="home flex justify-center items-center mx-auto h-full">

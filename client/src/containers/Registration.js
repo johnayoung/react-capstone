@@ -2,8 +2,9 @@ import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
-import Input from '../components/Input';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
+import RenderField from '../components/RenderField';
+import Error from '../components/Error';
 const passwordLength = length({min: 10, max: 72});
 const matchesPassword = matches('password');
 
@@ -18,6 +19,7 @@ export class Registration extends React.Component {
     }
 
     render() {
+        const {error} = this.props
         return (
             <div className='w-full max-w-xs'>
                 <h2 className='text-center p-6'>Disrupting the world, one API at a time.</h2>
@@ -28,52 +30,42 @@ export class Registration extends React.Component {
                     )}
                     >
                     <div className='mb-4'>
-                        <label 
-                            className='block text-grey-darker text-sm font-bold mb-2'
-                            htmlFor="fullname">Full name</label>
                         <Field 
-                            component='input' 
-                            type="text" 
-                            name="fullname" 
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline'
+                            name='fullname'
+                            type='text'
+                            component={RenderField}
+                            validate={[required, nonEmpty]}
+                            label='Full Name'
                         />
                     </div>
                     <div className='mb-4'>
-                        <label 
-                            className='block text-grey-darker text-sm font-bold mb-2'
-                            htmlFor="username">Username</label>
-                        <Field
-                            component={Input}
-                            type="text"
-                            name="username"
+                        <Field 
+                            name='username'
+                            type='text'
+                            component={RenderField}
+                            label='Username'
                             validate={[required, nonEmpty, isTrimmed]}
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline'
                         />
                     </div>
                     <div className='mb-4'>
-                        <label 
-                            className='block text-grey-darker text-sm font-bold mb-2'
-                            htmlFor="password">Password</label>
-                        <Field
-                            component={Input}
-                            type="password"
-                            name="password"
+                        <Field 
+                            name='password'
+                            type='password'
+                            component={RenderField}
+                            label='Password'
                             validate={[required, passwordLength, isTrimmed]}
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline'
                         />
                     </div>
                     <div className='mb-4'>
-                        <label 
-                            className='block text-grey-darker text-sm font-bold mb-2'
-                            htmlFor="passwordConfirm">Confirm password</label>
-                        <Field
-                            component={Input}
-                            type="password"
-                            name="passwordConfirm"
+                        <Field 
+                            name='passwordConfirm'
+                            type='password'
+                            component={RenderField}
+                            label='Confirm Password'
                             validate={[required, nonEmpty, matchesPassword]}
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline'
                         />
                     </div>
+                    {error && <div className='mb-4'><Error error={error} /></div>}
                     <div className='flex items-center justify-between'>
                         <button
                             className='btn btn-green hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline'
@@ -90,6 +82,5 @@ export class Registration extends React.Component {
 
 export default reduxForm({
     form: 'registration',
-    onSubmitFail: (errors, dispatch) =>
-        dispatch(focus('registration', Object.keys(errors)[0]))
+    onSubmitFail: (errors, dispatch) => dispatch(focus('registration', Object.keys(errors)[0]))
 })(Registration);

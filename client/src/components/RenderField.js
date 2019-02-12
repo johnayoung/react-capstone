@@ -1,4 +1,6 @@
 import React from 'react'
+import Error from '../components/Error';
+import FieldError from './FieldError';
 
 // type can be: text, password, submit, reset, radio, checkbox, button, 
 // type can be: color, date, datetime-local, email, month, number, range, search, tel, time, url, week
@@ -9,7 +11,7 @@ const RenderField = ({ options, input, label, type, meta: { touched, error }, pl
         selector = (
             <div>
                 <input {...input} className='field-input' type={type} placeholder={(placeholder) ? placeholder : label}/>
-                {touched && error && <span>{error}</span>}
+                {touched && error && <div className='mb-4 mt-2'><FieldError error={error} /></div>}
             </div>
         )
     } else {
@@ -20,7 +22,7 @@ const RenderField = ({ options, input, label, type, meta: { touched, error }, pl
                         return <option key={index} value={option}>{option}</option>
                     })}
                 </select>
-                {touched && error && <span>{error}</span>}
+                {touched && error && <div className='mb-4 mt-4'><FieldError error={error} /></div>}
             </div>
         )
     }

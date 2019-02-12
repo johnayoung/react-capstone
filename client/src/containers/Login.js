@@ -1,6 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
 import Input from '../components/Input';
+import RenderField from '../components/RenderField';
 import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
@@ -22,31 +23,22 @@ export class Login extends React.Component {
                     onSubmit={this.props.handleSubmit}>
                     {error}
                     <div className='mb-4'>
-                        <label
-                            className='block text-grey-darker text-sm font-bold mb-2'
-                            htmlFor="username">Username</label>
-                        <Field
-                            component={Input}
-                            type="text"
-                            name="username"
-                            id="username"
+                        <Field 
+                            name='username'
+                            type='text'
+                            component={RenderField}
+                            label='Username'
                             validate={[required, nonEmpty]}
-                            className='shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline'
                         />
                     </div>
                     <div className='mb-6'>
-                        <label 
-                            className='block text-grey-darker text-sm font-bold mb-2'
-                            htmlFor="password">Password</label>
-                        <Field
-                            component={Input}
-                            type="password"
-                            name="password"
-                            id="password"
+                        <Field 
+                            name='password'
+                            type='password'
+                            component={RenderField}
+                            label='Password'
                             validate={[required, nonEmpty]}
-                            className='shadow appearance-none border border-red rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline'
                         />
-                        <p class="text-red text-xs italic">Please choose a password.</p>
                     </div>
                     <div className='flex items-center justify-between'>
                         <button 

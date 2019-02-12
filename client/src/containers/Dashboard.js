@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 import {Route, Switch, withRouter} from 'react-router-dom';
 
+import LandingPage from './LandingPage';
 import RegistrationPage from './RegistrationPage';
 import LoginPage from './LoginPage';
 import CardContainer from './CardContainer';
@@ -15,7 +16,8 @@ export class Dashboard extends Component {
         } else {
             return (
             <Switch>
-                <Route exact path="/" component={CardContainer}/>
+                <Route exact path="/" component={LandingPage}/>
+                <Route path="/browse" component={CardContainer}/>
                 <Route path="/signup" component={RegistrationPage} />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/add" component={FieldArraysForm} />

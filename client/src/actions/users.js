@@ -12,13 +12,19 @@ export const registerUser = user => dispatch => {
         data: JSON.stringify(user)
     };
     return axios(config)
-            .then(res => res.json())
+            .then(({data}) => {
+                console.log(data);
+                // return data.json()
+                return data;
+            })
             .catch(err => {
-                const {reason, message, location} = err;
-                if (reason === 'ValidationError') {
-                // Convert validation errors into SubmissionErrors for Redux Form
-                    return new SubmissionError({
-                        [location]: message
+                console.log(err);
+                console.log(err.response.data);
+                console.log(err.response.status);
+                console.log(err.response.headers);
+                if (err.response.data.message === 'The username already exists') {
+                    throw new SubmissionError({
+                        _error: 'Username already exists'
                     })
                 }
             })
