@@ -6,11 +6,7 @@ import {Provider} from 'react-redux';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
 
-// Import styles
-// import './index.css';
-// import './responsive.css';
-// import './normalize.css';
-// import './skeleton.css';
+// Styles
 import './output.css';
 import './misc.css';
 

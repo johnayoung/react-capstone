@@ -8062,8 +8062,14 @@ table {
 
 .navbar-link {
   padding-right: 1rem;
-  color: #606f7b;
+  color: #fff;
   text-decoration: none;
+}
+
+@media (min-width: 576px) {
+  .navbar-link {
+    color: #606f7b;
+  }
 }
 
 .navbar-link:hover {

@@ -94,7 +94,13 @@
 }
 
 .navbar-link {
-    @apply  pr-4 text-grey-darker no-underline;
+    @apply  pr-4 text-white no-underline;
+}
+
+@screen sm {
+    .navbar-link {
+        @apply text-grey-darker
+    }
 }
 
 .navbar-link:hover {
