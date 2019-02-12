@@ -1,14 +1,12 @@
 import React from 'react'
-import store from '../store';
-import { formValueSelector, getFormValues, getFormMeta } from 'redux-form'
+import { formValueSelector, getFormValues } from 'redux-form'
 import Parameter from './Parameter';
 import { connect } from 'react-redux';
 
 const RenderParameters = (props) => {
   const { fields, meta: { error }, values } = props;
-  console.log(values);
   return (
-    <ul className='list-reset'>
+    <ul className='list-reset mt-6'>
       <label className='label-input'>Query Params</label>
       <li className='pb-4'>
         <button 
@@ -25,7 +23,7 @@ const RenderParameters = (props) => {
             parameter={parameter}
             index={index}
             fields={fields}
-            formValues={props.values}
+            formValues={values}
           />
         )
       })}

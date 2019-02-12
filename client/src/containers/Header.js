@@ -104,7 +104,7 @@ export class Header extends Component {
       )
     }
     return (
-        <nav className='shadow flex fixed pin-t pin-x z-100 h-16 navbar items-center bg-white'>
+        <nav className='max-w-full shadow flex fixed pin-t pin-x z-100 h-16 items-center bg-white'>
           {navbar}
         </nav>
     )
