@@ -1,7 +1,7 @@
 import React from 'react';
 import {Field, reduxForm, focus} from 'redux-form';
-import Input from '../components/Input';
 import RenderField from '../components/RenderField';
+import Error from '../components/Error';
 import {login} from '../actions/auth';
 import {required, nonEmpty} from '../validators';
 
@@ -21,7 +21,6 @@ export class Login extends React.Component {
                 <form
                     className="login-form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
                     onSubmit={this.props.handleSubmit}>
-                    {error}
                     <div className='mb-4'>
                         <Field 
                             name='username'
@@ -40,6 +39,7 @@ export class Login extends React.Component {
                             validate={[required, nonEmpty]}
                         />
                     </div>
+                    {error && <div className='mb-4'><Error error={error} /></div>}
                     <div className='flex items-center justify-between'>
                         <button 
                             className='btn btn-green hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline'

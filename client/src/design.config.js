@@ -138,7 +138,8 @@ let colors = {
   "green-600": "#2F8132",
   "green-700": "#207227",
   "green-800": "#0E5814",
-  "green-900": "#05400A",   
+  "green-900": "#05400A",
+  "green-bg-transparent": "hsla(125, 86%, 14%, 0.75)",   
 
   // Neutrals
   "grey-050": "#F7F7F7",
