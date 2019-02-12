@@ -26,18 +26,23 @@ const RenderEndpoints = ({ fields, meta: { error, submitFailed } }) => (
         <svg className='icon-close fill-current w-4 h-4' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path className="secondary" fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"/></svg>
         </button>
         <h4>Endpoint #{index + 1}</h4>
-        <Field
-          name={`${endpoint}.name`}
-          type="text"
-          component={RenderField}
-          label="Name"
-        />
-        <Field
-          name={`${endpoint}.fullUrl`}
-          type='text'
-          component={RenderField}
-          label="Full Url"
-        />
+        <div className='mb-4'>
+          <Field
+            name={`${endpoint}.name`}
+            type="text"
+            component={RenderField}
+            label="Name"
+          />
+        </div>
+        <div className='mb-4'>
+          <Field
+            name={`${endpoint}.fullUrl`}
+            type='url'
+            component={RenderField}
+            label="Full Url"
+            placeholder='https://...'
+          />
+        </div>
         <FieldArray name={`${endpoint}.parameters`} component={RenderParameters} />
       </li>
     ))}

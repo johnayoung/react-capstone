@@ -5,13 +5,18 @@ import Parameter from './Parameter';
 import { connect } from 'react-redux';
 
 const RenderParameters = (props) => {
-  const { fields, meta: { error } } = props;
-  console.log(fields);
+  const { fields, meta: { error }, values } = props;
+  console.log(values);
   return (
     <ul className='list-reset'>
+      <label className='label-input'>Query Params</label>
       <li className='pb-4'>
-        <button className='btn' type="button" onClick={() => fields.push()}>
-          Add Parameter
+        <button 
+          className='text-grey-darkest font-bold py-2 px-4 inline-flex mb-4'
+          type="button" 
+          onClick={() => fields.push({})}>
+          <svg className='icon-add fill-current w-4 h-4 mr-2' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="secondary" fill-rule="evenodd" d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"/></svg>
+          Add query param
         </button>
       </li>
       {fields.map((parameter, index, fields) => {
@@ -20,6 +25,7 @@ const RenderParameters = (props) => {
             parameter={parameter}
             index={index}
             fields={fields}
+            formValues={props.values}
           />
         )
       })}

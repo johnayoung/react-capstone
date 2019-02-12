@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import RenderField from './RenderField';
 import {Field} from 'redux-form';
+import get from '../utils/nestedValueGetter';
+import stringToPath from '../utils/stringToPath';
 
 class Parameter extends Component {
     constructor(props) {
@@ -21,17 +23,24 @@ class Parameter extends Component {
         })
     }
   render() {
-      const {parameter, index, fields} = this.props;
+    const {parameter, index, fields, formValues} = this.props;
+    const table = get(stringToPath(parameter), formValues);
+    console.log(table);
     return (
         <div className=''>
-            <div className='flex flex-row items-center border-t border-b'>
-                <div className='flex-1 p-2'>
-                    <span className='font-bold text-xs'>{parameter}</span>
-                    {/* <p className='cardContentDescription'>{this.props.cardDescription}</p> */}
+            <div className='flex flex-row items-center border-t border-b hover:bg-grey-lightest'>
+                <div className='flex-1 p-2 text-xs min-w-0'>
+                    <table className='truncate w-full table-fixed'>
+                        <tr className='truncate'>
+                            <td className='max-w-xs w-1/3 truncate'>{table.name}</td>
+                            <td className='max-w-xs w-1/3 truncate'>{table.value}</td>
+                            <td className='max-w-xs w-1/3 truncate'>{table.required}</td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="inline-flex">
+                <div class="p-2 whitespace-no-wrap">
                     <button
-                        className='ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex'
+                        className='inline-block ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4'
                         type="button"
                         title="Remove Parameter"
                         onClick={() => fields.remove(index)}>
@@ -39,8 +48,8 @@ class Parameter extends Component {
                     </button>
                     <button 
                         onClick={() => this.showModal()}
-                        className="bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded-r">
-                        Edit
+                        className="inline-block ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4">
+                        <svg className="icon-edit fill-current text-blue h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path class="primary" d="M4 14a1 1 0 0 1 .3-.7l11-11a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-11 11a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-3z"/><rect width="20" height="2" x="2" y="20" class="secondary" rx="1"/></svg>
                     </button>
                 </div>
             </div>
@@ -51,10 +60,10 @@ class Parameter extends Component {
                     name={`${parameter}.name`}
                     type="text"
                     component={RenderField}
-                    label={`Parameter #${index + 1}: Name`}
+                    label={`Name`}
                     />
                 </div>
-                <div className='mb-4'> 
+                {/* <div className='mb-4'> 
                     <Field
                     name={`${parameter}.type`}
                     type="text"
@@ -62,13 +71,13 @@ class Parameter extends Component {
                     label={`Parameter #${index + 1}: Type`}
                     props={{options: ['', 'input', 'list']}}
                     />
-                </div>
+                </div> */}
                 <div className='mb-4'> 
                     <Field
                     name={`${parameter}.value`}
                     type="text"
                     component={RenderField}
-                    label={`Parameter #${index + 1}: Initial Value`}
+                    label={`Initial Value`}
                     />
                 </div>
                 <div className='mb-4'> 
@@ -76,7 +85,7 @@ class Parameter extends Component {
                     name={`${parameter}.required`}
                     type="select"
                     component={RenderField}
-                    label={`Parameter #${index + 1}: Required`}
+                    label={`Required`}
                     props={{options: ['Yes', 'No']}}
                     />
                 </div>
@@ -101,6 +110,4 @@ class Parameter extends Component {
   }
 }
 
-
-export default Parameter
-
+export default Parameter;
