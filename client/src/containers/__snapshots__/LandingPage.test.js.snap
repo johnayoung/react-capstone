@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A suite of tests for the App component should render with no errors 1`] = `
+<div>
+  <h1>
+    API Hub
+  </h1>
+  <p>
+    A wonderful landing page will eventually go here
+  </p>
+  <button>
+    Browse APIs
+  </button>
+</div>
+`;

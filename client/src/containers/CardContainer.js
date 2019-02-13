@@ -29,7 +29,7 @@ export class CardContainer extends Component {
     return (
       <div className='cardList'>
           <div className='searchHeader fixed w-screen pin-t pin-l mt-16'>        
-            <form className='p-6 flex flex-col items-center justify-center mb-20 bg-green-darkest'>
+            <form className='hero-background p-6 flex flex-col items-center justify-center mb-20'>
               <h1 className='text-center font-semibold tracking-tight mb-1 text-white'>API Hub</h1>
               <div className='max-w-sm mx-auto text-center mb-6'>
                 <p className='leading-tight text-green-lighter'>An easy way to find and connect to (a few) APIs</p>

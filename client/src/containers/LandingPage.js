@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class LandingPage extends Component {
   render() {
@@ -8,6 +8,6 @@ export default class LandingPage extends Component {
         <p>A wonderful landing page will eventually go here</p>
         <button>Browse APIs</button>
       </div>
-    )
+    );
   }
 }

@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
-import Header from './containers/Header';
-import { fetchEndpoints } from './actions/endpoints';
-import Dashboard from './containers/Dashboard';
+import Header from "./containers/Header";
+import { fetchEndpoints } from "./actions/endpoints";
+import Dashboard from "./containers/Dashboard";
 
 class App extends Component {
   componentDidMount() {
@@ -13,7 +13,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className='h-screen mx-auto bg-grey-050'>
+      <div className="mx-auto">
         <Header />
         <Dashboard />
       </div>
@@ -25,6 +25,6 @@ const mapStateToProps = state => ({
   hasAuthToken: state.auth.authToken !== null,
   loggedIn: state.auth.currentUser !== null,
   endpoints: state.endpoints.endpoints
-})
+});
 
 export default withRouter(connect(mapStateToProps)(App));

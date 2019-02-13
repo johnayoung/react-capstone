@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A suite of tests for the App component should render banner text correctly with given props 1`] = `
+<div
+  className="bg-red-lightest border-l-4 border-red text-red-dark p-2"
+  role="alert"
+>
+  <p>
+    This is a test message
+  </p>
+</div>
+`;
+
+exports[`A suite of tests for the App component should render with no errors 1`] = `
+<div
+  className="bg-red-lightest border-l-4 border-red text-red-dark p-2"
+  role="alert"
+>
+  <p />
+</div>
+`;
