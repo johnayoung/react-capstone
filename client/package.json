@@ -25,7 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "buildcss": "npx tailwind build styles.css -c ./design.config.js -o ./output.css"
+    "buildcss": "cd ./src && npx tailwind build styles.css -c ./design.config.js -o ./output.css"
   },
   "eslintConfig": {
     "extends": "react-app"

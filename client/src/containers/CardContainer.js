@@ -10,8 +10,10 @@ export class CardContainer extends Component {
     console.log('search box values are ', searchBox)
     const cards = this.props.endpoints.filter(endpoint => {
       return (!searchBox) ? endpoint : endpoint.name.toLowerCase().includes(searchBox)
-    }).map(endpoint => {
-      const {id, userId, name, description} = endpoint;
+    })
+    .filter(newEndpoint => newEndpoint !== null)
+    .map(filteredEndpoint => {
+      const {id, userId, name, description} = filteredEndpoint;
       const username = userId.username;
         return (
           <li key={id} className=' bg-white w-full p-4 border-t hover:bg-grey-lighter text-grey-darker'>

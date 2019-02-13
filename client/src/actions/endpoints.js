@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import API_BASE_URL from '../config';
 import {SubmissionError} from 'redux-form';
 import axios from 'axios';
@@ -64,9 +65,9 @@ export const postEndpointRequest = () => ({
   type: POST_ENDPOINT_REQUEST,
 })
 
-export const postEndpointSuccess = (endpoints) => ({
+export const postEndpointSuccess = (newUrls) => ({
   type: POST_ENDPOINT_SUCCESS,
-  endpoints
+  newUrls
 })
 
 export const postEndpointError = (error) => ({
@@ -88,13 +89,20 @@ export const postEndpoint = (postObject) => dispatch => {
     console.log('full url and name is ', fullUrl, name);
     return axios.all(endpoints.map(endpoint => api.post('/endpoints', {name: endpoint.name, fullUrl: endpoint.fullUrl, parameters: endpoint.parameters})))
     // return api.post('/endpoints', config.data)
-        .then(([responses]) => {
-            console.log(responses);
-            return responses;
+        .then((responses) => {
+            const names = responses.map(response => response.data.name);
+            const decodedToken = jwtDecode(localStorage.authToken);
+            const {username} = decodedToken.user;
+            const newUrls = names.reduce((a, cv) => {
+                a.push(`https://${window.location.hostname}/${username}/${cv}`);
+                return a;
+            }, [])
+            console.log(newUrls);
+            return newUrls;
         })
-        .then(() => {
+        .then((newUrls) => {
             // const endpoint = response.data;
-            return dispatch(postEndpointSuccess());
+            return dispatch(postEndpointSuccess(newUrls));
         })
         .catch(err => {
             console.log(err.response.data);

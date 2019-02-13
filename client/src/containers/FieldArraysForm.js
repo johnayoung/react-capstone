@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'react-redux';
 import { Field, FieldArray, reduxForm } from 'redux-form'
 import {withRouter} from 'react-router-dom';
 import { postEndpoint } from '../actions/endpoints';
@@ -9,6 +10,7 @@ import validate from './validate'
 // Components used in form
 import RenderField from '../components/RenderField'
 import RenderEndpoints from '../components/RenderEndpoints'
+import SubmittedUrls from '../components/SubmittedUrls';
 
 const FieldArraysForm = props => {
   const { handleSubmit, submitting } = props
@@ -29,6 +31,7 @@ const FieldArraysForm = props => {
           <button className='btn btn-green' type="submit" disabled={submitting}>
             Submit
           </button>
+          {(!props.newUrls) ? <div>Nothing yet</div> : <SubmittedUrls newUrls={props.newUrls} />}
           {/* <button type="button" disabled={pristine || submitting} onClick={reset}>
             Clear Values
           </button> */}
@@ -63,7 +66,7 @@ const FieldArraysForm = props => {
 //   ]
 // }
 
-export default withRouter(reduxForm({
+const connectedForm = withRouter(reduxForm({
   form: 'fieldArrays', // a unique identifier for this form
   onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
   // onSubmit: (values, dispatch) => console.log(values),
@@ -71,3 +74,9 @@ export default withRouter(reduxForm({
   enableReinitialize : true,
   validate
 })(FieldArraysForm))
+
+export default connect((state) => {
+  return {
+    newUrls: state.endpoints.newUrls
+  }
+})(connectedForm);

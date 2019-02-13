@@ -4,22 +4,27 @@ const { MONGODB_URI } = require('../config');
 
 const Endpoint = require('../models/endpoint');
 
-function createEndpoint(name, description, fullUrl) {
-  const parsedURI = Endpoint.parseURL(fullUrl);
-  return Object.assign({}, {
-    name,
+const swapi = require('../db/swapi');
+
+function createEndpoint(obj) {
+  const {baseUrl, collectionName, description} = obj;
+  const newObj = Object.assign({}, {
+    name: collectionName,
     description,
-    fullUrl
-  }, parsedURI);
+    fullUrl: baseUrl,
+    userId: '333333333333333333333300',
+    ...obj
+  });
+  return newObj;
 }
 
-const testFuncObj = createEndpoint('Chart', 'Testing a chart desc', iexChart);
+const swapiObj = createEndpoint(swapi);
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
   .then(() => {
     console.info('Deleting Data...');
     return Promise.all([
-      Endpoint.create(testFuncObj)
+      Endpoint.create(swapiObj)
     ]);
   })
   .then((response) => {
@@ -30,4 +35,3 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
     console.error(err);
     return mongoose.disconnect();
   });
-

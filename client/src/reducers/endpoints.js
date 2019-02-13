@@ -19,7 +19,8 @@ const initialState = {
     userEndpoint: null,
     loading: true,
     loadingCurrent: true,
-    error: null
+    error: null,
+    newUrls: null
 };
 
 export default function reducer(state=initialState, action) {
@@ -52,11 +53,13 @@ export default function reducer(state=initialState, action) {
     } else if (action.type === POST_ENDPOINT_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
+            newUrls: null,
             error: null
         })
     } else if (action.type === POST_ENDPOINT_SUCCESS) {
         return Object.assign({}, state, {
-            loading: false
+            loading: false,
+            newUrls: action.newUrls
         })
     } else if (action.type === POST_ENDPOINT_ERROR) {
         return Object.assign({}, state, {
@@ -66,6 +69,7 @@ export default function reducer(state=initialState, action) {
     } else if (action.type === USER_ENDPOINT_REQUEST) {
         return Object.assign({}, state, {
             loading: true,
+            userEndpoint: null,
             error: null
         })
     } else if (action.type === USER_ENDPOINT_SUCCESS) {

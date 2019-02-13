@@ -53,7 +53,7 @@ class Endpoint extends Component {
                     </button>
                 </div>
             </div>
-            <div className='modal-background fixed h-screen w-screen pin-t pin-l'>            
+            <div className={!(this.state.isVisible) ? 'hidden' : 'modal-background fixed h-screen w-screen pin-t pin-l'}>            
                 <div className={!(this.state.isVisible) ? 'hidden' : 'flex h-screen mx-auto justify-center align-center'}>
                     <li className={'fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16'} key={index}>
                         <div className='mb-4'> 
@@ -90,7 +90,7 @@ class Endpoint extends Component {
                     </li>
                 </div>
             </div>
-            </div>
+        </div>
     )
   }
 }

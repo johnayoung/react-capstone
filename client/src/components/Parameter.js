@@ -54,15 +54,15 @@ class Parameter extends Component {
                     </button>
                 </div>
             </div>
-            <div className='modal-background fixed h-screen w-screen pin-t pin-l'>
+            <div className={!(this.state.isVisible) ? 'hidden' : 'modal-background fixed h-screen w-screen pin-t pin-l'}>
                 <div className={!(this.state.isVisible) ? 'hidden' : 'flex h-screen mx-auto justify-center align-center'}>
                     <li className={'fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16'}>
                         <div className='mb-4'> 
                             <Field
-                            name={`${parameter}.name`}
-                            type="text"
-                            component={RenderField}
-                            label={`Name`}
+                                name={`${parameter}.name`}
+                                type="text"
+                                component={RenderField}
+                                label={`Name`}
                             />
                         </div>
                         {/* <div className='mb-4'> 

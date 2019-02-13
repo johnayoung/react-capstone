@@ -91,6 +91,8 @@ router.get('/:username/:name', (req, res, next) => {
 router.post('/', validBody, passport.authenticate('jwt', {session: false, failWithError: true}), (req, res, next) => {
   const {name, description, fullUrl, parameters} = req.body;
   const userId = req.user.id;
+  const username = req.user.username;
+  console.log(req.user);
 
   const newEndpoint = createEndpoint(name, description, fullUrl, parameters, userId);
 
@@ -102,6 +104,10 @@ router.post('/', validBody, passport.authenticate('jwt', {session: false, failWi
   Endpoint
     .create(newEndpoint)
     .then(endpoints => {
+      // endpoints = Object.assign({}, endpoints, {username});
+      // console.log('endpoints from post are', endpoints, 'username is', username);
+      const response = Object.assign({}, endpoints, username);
+      console.log('new response is', response);
       res.location(`${req.originalUrl}/${endpoints.id}`)
         .status(201)
         .json(endpoints);
