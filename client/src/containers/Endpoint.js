@@ -79,10 +79,14 @@ class Endpoint extends Component {
           )
       }
     return (
-      <div className='px-6 pb-6 bg-white shadow-md rounded'>
+      <div className='px-6 pb-6 bg-white shadow-md rounded '>
         <div className='lg:flex'>
-            {displayedEndpoint}
-            <Code />
+            <div className='lg:w-1/2'>
+                {displayedEndpoint}
+            </div>
+            <div className='lg:flex-auto lg:w-2/3'>
+                <Code />
+            </div>
         </div>
       </div>
     )
