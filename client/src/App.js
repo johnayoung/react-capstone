@@ -13,7 +13,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className='h-screen container mx-auto'>
+      <div className='h-screen mx-auto bg-grey-050'>
         <Header />
         <Dashboard />
       </div>

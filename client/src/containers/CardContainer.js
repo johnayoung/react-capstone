@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 export class CardContainer extends Component {
   render() {
     const {searchBox} = this.props;
-    console.log('search box values are ', searchBox)
     const cards = this.props.endpoints.filter(endpoint => {
       return (!searchBox) ? endpoint : endpoint.name.toLowerCase().includes(searchBox)
     })
@@ -29,23 +28,28 @@ export class CardContainer extends Component {
     });
     return (
       <div className='cardList'>
-        <form className='p-6'>
-          <h1 className='text-center font-semibold tracking-tight mb-1'>API Hub</h1>
-          <div className='max-w-sm mx-auto text-center text-grey-dark mb-16'>
-            <p className='leading-tight'>An easy way to find and connect to (a few) APIs</p>
-          </div>
-          <Field 
-            name='searchBox'
-            component='input'
-            type='text'
-            onChange={this.props.handleChange}
-            placeholder='Search thousands of API endpoints'
-            className='transition focus:outline-0 border border-transparent focus:bg-white focus:border-grey-light placeholder-grey-darkest rounded bg-grey-lighter py-2 pr-4 pl-10 block w-full appearance-none leading-normal ds-input'
-          />
-        </form>
-        <ul className='list-reset flex flex-row flex-wrap ml-4 mr-4'>
-          {cards}
-        </ul>
+          <div className='searchHeader fixed w-screen pin-t pin-l mt-16'>        
+            <form className='p-6 flex flex-col items-center justify-center mb-20 bg-green-darkest'>
+              <h1 className='text-center font-semibold tracking-tight mb-1 text-white'>API Hub</h1>
+              <div className='max-w-sm mx-auto text-center mb-6'>
+                <p className='leading-tight text-green-lighter'>An easy way to find and connect to (a few) APIs</p>
+              </div>
+              <div className='flex flex-col items-center justify-center text-center w-full md:w-2/3 lg:w-1/2 bg-white px-4 py-6 rounded shadow-lg -mb-16'>
+                <p className='label-input'>Search thousands of API endpoints</p>
+                <Field 
+                  name='searchBox'
+                  component='input'
+                  type='text'
+                  onChange={this.props.handleChange}
+                  // placeholder='Start typing, for example: `people`'
+                  className='transition focus:outline-0 border border-transparent focus:bg-white focus:border-grey-light placeholder-grey-darkest rounded bg-grey-100 py-2 pr-4 pl-10 block w-full appearance-none leading-tight text-grey-600 ds-input'
+                />
+              </div>
+            </form>
+            <ul className='list-reset flex flex-row flex-wrap relative container mx-auto rounded shadow'>
+              {cards}
+            </ul>
+        </div>
       </div>
     )
   }
