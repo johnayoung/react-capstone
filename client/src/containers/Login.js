@@ -50,7 +50,7 @@ export class Login extends React.Component {
               className="btn btn-green hover:bg-green-900 text-white font-bold py-2 px-4 rounded focus:outline"
               disabled={this.props.pristine || this.props.submitting}
             >
-              > Log in
+              Log in
             </button>
           </div>
         </form>

@@ -1,19 +1,19 @@
 import React from "react";
-import Error from "../components/Error";
 import FieldError from "./FieldError";
 
 // type can be: text, password, submit, reset, radio, checkbox, button,
 // type can be: color, date, datetime-local, email, month, number, range, search, tel, time, url, week
 
-const RenderField = ({
-  options,
-  input,
-  label,
-  type,
-  meta: { touched, error },
-  placeholder,
-  select
-}) => {
+const RenderField = props => {
+  const {
+    options,
+    input,
+    label,
+    type,
+    meta: { touched, error },
+    placeholder,
+    select
+  } = props;
   let selector;
   if (!select) {
     selector = (

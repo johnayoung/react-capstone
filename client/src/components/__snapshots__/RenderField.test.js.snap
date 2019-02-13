@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`A suite of tests for the RenderField component should render Redux Form specific components with default props 1`] = `
+<div>
+  <label
+    className="label-input"
+  />
+  <div>
+    <input
+      className="field-input"
+    />
+  </div>
+</div>
+`;
+
+exports[`A suite of tests for the RenderField component should render Redux Form specific components with no props 1`] = `
+<div>
+  <label
+    className="label-input"
+  />
+  <div>
+    <input
+      className="field-input"
+    />
+  </div>
+</div>
+`;

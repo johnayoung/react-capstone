@@ -49,6 +49,7 @@
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jest": "^22.2.2",
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.9.0",
     "mocha": "^5.2.0",
