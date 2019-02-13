@@ -8,6 +8,7 @@ import LoginPage from './LoginPage';
 import CardContainer from './CardContainer';
 import Endpoint from './Endpoint';
 import FieldArraysForm from './FieldArraysForm';
+import NotFound from './NotFound';
 
 export class Dashboard extends Component {
     content() {
@@ -22,6 +23,7 @@ export class Dashboard extends Component {
                 <Route path="/login" component={LoginPage} />
                 <Route path="/add" component={FieldArraysForm} />
                 <Route path="/:username/:endpointName" component={Endpoint} />
+                <Route path='*' component={NotFound} />
             </Switch>
             )
         }
