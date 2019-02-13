@@ -30,9 +30,9 @@ class Endpoint extends Component {
               path,
             } = this.props.currentEndpoint;
             const {formValues} = this.props;
-            // submittedUrl = `${protocol}://${sub}.${domain}${path}${query}`;
             if (formValues) {submittedUrl = urlBuilder(formValues);}
-            baseUrl = `${protocol}://${sub}.${domain}`
+            const cleanedSub = (!sub) ? '' : `${sub}.`;
+            baseUrl = `${protocol}://${cleanedSub}${domain}`
           displayedEndpoint = (
               <div className='container pt-12 pb-8 lg:pt-28 w-full'>
                 <div className='mb-6 max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:px-12 xl:w-3/4'>
@@ -80,8 +80,10 @@ class Endpoint extends Component {
       }
     return (
       <div className='px-6 pb-6 bg-white shadow-md rounded'>
-        {displayedEndpoint}
-        <Code />
+        <div className='lg:flex'>
+            {displayedEndpoint}
+            <Code />
+        </div>
       </div>
     )
   }
