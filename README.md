@@ -1,7 +1,7 @@
 <h1 align="center"> 
   <br>
   <a href="https://warm-peak-72707.herokuapp.com/">
-    <img src="./client/src/style/icons/icon-link.svg" width="350" height="350">
+    <img src="./client/src/style/icons/icon-link.svg" width="200" height="200">
   </a>
   <br>
   API Hub
