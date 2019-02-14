@@ -1,10 +1,8 @@
 import React from "react";
 import MenuItem from "../components/MenuItem";
-import Icon from "../components/icons/Index";
-import { Link } from "react-router-dom";
 
 export default function Menu(props) {
-  const { menuItems, showMobileMenu, hideMobileMenu } = props;
+  const { menuItems } = props;
   const menuLinks = menuItems.map((item, index) => (
     <MenuItem
       name={item.name}

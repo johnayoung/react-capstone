@@ -5,9 +5,7 @@ import { withRouter } from "react-router-dom";
 import Header from "./containers/Header";
 import { fetchEndpoints } from "./actions/endpoints";
 import Dashboard from "./containers/Dashboard";
-import Error from "./components/Error";
 import FetchEndpointsError from "./containers/FetchEndpointsError";
-import HeaderScratch from "./containers/HeaderScratch";
 
 class App extends Component {
   componentDidMount() {
@@ -24,8 +22,7 @@ class App extends Component {
     }
     return (
       <main className="mx-auto">
-        {/* <Header /> */}
-        <HeaderScratch />
+        <Header />
         {content}
       </main>
     );
