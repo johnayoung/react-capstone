@@ -13,7 +13,10 @@
 </h4>
 
 <p align="center">
-[![Build Status](https://travis-ci.org/johnatspreadstreet/react-capstone.svg?branch=master)](https://travis-ci.org/johnatspreadstreet/react-capstone)
+  <a href="https://warm-peak-72707.herokuapp.com/">
+    <img src="https://travis-ci.org/johnatspreadstreet/react-capstone.svg?branch=master"
+         alt="Travis">
+  </a>
 </p>
 
 ## Table of Contents
