@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { withRouter } from "react-router-dom";
 import { clearAuth } from "../actions/auth";
 import { clearAuthToken } from "../localStorage";
 import MobileMenu from "./MobileMenu";

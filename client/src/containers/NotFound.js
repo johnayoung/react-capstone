@@ -6,6 +6,7 @@ const NotFound = () => (
   <div>
     <img
       src={PageNotFound}
+      alt="Not found logo for API Hub"
       style={{
         width: 400,
         height: 400,

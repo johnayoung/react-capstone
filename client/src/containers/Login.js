@@ -38,6 +38,7 @@ export class Login extends React.Component {
               component={RenderField}
               label="Password"
               validate={[required, nonEmpty]}
+              autocomplete="current-password"
             />
           </div>
           {error && (
