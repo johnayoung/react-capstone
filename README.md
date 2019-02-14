@@ -1,8 +1,7 @@
 <h1 align="center"> API Hub </h1> <br>
 <p align="center">
   <a href="https://warm-peak-72707.herokuapp.com/">
-    ![API Hub](./client/src/style/icons/icon-link.svg)
-    <img src="./client/src/style/icons/icon-link.svg">
+    <img src="./client/src/style/icons/icon-link.svg" width="450" height="450">
   </a>
 </p>
 
