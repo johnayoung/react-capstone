@@ -8056,6 +8056,21 @@ table {
     Navigation
 */
 
+.navbar {
+  max-width: 100%;
+  width: 100vw;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .1);
+  display: flex;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 4rem;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
+
 .navbar-list {
   padding: 1rem;
 }

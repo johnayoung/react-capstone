@@ -88,6 +88,9 @@
 /*
     Navigation
 */
+.navbar {
+    @apply max-w-full w-screen shadow flex fixed pin-t pin-x h-16 items-center justify-center bg-white
+}
 
 .navbar-list {
     @apply p-4;

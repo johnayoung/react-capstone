@@ -13,7 +13,6 @@ const Icon = props => {
     case "close":
       return <Close {...props} />;
     default:
-      return;
   }
 };
 

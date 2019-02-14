@@ -117,7 +117,7 @@ export class Header extends Component {
     );
 
     return (
-      <nav className="max-w-full w-screen shadow flex fixed pin-t pin-x z-100 h-16 items-center bg-white">
+      <nav className="navbar">
         <div className="container mx-auto">{navbar}</div>
       </nav>
     );
