@@ -38,6 +38,11 @@ app.use('/api/users', usersRouter);
 app.use('/api/endpoints', endpointsRouter);
 app.use('/api', authRouter);
 
+// Handles GET requests
+app.get('*', (req, res, next) => {
+  res.sendFile(path.join(__dirname, 'client/build/index.html'));
+});
+
 // Catch-all 404
 app.use(function (req, res, next) {
   const err = new Error('Not Found');
