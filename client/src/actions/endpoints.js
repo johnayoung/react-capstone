@@ -69,18 +69,15 @@ export const fetchEndpoints = () => dispatch => {
   return axios(config)
     .then(res => {
       const endpoints = res.data;
-      console.log("anything");
       return dispatch(fetchEndpointsSuccess(endpoints));
     })
     .catch(err => {
-      console.log(`Hmm...must have had an error`);
-      const { reason, message, location } = err;
-      if (reason === "ValidationError") {
-        // Convert validation errors into SubmissionErrors for Redux Form
-        return new SubmissionError({
-          [location]: message
-        });
-      }
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
+      const { message } = err.response.data;
+      console.log("Message is", message);
+      return dispatch(fetchEndpointsError(message));
     });
 };
 

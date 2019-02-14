@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action) {
   } else if (action.type === FETCH_ENDPOINTS_ERROR) {
     return Object.assign({}, state, {
       loading: false,
-      error: action.error1
+      error: action.error
     });
   } else if (action.type === SET_CURRENT_ENDPOINT_REQUEST) {
     return Object.assign({}, state, {
