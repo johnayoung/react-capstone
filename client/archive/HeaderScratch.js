@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { clearAuth } from "../actions/auth";
-import { clearAuthToken } from "../localStorage";
-import Menu from "./Menu";
-import MobileMenu from "./MobileMenu";
-import NavbarItem from "../components/NavbarItem";
-import Icon from "../components/icons/Index";
+import { clearAuth } from "../src/actions/auth";
+import { clearAuthToken } from "../src/localStorage";
+import Menu from "../src/containers/Menu";
+import MobileMenu from "../src/containers/MobileMenu";
+import NavbarItem from "./NavbarItem";
+import Icon from "../src/components/icons/Index";
 
 class HeaderScratch extends Component {
   constructor(props) {
