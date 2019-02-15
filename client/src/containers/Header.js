@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { clearAuth } from "../actions/auth";
-import { clearAuthToken } from "../localStorage";
-import Menu from "./Menu";
-import MobileMenu from "./MobileMenu";
-import Icon from "../components/icons/Index";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { clearAuth } from '../actions/auth';
+import { clearAuthToken } from '../localStorage';
+import Menu from './Menu';
+import MobileMenu from './MobileMenu';
+import Icon from '../components/icons/Index';
 
 class Header extends Component {
   constructor(props) {
@@ -13,11 +13,11 @@ class Header extends Component {
     this.state = {
       showMenu: false,
       menuItems: [
-        { name: "Browse", link: "/browse" },
-        { name: "Add", link: "/add" },
-        { name: "Sign Up", link: "/signup" },
-        { name: "Login", link: "/login" },
-        { name: "Sign Out", link: "/login" }
+        { name: 'Browse', link: '/browse' },
+        { name: 'Add', link: '/add' },
+        { name: 'Sign Up', link: '/signup' },
+        { name: 'Login', link: '/login' },
+        { name: 'Sign Out', link: '/login' }
       ]
     };
   }
@@ -42,10 +42,10 @@ class Header extends Component {
   handleLinks() {
     const { menuItems } = this.state;
     if (this.props.loggedIn) {
-      const hidden = ["Sign Up", "Login"];
+      const hidden = ['Sign Up', 'Login'];
       return menuItems.filter(item => !hidden.includes(item.name));
     }
-    const hidden = ["Sign Out"];
+    const hidden = ['Sign Out'];
     return menuItems.filter(item => !hidden.includes(item.name));
   }
 
@@ -53,10 +53,7 @@ class Header extends Component {
     return (
       <nav className="navbar z-50 px-6 lg:px-32">
         <Link to="/">
-          <Icon
-            name="logo"
-            className="fill-current text-green w-8 h-8 lg:w-12 lg:h-12 block"
-          />
+          <Icon name="logo" className="fill-current text-green w-8 h-8 lg:w-12 lg:h-12 block" />
         </Link>
         {!this.state.showMenu ? (
           <Menu
@@ -71,7 +68,7 @@ class Header extends Component {
             hideMobileMenu={() => this.hideMobileMenu()}
           />
         )}
-        <button onClick={() => this.handleMobileMenu()}>
+        <button type="button" onClick={() => this.handleMobileMenu()}>
           <Icon
             name="menu"
             className="fill-current text-grey w-8 h-8 lg:w-12 lg:h-12 block sm:invisible"

@@ -1,4 +1,4 @@
-import reducer from "./endpoints";
+import reducer from './endpoints';
 import {
   fetchEndpointsRequest,
   fetchEndpointsSuccess,
@@ -11,20 +11,20 @@ import {
   userEndpointRequest,
   userEndpointSuccess,
   userEndpointError
-} from "../actions/endpoints";
+} from '../actions/endpoints';
 
-describe("Endpoints reducer", () => {
+describe('Endpoints reducer', () => {
   // Dummy data goes here
-  const endpoint1 = { name: "name", fullUrl: "https://www.dummy.com" };
-  const endpoint2 = { name: "name2", fullUrl: "https://www.dummy.com" };
+  const endpoint1 = { name: 'name', fullUrl: 'https://www.dummy.com' };
+  const endpoint2 = { name: 'name2', fullUrl: 'https://www.dummy.com' };
   const endpointsFull = {
     endpoints: [endpoint1, endpoint2]
   };
-  const newUrlsPost = ["url1", "url2"];
-  const errorMsg = "This is an error message";
+  const newUrlsPost = ['url1', 'url2'];
+  const errorMsg = 'This is an error message';
 
-  it("Should set the initial state when nothing is passed in", () => {
-    const state = reducer(undefined, { type: "__UNKNOWN" });
+  it('Should set the initial state when nothing is passed in', () => {
+    const state = reducer(undefined, { type: '__UNKNOWN' });
     expect(state).toEqual({
       endpoints: null,
       currentEndpoint: null,
@@ -37,14 +37,14 @@ describe("Endpoints reducer", () => {
     });
   });
 
-  it("Should return the current state on an unknown action", () => {
+  it('Should return the current state on an unknown action', () => {
     const currentState = {};
-    const state = reducer(currentState, { type: "__UNKNOWN" });
+    const state = reducer(currentState, { type: '__UNKNOWN' });
     expect(state).toBe(currentState);
   });
 
-  describe("Fetch endpoints", () => {
-    it("Should update state with endpoints", () => {
+  describe('Fetch endpoints', () => {
+    it('Should update state with endpoints', () => {
       let state = {
         endpoints: null
       };
@@ -56,8 +56,8 @@ describe("Endpoints reducer", () => {
     });
   });
 
-  describe("Post endpoints", () => {
-    it("Should set loading when starting a post request", () => {
+  describe('Post endpoints', () => {
+    it('Should set loading when starting a post request', () => {
       let state = {
         loading: false,
         newUrls: null,
@@ -71,7 +71,7 @@ describe("Endpoints reducer", () => {
       });
     });
 
-    it("Should update state with posted endpoints", () => {
+    it('Should update state with posted endpoints', () => {
       let state = {
         newUrls: null
       };
@@ -82,7 +82,7 @@ describe("Endpoints reducer", () => {
       });
     });
 
-    it("Should update state with error on error response", () => {
+    it('Should update state with error on error response', () => {
       let state = {
         loading: true
       };

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import CardContent from '../components/CardContent';
-import { clearCurrentEndpoint, userEndpointClear } from '../actions/endpoints';
+import { userEndpointClear } from '../actions/endpoints';
 
 export class CardContainer extends Component {
   render() {
@@ -15,7 +15,7 @@ export class CardContainer extends Component {
       .filter(newEndpoint => newEndpoint !== null)
       .map(filteredEndpoint => {
         const { id, userId, name, description } = filteredEndpoint;
-        const username = userId.username;
+        const { username } = userId;
         return (
           <li
             key={id}

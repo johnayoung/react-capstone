@@ -21,19 +21,14 @@
 //   }
 // }
 
-import React from "react";
-import Icon from "../components/icons/Index";
-import MenuItem from "../components/MenuItem";
+import React from 'react';
+import Icon from '../components/icons/Index';
+import MenuItem from '../components/MenuItem';
 
 export default function MobileMenu(props) {
   const { hideMobileMenu, menuItems } = props;
-  const menuLinks = menuItems.map((item, index) => (
-    <MenuItem
-      name={item.name}
-      link={item.link}
-      key={`${item}-${index}`}
-      passedProps={props}
-    />
+  const menuLinks = menuItems.map(item => (
+    <MenuItem name={item.name} link={item.link} key={item} passedProps={props} />
   ));
   return (
     <div className="hero-background fixed h-screen w-screen pin-t pin-l z-50">

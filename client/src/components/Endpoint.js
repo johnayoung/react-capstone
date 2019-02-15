@@ -8,26 +8,24 @@ class Endpoint extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: true,
+      isVisible: true
     };
   }
 
   hideModal() {
     this.setState({
-      isVisible: false,
+      isVisible: false
     });
   }
 
   showModal() {
     this.setState({
-      isVisible: true,
+      isVisible: true
     });
   }
 
   render() {
-    const {
-      endpoint, index, fields, formValues,
-    } = this.props;
+    const { endpoint, index, fields, formValues } = this.props;
     const table = get(stringToPath(endpoint), formValues);
     return (
       <div className="">
@@ -65,6 +63,7 @@ class Endpoint extends Component {
               </svg>
             </button>
             <button
+              type="button"
               onClick={() => this.showModal()}
               className="inline-block ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4"
             >
@@ -77,14 +76,7 @@ class Endpoint extends Component {
                   className="primary"
                   d="M4 14a1 1 0 0 1 .3-.7l11-11a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-11 11a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-3z"
                 />
-                <rect
-                  width="20"
-                  height="2"
-                  x="2"
-                  y="20"
-                  className="secondary"
-                  rx="1"
-                />
+                <rect width="20" height="2" x="2" y="20" className="secondary" rx="1" />
               </svg>
             </button>
           </div>
@@ -98,9 +90,7 @@ class Endpoint extends Component {
         >
           <div
             className={
-              !this.state.isVisible
-                ? 'hidden'
-                : 'flex h-screen mx-auto justify-center align-center'
+              !this.state.isVisible ? 'hidden' : 'flex h-screen mx-auto justify-center align-center'
             }
           >
             <li
@@ -108,12 +98,7 @@ class Endpoint extends Component {
               key={index}
             >
               <div className="mb-4">
-                <Field
-                  name={`${endpoint}.name`}
-                  type="text"
-                  component={RenderField}
-                  label="Name"
-                />
+                <Field name={`${endpoint}.name`} type="text" component={RenderField} label="Name" />
               </div>
               <div className="mb-4">
                 <Field
@@ -151,12 +136,8 @@ class Endpoint extends Component {
                 title="Save Endpoint"
                 onClick={() => this.hideModal()}
               >
-
-
-
-
                 Save Endpoint
-                            </button>
+              </button>
             </li>
           </div>
         </div>

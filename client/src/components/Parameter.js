@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import RenderField from "./RenderField";
-import { Field } from "redux-form";
-import get from "../utils/nestedValueGetter";
-import stringToPath from "../utils/stringToPath";
+import React, { Component } from 'react';
+import { Field } from 'redux-form';
+import RenderField from './RenderField';
+import get from '../utils/nestedValueGetter';
+import stringToPath from '../utils/stringToPath';
 
 class Parameter extends Component {
   constructor(props) {
@@ -11,6 +11,7 @@ class Parameter extends Component {
       isVisible: true
     };
   }
+
   hideModal() {
     this.setState({
       isVisible: false
@@ -22,6 +23,7 @@ class Parameter extends Component {
       isVisible: true
     });
   }
+
   render() {
     const { parameter, index, fields, formValues } = this.props;
     const table = get(stringToPath(parameter), formValues);
@@ -62,6 +64,7 @@ class Parameter extends Component {
               </svg>
             </button>
             <button
+              type="button"
               onClick={() => this.showModal()}
               className="inline-block ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4"
             >
@@ -74,14 +77,7 @@ class Parameter extends Component {
                   className="primary"
                   d="M4 14a1 1 0 0 1 .3-.7l11-11a1 1 0 0 1 1.4 0l3 3a1 1 0 0 1 0 1.4l-11 11a1 1 0 0 1-.7.3H5a1 1 0 0 1-1-1v-3z"
                 />
-                <rect
-                  width="20"
-                  height="2"
-                  x="2"
-                  y="20"
-                  className="secondary"
-                  rx="1"
-                />
+                <rect width="20" height="2" x="2" y="20" className="secondary" rx="1" />
               </svg>
             </button>
           </div>
@@ -89,28 +85,22 @@ class Parameter extends Component {
         <div
           className={
             !this.state.isVisible
-              ? "hidden"
-              : "modal-background fixed h-screen w-screen pin-t pin-l"
+              ? 'hidden'
+              : 'modal-background fixed h-screen w-screen pin-t pin-l'
           }
         >
           <div
             className={
-              !this.state.isVisible
-                ? "hidden"
-                : "flex h-screen mx-auto justify-center align-center"
+              !this.state.isVisible ? 'hidden' : 'flex h-screen mx-auto justify-center align-center'
             }
           >
-            <li
-              className={
-                "fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16"
-              }
-            >
+            <li className="fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16">
               <div className="mb-4">
                 <Field
                   name={`${parameter}.name`}
                   type="text"
                   component={RenderField}
-                  label={`Name`}
+                  label="Name"
                 />
               </div>
               {/* <div className='mb-4'> 
@@ -127,7 +117,7 @@ class Parameter extends Component {
                   name={`${parameter}.value`}
                   type="text"
                   component={RenderField}
-                  label={`Initial Value`}
+                  label="Initial Value"
                 />
               </div>
               <div className="mb-4">
@@ -135,8 +125,8 @@ class Parameter extends Component {
                   name={`${parameter}.required`}
                   type="select"
                   component={RenderField}
-                  label={`Required`}
-                  props={{ select: true, options: ["Yes", "No"] }}
+                  label="Required"
+                  props={{ select: true, options: ['Yes', 'No'] }}
                 />
               </div>
               <button

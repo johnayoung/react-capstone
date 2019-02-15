@@ -1,9 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { withRouter } from "react-router-dom";
+import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router-dom';
 
-import Login from "./Login";
+import Login from './Login';
 
 export function LoginPage(props) {
   // If we are logged in (which happens automatically when registration

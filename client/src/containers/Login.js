@@ -1,9 +1,9 @@
-import React from "react";
-import { Field, reduxForm, focus } from "redux-form";
-import RenderField from "../components/RenderField";
-import Error from "../components/Error";
-import { login } from "../actions/auth";
-import { required, nonEmpty } from "../validators";
+import React from 'react';
+import { Field, reduxForm, focus } from 'redux-form';
+import RenderField from '../components/RenderField';
+import Error from '../components/Error';
+import { login } from '../actions/auth';
+import { required, nonEmpty } from '../validators';
 
 export class Login extends React.Component {
   render() {
@@ -61,8 +61,7 @@ export class Login extends React.Component {
 }
 
 export default reduxForm({
-  form: "login",
-  onSubmitFail: (errors, dispatch) => dispatch(focus("login", "username")),
-  onSubmit: (values, dispatch) =>
-    dispatch(login(values.username, values.password))
+  form: 'login',
+  onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username')),
+  onSubmit: (values, dispatch) => dispatch(login(values.username, values.password))
 })(Login);

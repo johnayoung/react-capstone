@@ -1,5 +1,5 @@
-import axios from "axios";
-import API_BASE_URL from "../config";
+import axios from 'axios';
+import API_BASE_URL from '../config';
 import {
   FETCH_ENDPOINTS_REQUEST,
   FETCH_ENDPOINTS_SUCCESS,
@@ -25,12 +25,12 @@ import {
   userEndpointSuccess,
   userEndpointError,
   fetchEndpoints
-} from "../actions/endpoints";
+} from './endpoints';
 
-describe("Fetch endpoints", () => {
-  it("Should return the action", () => {
-    const endpoints = "Endpoints";
-    const error = "error";
+describe('Fetch endpoints', () => {
+  it('Should return the action', () => {
+    const endpoints = 'Endpoints';
+    const error = 'error';
     const action1 = fetchEndpointsSuccess(endpoints);
     const action2 = fetchEndpointsError(error);
     const action3 = fetchEndpointsRequest();
@@ -40,13 +40,13 @@ describe("Fetch endpoints", () => {
     expect(action3.type).toEqual(FETCH_ENDPOINTS_REQUEST);
   });
 
-  it("Fetch should dispatch fetchEndpointsSuccess", () => {
+  it('Fetch should dispatch fetchEndpointsSuccess', () => {
     // Dummy data goes here
     const config = {
-      method: "get",
+      method: 'get',
       url: `${API_BASE_URL}/endpoints`,
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
       // data: JSON.stringify(endpoints)
     };
@@ -59,10 +59,10 @@ describe("Fetch endpoints", () => {
   });
 });
 
-describe("Post endpoints", () => {
-  it("Should return the action", () => {
-    const endpoint = "Endpoint";
-    const error = "error";
+describe('Post endpoints', () => {
+  it('Should return the action', () => {
+    const endpoint = 'Endpoint';
+    const error = 'error';
     const action1 = postEndpointSuccess(endpoint);
     const action2 = postEndpointError(error);
     const action3 = postEndpointRequest();
@@ -94,10 +94,10 @@ describe("Post endpoints", () => {
   // });
 });
 
-describe("User endpoints", () => {
-  it("Should return the action", () => {
-    const endpoint = "Endpoint";
-    const error = "error";
+describe('User endpoints', () => {
+  it('Should return the action', () => {
+    const endpoint = 'Endpoint';
+    const error = 'error';
     const action1 = userEndpointSuccess(endpoint);
     const action2 = userEndpointError(error);
     const action3 = userEndpointRequest();
@@ -108,9 +108,9 @@ describe("User endpoints", () => {
   });
 });
 
-describe("Current endpoint", () => {
-  it("Should return the action", () => {
-    const endpoint = "Endpoint";
+describe('Current endpoint', () => {
+  it('Should return the action', () => {
+    const endpoint = 'Endpoint';
     const action1 = setCurrentEndpointSuccess(endpoint);
     const action3 = setCurrentEndpointRequest();
 

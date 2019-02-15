@@ -1,13 +1,13 @@
-import React from "react";
-import { Field, reduxForm, focus } from "redux-form";
-import { registerUser } from "../actions/users";
-import { login } from "../actions/auth";
-import { required, nonEmpty, matches, length, isTrimmed } from "../validators";
-import RenderField from "../components/RenderField";
-import Error from "../components/Error";
+import React from 'react';
+import { Field, reduxForm, focus } from 'redux-form';
+import { registerUser } from '../actions/users';
+import { login } from '../actions/auth';
+import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
+import RenderField from '../components/RenderField';
+import Error from '../components/Error';
 
 const passwordLength = length({ min: 10, max: 72 });
-const matchesPassword = matches("password");
+const matchesPassword = matches('password');
 
 export class Registration extends React.Component {
   onSubmit(values) {
@@ -23,9 +23,7 @@ export class Registration extends React.Component {
     const { error } = this.props;
     return (
       <div className="w-full max-w-xs">
-        <h2 className="text-center p-6">
-          Disrupting the world, one API at a time.
-        </h2>
+        <h2 className="text-center p-6">Disrupting the world, one API at a time.</h2>
         <form
           className="login-form bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
@@ -87,7 +85,6 @@ export class Registration extends React.Component {
 }
 
 export default reduxForm({
-  form: "registration",
-  onSubmitFail: (errors, dispatch) =>
-    dispatch(focus("registration", Object.keys(errors)[0]))
+  form: 'registration',
+  onSubmitFail: (errors, dispatch) => dispatch(focus('registration', Object.keys(errors)[0]))
 })(Registration);

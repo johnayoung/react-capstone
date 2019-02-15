@@ -1,8 +1,8 @@
-import buildUrl from "../../node_modules/build-url/dist/build-url";
+import buildUrl from '../../node_modules/build-url/dist/build-url';
 
 const urlBuilder = values => {
   const { description, domain, name, path, query, sub, protocol } = values;
-  const validSub = !sub ? "" : `${sub}.`;
+  const validSub = !sub ? '' : `${sub}.`;
   const baseUrl = `${protocol}://${validSub}${domain}`;
   const notAllowed = Object.keys({
     description,

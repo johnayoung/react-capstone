@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Field, reduxForm, getFormValues } from "redux-form";
-import RenderField from "../components/RenderField";
-import Code from "../components/Code";
-import { setCurrentEndpointSuccess, userEndpoint } from "../actions/endpoints";
-import urlBuilder from "../utils/urlBuilder";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Field, reduxForm, getFormValues } from 'redux-form';
+import RenderField from '../components/RenderField';
+import Code from '../components/Code';
+import { setCurrentEndpointSuccess, userEndpoint } from '../actions/endpoints';
+import urlBuilder from '../utils/urlBuilder';
 
 class Endpoint extends Component {
   componentDidMount() {
@@ -16,6 +16,7 @@ class Endpoint extends Component {
     });
     this.props.dispatch(setCurrentEndpointSuccess(obj));
   }
+
   render() {
     let displayedEndpoint;
     let submittedUrl;
@@ -34,7 +35,7 @@ class Endpoint extends Component {
       if (formValues) {
         submittedUrl = urlBuilder(formValues);
       }
-      const cleanedSub = !sub ? "" : `${sub}.`;
+      const cleanedSub = !sub ? '' : `${sub}.`;
       baseUrl = `${protocol}://${cleanedSub}${domain}`;
       displayedEndpoint = (
         <div className="container pt-12 pb-8 lg:pt-28 w-full">
@@ -46,25 +47,19 @@ class Endpoint extends Component {
             className="xl:px-12 w-full max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4"
             onSubmit={this.props.handleSubmit}
           >
-            <label className="block text-grey-darker text-sm font-bold mb-2">
-              Base Url
-            </label>
+            <label className="block text-grey-darker text-sm font-bold mb-2">Base Url</label>
             <p className="mb-4">{baseUrl}</p>
-            <label className="block text-grey-darker text-sm font-bold mb-2">
-              Path
-            </label>
+            <label className="block text-grey-darker text-sm font-bold mb-2">Path</label>
             <p className="mb-4">{path}</p>
             <ul className="list-reset mb-4">
               {parameters.map((param, index) => (
                 <div key={index} className="mb-4">
                   <Field
                     name={param.name}
-                    type={param.type === "list" ? "select" : "text"}
+                    type={param.type === 'list' ? 'select' : 'text'}
                     component={RenderField}
-                    label={`${param.name} (${
-                      param.required ? "required" : "optional"
-                    })`}
-                    options={param.type === "list" ? [param.value] : ""}
+                    label={`${param.name} (${param.required ? 'required' : 'optional'})`}
+                    options={param.type === 'list' ? [param.value] : ''}
                   />
                 </div>
               ))}
@@ -100,7 +95,7 @@ class Endpoint extends Component {
 }
 
 const connectedForm = reduxForm({
-  form: "endpointSubmit", // a unique identifier for this form
+  form: 'endpointSubmit', // a unique identifier for this form
   // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
   onSubmit: (values, dispatch) => {
     console.log(values);
@@ -114,15 +109,7 @@ export default connect(state => {
   let initialValues = {};
   const { currentEndpoint, currentEndpointParams } = state.endpoints;
   if (currentEndpointParams) {
-    const {
-      name,
-      description,
-      sub,
-      domain,
-      path,
-      query,
-      protocol
-    } = currentEndpoint;
+    const { name, description, sub, domain, path, query, protocol } = currentEndpoint;
     initialValues = currentEndpointParams.reduce((obj, param) => {
       obj[param.name] = param.value;
       return obj;
@@ -142,6 +129,6 @@ export default connect(state => {
     currentEndpoint: state.endpoints.currentEndpoint,
     currentEndpointParams: state.endpoints.currentEndpointParams,
     initialValues,
-    formValues: getFormValues("endpointSubmit")(state)
+    formValues: getFormValues('endpointSubmit')(state)
   };
 })(connectedForm);

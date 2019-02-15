@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import PageNotFound from "../style/assets/PageNotFound.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import PageNotFound from '../style/assets/PageNotFound.png';
 
 const NotFound = () => (
   <div>
@@ -10,9 +10,9 @@ const NotFound = () => (
       style={{
         width: 400,
         height: 400,
-        display: "block",
-        margin: "auto",
-        position: "relative"
+        display: 'block',
+        margin: 'auto',
+        position: 'relative'
       }}
     />
     <h2 className="text-center mb-4">Page not found</h2>

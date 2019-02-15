@@ -1,5 +1,5 @@
-import React from "react";
-import Error from "../components/Error";
+import React from 'react';
+import Error from '../components/Error';
 
 function FetchEndpointsError(props) {
   return (

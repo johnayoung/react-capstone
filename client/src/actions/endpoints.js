@@ -1,54 +1,54 @@
-import { SubmissionError } from "redux-form";
-import axios from "axios";
-import jwtDecode from "jwt-decode";
-import API_BASE_URL from "../config";
-import slugify from "../utils/slugify";
+import { SubmissionError } from 'redux-form';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import API_BASE_URL from '../config';
+import slugify from '../utils/slugify';
 
-export const FETCH_ENDPOINTS_REQUEST = "FETCH_ENDPOINTS_REQUEST";
+export const FETCH_ENDPOINTS_REQUEST = 'FETCH_ENDPOINTS_REQUEST';
 export const fetchEndpointsRequest = () => ({
   type: FETCH_ENDPOINTS_REQUEST
 });
 
-export const FETCH_ENDPOINTS_SUCCESS = "FETCH_ENDPOINTS_SUCCESS";
+export const FETCH_ENDPOINTS_SUCCESS = 'FETCH_ENDPOINTS_SUCCESS';
 export const fetchEndpointsSuccess = endpoints => ({
   type: FETCH_ENDPOINTS_SUCCESS,
   endpoints
 });
 
-export const FETCH_ENDPOINTS_ERROR = "FETCH_ENDPOINTS_ERROR";
+export const FETCH_ENDPOINTS_ERROR = 'FETCH_ENDPOINTS_ERROR';
 export const fetchEndpointsError = error => ({
   type: FETCH_ENDPOINTS_ERROR,
   error
 });
 
-export const SET_CURRENT_ENDPOINT_REQUEST = "SET_CURRENT_ENDPOINT_REQUEST";
+export const SET_CURRENT_ENDPOINT_REQUEST = 'SET_CURRENT_ENDPOINT_REQUEST';
 export const setCurrentEndpointRequest = () => ({
   type: SET_CURRENT_ENDPOINT_REQUEST
 });
 
-export const SET_CURRENT_ENDPOINT_SUCCESS = "SET_CURRENT_ENDPOINT_SUCCESS";
+export const SET_CURRENT_ENDPOINT_SUCCESS = 'SET_CURRENT_ENDPOINT_SUCCESS';
 export const setCurrentEndpointSuccess = endpoint => ({
   type: SET_CURRENT_ENDPOINT_SUCCESS,
   endpoint
 });
 
-export const CLEAR_CURRENT_ENDPOINT = "CLEAR_CURRENT_ENDPOINT";
+export const CLEAR_CURRENT_ENDPOINT = 'CLEAR_CURRENT_ENDPOINT';
 export const clearCurrentEndpoint = () => ({
   type: CLEAR_CURRENT_ENDPOINT
 });
 
-export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
+export const FETCH_USER_REQUEST = 'FETCH_USER_REQUEST';
 export const fetchUserRequest = () => ({
   type: FETCH_ENDPOINTS_REQUEST
 });
 
-export const FETCH_USER_SUCCESS = "FETCH_USER_SUCCESS";
+export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
 export const fetchUserSuccess = endpoints => ({
   type: FETCH_ENDPOINTS_SUCCESS,
   endpoints
 });
 
-export const FETCH_USER_ERROR = "FETCH_USER_ERROR";
+export const FETCH_USER_ERROR = 'FETCH_USER_ERROR';
 export const fetchUserError = error => ({
   type: FETCH_ENDPOINTS_ERROR,
   error
@@ -57,10 +57,10 @@ export const fetchUserError = error => ({
 export const fetchEndpoints = () => dispatch => {
   dispatch(fetchEndpointsRequest());
   const config = {
-    method: "get",
+    method: 'get',
     url: `${API_BASE_URL}/endpoints`,
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     }
     // data: JSON.stringify(endpoints)
   };
@@ -76,9 +76,9 @@ export const fetchEndpoints = () => dispatch => {
 };
 
 // Actions around a user submitting a new endpoint
-export const POST_ENDPOINT_REQUEST = "POST_ENDPOINT_REQUEST";
-export const POST_ENDPOINT_SUCCESS = "POST_ENDPOINT_SUCCESS";
-export const POST_ENDPOINT_ERROR = "POST_ENDPOINT_ERROR";
+export const POST_ENDPOINT_REQUEST = 'POST_ENDPOINT_REQUEST';
+export const POST_ENDPOINT_SUCCESS = 'POST_ENDPOINT_SUCCESS';
+export const POST_ENDPOINT_ERROR = 'POST_ENDPOINT_ERROR';
 
 export const postEndpointRequest = () => ({
   type: POST_ENDPOINT_REQUEST
@@ -98,7 +98,7 @@ export const postEndpoint = postObject => dispatch => {
   const api = axios.create({
     baseURL: `${API_BASE_URL}`,
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       // eslint-disable-next-line no-undef
       Authorization: `Bearer ${localStorage.authToken}`
     }
@@ -110,7 +110,7 @@ export const postEndpoint = postObject => dispatch => {
       .all(
         endpoints.map(endpoint => {
           const slugName = slugify(endpoint.name);
-          return api.post("/endpoints", {
+          return api.post('/endpoints', {
             name: slugName,
             fullUrl: endpoint.fullUrl,
             parameters: endpoint.parameters
@@ -144,17 +144,17 @@ export const postEndpoint = postObject => dispatch => {
         const { message } = err.response.data;
         dispatch(postEndpointError(message));
         throw new SubmissionError({
-          _error: "Unauthorized"
+          _error: 'Unauthorized'
         });
       })
   );
 };
 
 // Actions around a user pulling an existing endpoint
-export const USER_ENDPOINT_REQUEST = "USER_ENDPOINT_REQUEST";
-export const USER_ENDPOINT_SUCCESS = "USER_ENDPOINT_SUCCESS";
-export const USER_ENDPOINT_ERROR = "USER_ENDPOINT_ERROR";
-export const USER_ENDPOINT_CLEAR = "USER_ENDPOINT_CLEAR";
+export const USER_ENDPOINT_REQUEST = 'USER_ENDPOINT_REQUEST';
+export const USER_ENDPOINT_SUCCESS = 'USER_ENDPOINT_SUCCESS';
+export const USER_ENDPOINT_ERROR = 'USER_ENDPOINT_ERROR';
+export const USER_ENDPOINT_CLEAR = 'USER_ENDPOINT_CLEAR';
 
 export const userEndpointRequest = () => ({
   type: USER_ENDPOINT_REQUEST
@@ -177,10 +177,10 @@ export const userEndpointClear = () => ({
 export const userEndpoint = urlString => dispatch => {
   // To avoid CORS issues, we must proxy request to the back end
   const config = {
-    method: "post",
+    method: 'post',
     url: `${API_BASE_URL}/endpoints/proxy`,
     headers: {
-      "Content-Type": "application/json"
+      'Content-Type': 'application/json'
     },
     data: {
       urlString

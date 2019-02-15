@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import Icon from "../components/icons/Index";
-import hero from "../style/assets/hero-browse-apis.gif";
-import { Link } from "react-router-dom";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Icon from '../components/icons/Index';
+import hero from '../style/assets/hero-browse-apis.gif';
 
 export default class LandingPage extends Component {
   render() {
@@ -11,26 +11,20 @@ export default class LandingPage extends Component {
           <div className="flex flex-col md:flex-row">
             <div className="flex flex-col mb-6 md:w-1/2">
               <div className="block">
-                <Icon
-                  name="logo"
-                  className="fill-current w-8 h-8 text-grey-darker float-left"
-                />
+                <Icon name="logo" className="fill-current w-8 h-8 text-grey-darker float-left" />
                 <p className="text-xl sm:text-2xl md:text-3xl font-bold text-grey-darker">
                   API Hub
                 </p>
               </div>
               <div className="mb-12">
                 <h1 className="font-semibold text-grey-darkest text-4xl sm:text-5xl md:text-6xl mb-4 leading-none">
-                  GitHub, but for{" "}
-                  <span className="text-green-300">Public APIs.</span>
+                  GitHub, but for <span className="text-green-300">Public APIs.</span>
                 </h1>
                 <p className="text-xl sm:text-2xl text-grey-darkest leading-normal max-w-lg">
                   A (not so) Massive Online Repository for API Endpoints
                 </p>
                 <Link to="/browse">
-                  <button className="btn btn-green mt-16 mb-8">
-                    Browse APIs
-                  </button>
+                  <button className="btn btn-green mt-16 mb-8">Browse APIs</button>
                 </Link>
                 <p className="label-input">Tried by over 1 person. Aka, me.</p>
               </div>

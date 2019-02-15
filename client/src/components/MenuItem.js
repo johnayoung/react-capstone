@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { clearAuth } from "../actions/auth";
-import { clearAuthToken } from "../localStorage";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { clearAuth } from '../actions/auth';
+import { clearAuthToken } from '../localStorage';
 
 export function MenuItem(props) {
   const {
@@ -16,10 +16,7 @@ export function MenuItem(props) {
     hideMobileMenu();
   };
   return (
-    <li
-      className="navbar-item"
-      onClick={name === "Sign Out" ? () => logout() : hideMobileMenu}
-    >
+    <li className="navbar-item" onClick={name === 'Sign Out' ? () => logout() : hideMobileMenu}>
       <Link to={link} className="navbar-link">
         {name}
       </Link>

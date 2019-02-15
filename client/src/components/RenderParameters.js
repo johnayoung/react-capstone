@@ -1,7 +1,7 @@
-import React from "react";
-import { formValueSelector, getFormValues } from "redux-form";
-import Parameter from "./Parameter";
-import { connect } from "react-redux";
+import React from 'react';
+import { formValueSelector, getFormValues } from 'redux-form';
+import { connect } from 'react-redux';
+import Parameter from './Parameter';
 
 const RenderParameters = props => {
   const {
@@ -50,13 +50,13 @@ const RenderParameters = props => {
   );
 };
 
-const selector = formValueSelector("fieldArrays");
+const selector = formValueSelector('fieldArrays');
 
 function mapStateToProps(state) {
-  const parameterType = selector(state, "parameterType");
+  const parameterType = selector(state, 'parameterType');
   return {
     parameterType,
-    values: getFormValues("fieldArrays")(state)
+    values: getFormValues('fieldArrays')(state)
   };
 }
 

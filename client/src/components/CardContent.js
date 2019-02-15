@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import Icon from "./icons/Index";
+import React, { Component } from 'react';
+import Icon from './icons/Index';
 
 export default class CardContent extends Component {
   render() {
@@ -12,9 +12,7 @@ export default class CardContent extends Component {
           </div>
           <div className="flex-1 p-2">
             <span className="font-bold text-xl">{this.props.cardName}</span>
-            <p className="cardContentDescription">
-              {this.props.cardDescription}
-            </p>
+            <p className="cardContentDescription">{this.props.cardDescription}</p>
           </div>
         </div>
       </div>

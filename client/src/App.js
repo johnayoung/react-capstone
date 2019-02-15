@@ -1,11 +1,11 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import Header from "./containers/Header";
-import { fetchEndpoints } from "./actions/endpoints";
-import Dashboard from "./containers/Dashboard";
-import FetchEndpointsError from "./containers/FetchEndpointsError";
+import Header from './containers/Header';
+import { fetchEndpoints } from './actions/endpoints';
+import Dashboard from './containers/Dashboard';
+import FetchEndpointsError from './containers/FetchEndpointsError';
 
 class App extends Component {
   componentDidMount() {

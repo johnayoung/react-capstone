@@ -1,8 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import { FieldArray, getFormValues } from "redux-form";
-import RenderParameters from "../components/RenderParameters";
-import Endpoint from "./Endpoint";
+import React from 'react';
+import { connect } from 'react-redux';
+import { FieldArray, getFormValues } from 'redux-form';
+import RenderParameters from './RenderParameters';
+import Endpoint from './Endpoint';
 
 const RenderEndpoints = ({ fields, meta: { error, submitFailed }, values }) => (
   <ul className="list-reset pt-6">
@@ -29,21 +29,10 @@ const RenderEndpoints = ({ fields, meta: { error, submitFailed }, values }) => (
     </li>
     <div>
       {fields.map((endpoint, index, fields) => (
-        <div
-          className="mb-6 px-2 pb-6 bg-white rounded border shadow"
-          key={index}
-        >
+        <div className="mb-6 px-2 pb-6 bg-white rounded border shadow" key={index}>
           <h2 className="text-center my-6">{`Endpoint #${index + 1}`}</h2>
-          <Endpoint
-            endpoint={endpoint}
-            index={index}
-            fields={fields}
-            formValues={values}
-          />
-          <FieldArray
-            name={`${endpoint}.parameters`}
-            component={RenderParameters}
-          />
+          <Endpoint endpoint={endpoint} index={index} fields={fields} formValues={values} />
+          <FieldArray name={`${endpoint}.parameters`} component={RenderParameters} />
         </div>
       ))}
     </div>
@@ -52,7 +41,7 @@ const RenderEndpoints = ({ fields, meta: { error, submitFailed }, values }) => (
 
 const mapStateToProps = state => {
   return {
-    values: getFormValues("fieldArrays")(state)
+    values: getFormValues('fieldArrays')(state)
   };
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 const SVG = props => {
   const fills = {
-    viewBox: "0 0 24 24"
+    viewBox: '0 0 24 24'
   };
   return (
     <svg viewBox={fills.viewBox} {...props}>
