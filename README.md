@@ -42,6 +42,7 @@ A very big thank you goes out to the following individuals who helped me create 
 - [Jesse Heaslip](https://github.com/funador)
 - [Chris Klanac](https://github.com/cklanac)
 - [Joe Turner](https://github.com/oampo)
+- All my partners in crime in [Thinkful EI-27](https://github.com/thinkful-ei27)
 
 ## Related
 
