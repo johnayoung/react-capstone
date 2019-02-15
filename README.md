@@ -105,7 +105,7 @@ API Documentation can be found at the following link: https://warm-peak-72707.he
 
 ## The Stack
 
-Front-end
+### Front-end
 - React
 - React-Router
 - Redux
@@ -117,14 +117,14 @@ Front-end
 - Jest
 - Tailwindcss
 
-Back-end
+### Back-end
 - Express
 - MongoDB
 - Mongoose
 - Mocha
 - Chai
 
-Authentication
+### Authentication
 - JWT
 - Passportjs
 - Bcryptjs
