@@ -51,7 +51,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar z-50 px-6">
+      <nav className="navbar z-50 px-6 lg:px-32">
         <Link to="/">
           <Icon
             name="logo"

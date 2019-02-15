@@ -13,3 +13,9 @@ body {
     background-attachment: fixed;
     background-size: cover;
 }
+
+.cover-background {
+    background-image: url("./style/assets/hero-background.png");
+    background-attachment: fixed;
+    background-size: cover; 
+}
