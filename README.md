@@ -33,8 +33,15 @@
 ## How To Use
 
 ## API
+API Documentation can be found at the following link: https://warm-peak-72707.herokuapp.com/api/docs
 
 ## A Special Thank You
+A very big thank you goes out to the following individuals who helped me create API Hub. It would not have been possible without you:
+
+- Capi Etheriel
+- Jesse Heaslip
+- [Chris Klanac](https://github.com/cklanac)
+- Joe Turner
 
 ## Related
 
