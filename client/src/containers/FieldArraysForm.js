@@ -16,7 +16,7 @@ const FieldArraysForm = props => {
   const { handleSubmit, submitting } = props;
   return (
     <div className="container max-w-lg mx-auto addEndpoints">
-      <div className="mb-6 max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:px-12 xl:w-3/4">
+      <div className="mb-6 max-w-lg mx-auto ">
         <h1 className="">Add an endpoint</h1>
         <p className="text-xl text-grey-dark mb-4">
           This page will help you to get started adding endpoints to API Hub.

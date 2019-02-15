@@ -23,6 +23,7 @@
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#api">API</a> •
+  <a href="#the-stack">The Stack</a> •
   <a href="#a-special-thank-you">A Special Thank You</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
@@ -101,6 +102,32 @@ Note: If you're using Linux Bash for Windows, [see this guide](https://www.howto
 
 ## API
 API Documentation can be found at the following link: https://warm-peak-72707.herokuapp.com/api/docs
+
+## The Stack
+
+Front-end
+- React
+- React-Router
+- Redux
+- Redux Thunk
+- Redux Forms
+- Axios
+- Highlightjs
+- Enzyme
+- Jest
+- Tailwindcss
+
+Back-end
+- Express
+- MongoDB
+- Mongoose
+- Mocha
+- Chai
+
+Authentication
+- JWT
+- Passportjs
+- Bcryptjs
 
 ## A Special Thank You
 A very big thank you goes out to the following individuals who helped me create API Hub. It would not have been possible without you:
