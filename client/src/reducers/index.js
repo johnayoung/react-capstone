@@ -8,7 +8,7 @@
 //       skills: [],
 //       about: ''
 //     },
-    
+
 //     skillOptions: ['React', 'React Native', 'Redux', 'Mongoose'],
 //     genderOptions: ["Male", "Female", "Others"]
 // }

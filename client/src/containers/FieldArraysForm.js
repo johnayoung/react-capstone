@@ -13,7 +13,7 @@ import RenderEndpoints from "../components/RenderEndpoints";
 import SubmittedUrls from "../components/SubmittedUrls";
 
 const FieldArraysForm = props => {
-  const { handleSubmit, submitting } = props;
+  const { handleSubmit, submitting, pristine } = props;
   return (
     <div className="container max-w-lg mx-auto p-6 addEndpoints">
       <div className="mb-6 max-w-lg mx-auto ">
@@ -35,7 +35,7 @@ const FieldArraysForm = props => {
             <button
               className="btn btn-green"
               type="submit"
-              disabled={submitting}
+              disabled={pristine || submitting}
             >
               Submit
             </button>
@@ -75,12 +75,28 @@ const FieldArraysForm = props => {
 //   ]
 // }
 
+const initialValues = {
+  collectionName: "Game of Thrones",
+  endpoints: [
+    {
+      name: "Game of Thrones Characters",
+      fullUrl: "https://www.anapioficeandfire.com/api/characters",
+      parameters: [
+        {
+          name: "name",
+          required: "No"
+        }
+      ]
+    }
+  ]
+};
+
 const connectedForm = withRouter(
   reduxForm({
     form: "fieldArrays", // a unique identifier for this form
     onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
     // onSubmit: (values, dispatch) => console.log(values),
-    // initialValues: initialValues,
+    initialValues,
     enableReinitialize: true,
     validate
   })(FieldArraysForm)

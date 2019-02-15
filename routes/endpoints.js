@@ -117,6 +117,11 @@ router.post('/', validBody, passport.authenticate('jwt', {session: false, failWi
         .json(endpoints);
     })
     .catch(err => {
+      // Check for duplicate entry in Mongo
+      if (err.code === 11000) {
+        err = new Error('An endpoint you created with that name already exists');
+        err.status = 400;
+      }
       next(err);
     });
 });

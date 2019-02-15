@@ -2,6 +2,7 @@ import { SubmissionError } from "redux-form";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import API_BASE_URL from "../config";
+import slugify from "../utils/slugify";
 
 export const FETCH_ENDPOINTS_REQUEST = "FETCH_ENDPOINTS_REQUEST";
 export const fetchEndpointsRequest = () => ({
@@ -112,16 +113,18 @@ export const postEndpoint = postObject => dispatch => {
   return (
     axios
       .all(
-        endpoints.map(endpoint =>
-          api.post("/endpoints", {
-            name: endpoint.name,
+        endpoints.map(endpoint => {
+          const slugName = slugify(endpoint.name);
+          return api.post("/endpoints", {
+            name: slugName,
             fullUrl: endpoint.fullUrl,
             parameters: endpoint.parameters
-          })
-        )
+          });
+        })
       )
       // return api.post('/endpoints', config.data)
       .then(responses => {
+        console.log("responses are ", responses);
         const names = responses.map(response => response.data.name);
         const decodedToken = jwtDecode(localStorage.authToken);
         const { username } = decodedToken.user;
@@ -129,8 +132,8 @@ export const postEndpoint = postObject => dispatch => {
           a.push(`https://${window.location.hostname}/${username}/${cv}`);
           return a;
         }, []);
-        console.log(newUrls);
-        return newUrls;
+        return console.log(newUrls);
+        // return newUrls;
       })
       .then(newUrls => {
         // const endpoint = response.data;
@@ -143,7 +146,8 @@ export const postEndpoint = postObject => dispatch => {
         console.log(err.response.data);
         console.log(err.response.status);
         console.log(err.response.headers);
-        dispatch(postEndpointError(err));
+        const { message } = err.response.data;
+        dispatch(postEndpointError(message));
         throw new SubmissionError({
           _error: "Unauthorized"
         });

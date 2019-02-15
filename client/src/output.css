@@ -8046,6 +8046,11 @@ table {
   border-radius: .25rem;
 }
 
+.btn:disabled {
+  opacity: .5;
+  cursor: not-allowed;
+}
+
 .btn-green {
   background-color: #7bc47f;
   color: #fff;
