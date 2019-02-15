@@ -46,53 +46,29 @@ const FieldArraysForm = props => {
   );
 };
 
-// For testing purposes, we fill out the form with initial values
+// For testing purposes, we can input initial values to the form
 // const initialValues = {
-//   collectionName: 'IEX',
+//   collectionName: 'Game of Thrones',
 //   endpoints: [
 //     {
-//       fullUrl: 'https://api.iextrading.com/1.0/stock/aapl/financials',
-//       name: 'Financials',
+//       name: 'Game of Thrones Characters',
+//       fullUrl: 'https://www.anapioficeandfire.com/api/characters',
 //       parameters: [
-//         {name: 'period', value: 'annual', type: 'textarea', required: false}
-//       ]
-//     },
-//     {
-//       fullUrl: 'https://api.iextrading.com/1.0/stock/aapl/chart/5y?chartReset=true&chartSimplify=true&chartInterval=2&changeFromClose=true&chartLast=100',
-//       name: 'Chart',
-//       parameters: [
-//         {name: 'chartReset', value: 'true', required: 'Yes'},
-//         {name: 'chartSimplify', value: 'true', required: 'Yes'},
-//         {name: 'chartInterval', value: 2, required: 'Yes'},
-//         {name: 'changeFromClose', value: true, required: 'Yes'},
-//         {name: 'chartLast', value: '100', required: 'Yes'}
+//         {
+//           name: 'name',
+//           required: 'No'
+//         }
 //       ]
 //     }
 //   ]
-// }
-
-const initialValues = {
-  collectionName: 'Game of Thrones',
-  endpoints: [
-    {
-      name: 'Game of Thrones Characters',
-      fullUrl: 'https://www.anapioficeandfire.com/api/characters',
-      parameters: [
-        {
-          name: 'name',
-          required: 'No'
-        }
-      ]
-    }
-  ]
-};
+// };
 
 const connectedForm = withRouter(
   reduxForm({
     form: 'fieldArrays', // a unique identifier for this form
     onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
     // onSubmit: (values, dispatch) => console.log(values),
-    initialValues,
+    // initialValues,
     enableReinitialize: true,
     validate
   })(FieldArraysForm)
