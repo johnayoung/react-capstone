@@ -28,6 +28,8 @@
   <a href="#license">License</a>
 </p>
 
+![screenshot](https://github.com/johnatspreadstreet/react-capstone/blob/master/client/src/style/assets/hero-browse-apis.gif?raw=true)
+
 ## Key Features
 
 - GUI for adding endpoints for various Public APIs
