@@ -21,7 +21,7 @@ export default class LandingPage extends Component {
               </div>
               <div className="mb-12">
                 <h1 className="font-semibold text-grey-darkest text-4xl sm:text-5xl md:text-6xl mb-4 leadining-none">
-                  Google, but for APIs.
+                  GitHub, but for APIs.
                 </h1>
                 <p className="text-xl sm:text-2xl text-grey-darkest leading-normal max-w-lg">
                   A (not so) Massive Online Repository for API Endpoints

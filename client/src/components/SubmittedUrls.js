@@ -3,7 +3,7 @@ import React from "react";
 function SubmittedUrls(props) {
   const { newUrls } = props;
   const displayedUrls = newUrls.map(url => (
-    <a href={url}>
+    <a key={url} href={url}>
       <p>{url}</p>
     </a>
   ));

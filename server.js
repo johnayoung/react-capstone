@@ -16,6 +16,7 @@ const endpointsRouter = require('./routes/endpoints');
 const authRouter = require('./routes/auth');
 
 const app = express();
+app.use(cors());
 
 // Log all requests. Skip logging during testing
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
@@ -24,7 +25,6 @@ app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
 
 // Create a static webserver
 app.use(express.static(path.join(__dirname, 'client/build')));
-app.use(cors());
 
 // Parse request body
 app.use(express.json());

@@ -10,7 +10,6 @@ export function MenuItem(props) {
     link,
     passedProps: { hideMobileMenu }
   } = props;
-  console.log(hideMobileMenu);
   const logout = () => {
     props.dispatch(clearAuth());
     clearAuthToken();

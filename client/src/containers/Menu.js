@@ -7,7 +7,7 @@ export default function Menu(props) {
     <MenuItem
       name={item.name}
       link={item.link}
-      keyValue={`${index}-${item.name}`}
+      key={item.name}
       passedProps={props}
     />
   ));

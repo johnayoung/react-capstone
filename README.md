@@ -34,6 +34,9 @@
 
 ## Key Features
 
+- Free!
+- Search for public APIs
+- Quickly and easily navigate query parameters
 - GUI for adding endpoints for various Public APIs
 
 ## Preview

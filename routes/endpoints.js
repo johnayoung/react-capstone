@@ -2,6 +2,7 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const axios = require('axios');
 
 const router = express.Router();
 const Endpoint = require('../models/endpoint');
@@ -44,6 +45,8 @@ function createEndpoint(name, description, fullUrl, parameters, userId) {
 }
 
 /* ========== GET ENDPOINTS ========== */
+
+// Get all endpoints from database
 router.get('/', (req, res, next) => {
   Endpoint
     .find()
@@ -56,6 +59,7 @@ router.get('/', (req, res, next) => {
     });
 });
 
+// Get one endpoint from database
 router.get('/:username/:name', (req, res, next) => {
   const { name } = req.params;
   const { username } = req.params;
@@ -115,6 +119,28 @@ router.post('/', validBody, passport.authenticate('jwt', {session: false, failWi
     .catch(err => {
       next(err);
     });
+});
+
+// Front end proxy requests
+router.post('/proxy', (req, res, next) => {
+  const {urlString} = req.body;
+  const config = {
+    method: 'get',
+    url: urlString,
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  };
+
+  axios(config)
+    .then(response => {
+      res.send(response.data);
+    })
+    .catch(err => {
+      console.log(err);
+      next(err);
+    });
+
 });
 
 // router.put('/:name', (req, res, next) => {

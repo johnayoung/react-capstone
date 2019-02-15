@@ -3,14 +3,6 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import API_BASE_URL from "../config";
 
-// const api = axios.create({
-//     baseURL: `${API_BASE_URL}`,
-//     headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${localStorage.authToken}`
-//     },
-// })
-
 export const FETCH_ENDPOINTS_REQUEST = "FETCH_ENDPOINTS_REQUEST";
 export const fetchEndpointsRequest = () => ({
   type: FETCH_ENDPOINTS_REQUEST
@@ -201,11 +193,15 @@ export const userEndpointError = error => ({
 });
 
 export const userEndpoint = urlString => dispatch => {
+  // To avoid CORS issues, we must proxy request to the back end
   const config = {
-    method: "get",
-    url: urlString,
+    method: "post",
+    url: `${API_BASE_URL}/endpoints/proxy`,
     headers: {
       "Content-Type": "application/json"
+    },
+    data: {
+      urlString
     }
   };
   dispatch(userEndpointRequest());
@@ -219,13 +215,14 @@ export const userEndpoint = urlString => dispatch => {
       return dispatch(userEndpointSuccess(data));
     })
     .catch(err => {
-      // console.log(err.response.data);
-      // console.log(err.response.status);
-      // console.log(err.response.headers);
-      console.log(err);
-      dispatch(postEndpointError(err));
+      console.log(err.response.data);
+      console.log(err.response.status);
+      console.log(err.response.headers);
+      const { message } = err.response.data;
+      console.log("Message is", message);
+      dispatch(fetchEndpointsError(message));
       throw new SubmissionError({
-        _error: "Unauthorized"
+        _error: message
       });
     });
 };
