@@ -31,7 +31,7 @@ export default function MobileMenu(props) {
     <MenuItem
       name={item.name}
       link={item.link}
-      keyValue={`${item}-${index}`}
+      key={`${item}-${index}`}
       passedProps={props}
     />
   ));
