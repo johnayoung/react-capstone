@@ -22,13 +22,15 @@
 <p align="center">
   <a href="#key-features">Key Features</a> •
   <a href="#how-to-use">How To Use</a> •
-  <a href="#download">API</a> •
-  <a href="#credits">A Special Thank You</a> •
+  <a href="#api">API</a> •
+  <a href="#a-special-thank-you">A Special Thank You</a> •
   <a href="#related">Related</a> •
   <a href="#license">License</a>
 </p>
 
 ## Key Features
+
+- GUI for adding endpoints for various Public APIs
 
 ## How To Use
 
