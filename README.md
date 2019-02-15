@@ -21,6 +21,7 @@
 
 <p align="center">
   <a href="#key-features">Key Features</a> •
+  <a href="#preview">Preview</a> •
   <a href="#how-to-use">How To Use</a> •
   <a href="#api">API</a> •
   <a href="#the-stack">The Stack</a> •
@@ -34,6 +35,17 @@
 ## Key Features
 
 - GUI for adding endpoints for various Public APIs
+
+## Preview
+
+### Landing Page
+![screenshot](https://github.com/johnatspreadstreet/react-capstone/blob/master/client/src/style/assets/landing-page.png?raw=true)
+
+### Browse
+![screenshot](https://github.com/johnatspreadstreet/react-capstone/blob/master/client/src/style/assets/browse.png?raw=true)
+
+### Endpoint
+![screenshot](https://github.com/johnatspreadstreet/react-capstone/blob/master/client/src/style/assets/endpoint.png?raw=true)
 
 ## How To Use
 
