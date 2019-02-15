@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Route, Switch, withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
-import LandingPage from "./LandingPage";
-import RegistrationPage from "./RegistrationPage";
-import LoginPage from "./LoginPage";
-import CardContainer from "./CardContainer";
-import Endpoint from "./Endpoint";
-import FieldArraysForm from "./FieldArraysForm";
-import NotFound from "./NotFound";
+import LandingPage from './LandingPage';
+import RegistrationPage from './RegistrationPage';
+import LoginPage from './LoginPage';
+import CardContainer from './CardContainer';
+import Endpoint from './Endpoint';
+import FieldArraysForm from './FieldArraysForm';
+import NotFound from './NotFound';
 
 export class Dashboard extends Component {
   content() {
@@ -27,8 +27,9 @@ export class Dashboard extends Component {
       </Switch>
     );
   }
+
   render() {
-    return <div className="dashboard pt-16">{this.content()}</div>;
+    return <section className="dashboard pt-16">{this.content()}</section>;
   }
 }
 

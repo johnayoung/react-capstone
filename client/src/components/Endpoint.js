@@ -1,29 +1,33 @@
-import React, { Component } from "react";
-import RenderField from "./RenderField";
-import { Field } from "redux-form";
-import get from "../utils/nestedValueGetter";
-import stringToPath from "../utils/stringToPath";
+import React, { Component } from 'react';
+import { Field } from 'redux-form';
+import RenderField from './RenderField';
+import get from '../utils/nestedValueGetter';
+import stringToPath from '../utils/stringToPath';
 
 class Endpoint extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: true
+      isVisible: true,
     };
   }
+
   hideModal() {
     this.setState({
-      isVisible: false
+      isVisible: false,
     });
   }
 
   showModal() {
     this.setState({
-      isVisible: true
+      isVisible: true,
     });
   }
+
   render() {
-    const { endpoint, index, fields, formValues } = this.props;
+    const {
+      endpoint, index, fields, formValues,
+    } = this.props;
     const table = get(stringToPath(endpoint), formValues);
     return (
       <div className="">
@@ -88,21 +92,19 @@ class Endpoint extends Component {
         <div
           className={
             !this.state.isVisible
-              ? "hidden"
-              : "modal-background fixed h-screen w-screen pin-t pin-l"
+              ? 'hidden'
+              : 'modal-background fixed h-screen w-screen pin-t pin-l'
           }
         >
           <div
             className={
               !this.state.isVisible
-                ? "hidden"
-                : "flex h-screen mx-auto justify-center align-center"
+                ? 'hidden'
+                : 'flex h-screen mx-auto justify-center align-center'
             }
           >
             <li
-              className={
-                "fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16"
-              }
+              className="fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16"
               key={index}
             >
               <div className="mb-4">
@@ -149,8 +151,12 @@ class Endpoint extends Component {
                 title="Save Endpoint"
                 onClick={() => this.hideModal()}
               >
+
+
+
+
                 Save Endpoint
-              </button>
+                            </button>
             </li>
           </div>
         </div>

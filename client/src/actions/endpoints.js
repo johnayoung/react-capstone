@@ -70,11 +70,7 @@ export const fetchEndpoints = () => dispatch => {
       return dispatch(fetchEndpointsSuccess(endpoints));
     })
     .catch(err => {
-      console.log(err.response.data);
-      console.log(err.response.status);
-      console.log(err.response.headers);
       const { message } = err.response.data;
-      console.log("Message is", message);
       return dispatch(fetchEndpointsError(message));
     });
 };
@@ -103,13 +99,12 @@ export const postEndpoint = postObject => dispatch => {
     baseURL: `${API_BASE_URL}`,
     headers: {
       "Content-Type": "application/json",
+      // eslint-disable-next-line no-undef
       Authorization: `Bearer ${localStorage.authToken}`
     }
   });
   dispatch(postEndpointRequest());
   const { endpoints } = postObject;
-  const { fullUrl, name } = endpoints[0];
-  console.log("full url and name is ", fullUrl, name);
   return (
     axios
       .all(
@@ -124,16 +119,16 @@ export const postEndpoint = postObject => dispatch => {
       )
       // return api.post('/endpoints', config.data)
       .then(responses => {
-        console.log("responses are ", responses);
         const names = responses.map(response => response.data.name);
+        // eslint-disable-next-line no-undef
         const decodedToken = jwtDecode(localStorage.authToken);
         const { username } = decodedToken.user;
         const newUrls = names.reduce((a, cv) => {
+          // eslint-disable-next-line no-undef
           a.push(`https://${window.location.hostname}/${username}/${cv}`);
           return a;
         }, []);
-        return console.log(newUrls);
-        // return newUrls;
+        return newUrls;
       })
       .then(newUrls => {
         // const endpoint = response.data;
@@ -143,9 +138,9 @@ export const postEndpoint = postObject => dispatch => {
         return dispatch(fetchEndpoints());
       })
       .catch(err => {
-        console.log(err.response.data);
-        console.log(err.response.status);
-        console.log(err.response.headers);
+        // console.log(err.response.data);
+        // console.log(err.response.status);
+        // console.log(err.response.headers);
         const { message } = err.response.data;
         dispatch(postEndpointError(message));
         throw new SubmissionError({
@@ -153,33 +148,6 @@ export const postEndpoint = postObject => dispatch => {
         });
       })
   );
-};
-
-export const fetchUserEndpoint = () => dispatch => {
-  dispatch(fetchUserRequest());
-  const config = {
-    method: "get",
-    url: `${API_BASE_URL}/endpoints`,
-    headers: {
-      "Content-Type": "application/json"
-    }
-    // data: JSON.stringify(endpoints)
-  };
-  return axios(config)
-    .then(res => {
-      const endpoints = res.data;
-      return dispatch(fetchEndpointsSuccess(endpoints));
-    })
-    .catch(err => {
-      console.log(`Hmm...must have had an error`);
-      const { reason, message, location } = err;
-      if (reason === "ValidationError") {
-        // Convert validation errors into SubmissionErrors for Redux Form
-        return new SubmissionError({
-          [location]: message
-        });
-      }
-    });
 };
 
 // Actions around a user pulling an existing endpoint
@@ -202,7 +170,7 @@ export const userEndpointError = error => ({
   error
 });
 
-export const userEndpointClear = error => ({
+export const userEndpointClear = () => ({
   type: USER_ENDPOINT_CLEAR
 });
 
@@ -222,18 +190,17 @@ export const userEndpoint = urlString => dispatch => {
   return axios(config)
     .then(response => {
       const { data } = response;
-      console.log("data is", data);
       return data;
     })
     .then(data => {
       return dispatch(userEndpointSuccess(data));
     })
     .catch(err => {
-      console.log(err.response.data);
-      console.log(err.response.status);
-      console.log(err.response.headers);
+      // console.log(err.response.data);
+      // console.log(err.response.status);
+      // console.log(err.response.headers);
       const { message } = err.response.data;
-      console.log("Message is", message);
+      // console.log("Message is", message);
       dispatch(fetchEndpointsError(message));
       throw new SubmissionError({
         _error: message

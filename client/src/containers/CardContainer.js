@@ -1,18 +1,16 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import CardContent from "../components/CardContent";
-import { Field, reduxForm, formValueSelector } from "redux-form";
-import { connect } from "react-redux";
-import { clearCurrentEndpoint, userEndpointClear } from "../actions/endpoints";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
+import CardContent from '../components/CardContent';
+import { clearCurrentEndpoint, userEndpointClear } from '../actions/endpoints';
 
 export class CardContainer extends Component {
   render() {
     const { searchBox } = this.props;
     const cards = this.props.endpoints
       .filter(endpoint => {
-        return !searchBox
-          ? endpoint
-          : endpoint.name.toLowerCase().includes(searchBox);
+        return !searchBox ? endpoint : endpoint.name.toLowerCase().includes(searchBox);
       })
       .filter(newEndpoint => newEndpoint !== null)
       .map(filteredEndpoint => {
@@ -28,11 +26,7 @@ export class CardContainer extends Component {
               to={`/${username}/${name}`}
               className="hover:bg-grey-lighter no-underline text-grey-darker"
             >
-              <CardContent
-                cardName={name}
-                cardImage="logo"
-                cardDescription={description}
-              />
+              <CardContent cardName={name} cardImage="logo" cardDescription={description} />
             </Link>
           </li>
         );
@@ -41,9 +35,7 @@ export class CardContainer extends Component {
       <div className="cardList">
         <div className="searchHeader w-screen">
           <form className="hero-background p-6 flex flex-col items-center justify-center mb-20">
-            <h1 className="text-center font-semibold tracking-tight mb-1 text-white">
-              API Hub
-            </h1>
+            <h1 className="text-center font-semibold tracking-tight mb-1 text-white">API Hub</h1>
             <div className="max-w-sm mx-auto text-center mb-6">
               <p className="leading-tight text-green-lighter">
                 An easy way to find and connect to (a few) APIs
@@ -71,16 +63,16 @@ export class CardContainer extends Component {
 }
 
 CardContainer = reduxForm({
-  form: "liveSearch", // a unique identifier for this form
+  form: 'liveSearch', // a unique identifier for this form
   // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
   onSubmit: (values, dispatch) => console.log(values),
   onChange: (values, dispatch) => console.log(values)
 })(CardContainer);
 
-const selector = formValueSelector("liveSearch");
+const selector = formValueSelector('liveSearch');
 
 function mapStateToProps(state) {
-  const searchBox = selector(state, "searchBox");
+  const searchBox = selector(state, 'searchBox');
   return {
     endpoints: state.endpoints.endpoints,
     hasAuthToken: state.auth.authToken !== null,
