@@ -8026,6 +8026,13 @@ table {
   * @import "utilities/skew-transforms";
   */
 
+.cover-background {
+  background-image: url("./style/assets/hero-background.png");
+  background-attachment: fixed;
+  background-size: cover;
+  z-index: 0;
+}
+
 /*
     Buttons
 */
