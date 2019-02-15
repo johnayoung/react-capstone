@@ -28,7 +28,7 @@ export class Dashboard extends Component {
     );
   }
   render() {
-    return <div className="dashboard pt-20 px-2">{this.content()}</div>;
+    return <div className="dashboard pt-16">{this.content()}</div>;
   }
 }
 

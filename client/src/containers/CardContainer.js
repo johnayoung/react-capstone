@@ -37,7 +37,7 @@ export class CardContainer extends Component {
       });
     return (
       <div className="cardList">
-        <div className="searchHeader fixed w-screen pin-t pin-l mt-16">
+        <div className="searchHeader w-screen">
           <form className="hero-background p-6 flex flex-col items-center justify-center mb-20">
             <h1 className="text-center font-semibold tracking-tight mb-1 text-white">
               API Hub

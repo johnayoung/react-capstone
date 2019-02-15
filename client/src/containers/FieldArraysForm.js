@@ -15,7 +15,7 @@ import SubmittedUrls from "../components/SubmittedUrls";
 const FieldArraysForm = props => {
   const { handleSubmit, submitting } = props;
   return (
-    <div className="container max-w-lg mx-auto addEndpoints">
+    <div className="container max-w-lg mx-auto p-6 addEndpoints">
       <div className="mb-6 max-w-lg mx-auto ">
         <h1 className="">Add an endpoint</h1>
         <p className="text-xl text-grey-dark mb-4">

@@ -87,7 +87,7 @@ class Endpoint extends Component {
       displayedEndpoint = <div>NO endpoint to display</div>;
     }
     return (
-      <div className="px-6 pb-6 bg-white shadow-md rounded ">
+      <div className="px-6 pb-6 bg-white shadow-md rounded m-6">
         <div className="lg:flex">
           <div className="lg:w-1/2">{displayedEndpoint}</div>
           <div className="lg:flex-auto lg:w-2/3">
