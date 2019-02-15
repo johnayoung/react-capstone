@@ -4,12 +4,14 @@ import {
   FETCH_ENDPOINTS_ERROR,
   SET_CURRENT_ENDPOINT_SUCCESS,
   SET_CURRENT_ENDPOINT_REQUEST,
+  CLEAR_CURRENT_ENDPOINT,
   POST_ENDPOINT_REQUEST,
   POST_ENDPOINT_SUCCESS,
   POST_ENDPOINT_ERROR,
   USER_ENDPOINT_REQUEST,
   USER_ENDPOINT_SUCCESS,
-  USER_ENDPOINT_ERROR
+  USER_ENDPOINT_ERROR,
+  USER_ENDPOINT_CLEAR
 } from "../actions/endpoints";
 
 const initialState = {
@@ -50,6 +52,10 @@ export default function reducer(state = initialState, action) {
       currentEndpointParams: action.endpoint.parameters,
       loadingCurrent: false
     });
+  } else if (action.type === CLEAR_CURRENT_ENDPOINT) {
+    return Object.assign({}, state, {
+      currentEndpoint: null
+    });
   } else if (action.type === POST_ENDPOINT_REQUEST) {
     return Object.assign({}, state, {
       loading: true,
@@ -81,6 +87,10 @@ export default function reducer(state = initialState, action) {
     return Object.assign({}, state, {
       loading: false,
       error: action.error1
+    });
+  } else if (action.type === USER_ENDPOINT_CLEAR) {
+    return Object.assign({}, state, {
+      userEndpoint: null
     });
   }
   return state;

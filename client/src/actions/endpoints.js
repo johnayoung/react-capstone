@@ -31,6 +31,11 @@ export const setCurrentEndpointSuccess = endpoint => ({
   endpoint
 });
 
+export const CLEAR_CURRENT_ENDPOINT = "CLEAR_CURRENT_ENDPOINT";
+export const clearCurrentEndpoint = () => ({
+  type: CLEAR_CURRENT_ENDPOINT
+});
+
 export const FETCH_USER_REQUEST = "FETCH_USER_REQUEST";
 export const fetchUserRequest = () => ({
   type: FETCH_ENDPOINTS_REQUEST
@@ -177,6 +182,7 @@ export const fetchUserEndpoint = () => dispatch => {
 export const USER_ENDPOINT_REQUEST = "USER_ENDPOINT_REQUEST";
 export const USER_ENDPOINT_SUCCESS = "USER_ENDPOINT_SUCCESS";
 export const USER_ENDPOINT_ERROR = "USER_ENDPOINT_ERROR";
+export const USER_ENDPOINT_CLEAR = "USER_ENDPOINT_CLEAR";
 
 export const userEndpointRequest = () => ({
   type: USER_ENDPOINT_REQUEST
@@ -190,6 +196,10 @@ export const userEndpointSuccess = apiResponse => ({
 export const userEndpointError = error => ({
   type: USER_ENDPOINT_ERROR,
   error
+});
+
+export const userEndpointClear = error => ({
+  type: USER_ENDPOINT_CLEAR
 });
 
 export const userEndpoint = urlString => dispatch => {

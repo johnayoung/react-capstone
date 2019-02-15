@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import CardContent from "../components/CardContent";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import { connect } from "react-redux";
+import { clearCurrentEndpoint, userEndpointClear } from "../actions/endpoints";
 
 export class CardContainer extends Component {
   render() {
@@ -21,6 +22,7 @@ export class CardContainer extends Component {
           <li
             key={id}
             className=" bg-white w-full p-4 border-t hover:bg-grey-lighter text-grey-darker"
+            onClick={() => this.props.dispatch(userEndpointClear())}
           >
             <Link
               to={`/${username}/${name}`}
