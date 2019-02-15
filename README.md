@@ -19,8 +19,24 @@
   </a>
 </p>
 
-## Table of Contents
+<p align="center">
+  <a href="#key-features">Key Features</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#download">API</a> •
+  <a href="#credits">A Special Thank You</a> •
+  <a href="#related">Related</a> •
+  <a href="#license">License</a>
+</p>
 
-## Introduction
+## Key Features
 
-React capstone for John Young
+## How To Use
+
+## API
+
+## A Special Thank You
+
+## Related
+
+## License
+Honestly, do whatever you want with it. Just give attribution.
