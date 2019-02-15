@@ -34,6 +34,27 @@
 
 To clone and run this application, you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
 
+The application can be run in two different ways:
+1. Back-end API only
+2. Full application
+3. Full application with proxy to back-end
+
+Back-end API only
+```bash
+# Clone this repository
+$ git clone https://github.com/johnatspreadstreet/react-capstone.git
+
+# Go into the repository
+$ cd react-capstone
+
+# Install dependencies
+$ npm install
+
+# Run the backend api
+$ npm start
+```
+
+Full application
 ```bash
 # Clone this repository
 $ git clone https://github.com/johnatspreadstreet/react-capstone.git
@@ -51,9 +72,24 @@ $ npm start
 
 # Run the front end React app
 $ cd client/
+$ npm start
+```
+
+Full application with proxy to back-end
+```bash
+# Clone this repository
+$ git clone https://github.com/johnatspreadstreet/react-capstone.git
+
+# Go into the repository
+$ cd react-capstone
+
+# Install dependencies
+$ npm install
+$ cd client/
 $ npm install
 
-# Run both, proxy requests from front end to back end
+# Make sure you are back in root directory, and run proxy build
+$ cd ..
 $ npm run proxy
 ```
 
