@@ -38,6 +38,11 @@ app.use('/api/users', usersRouter);
 app.use('/api/endpoints', endpointsRouter);
 app.use('/api', authRouter);
 
+// Serves up docs
+app.get('/api/docs', (req, res, next) => {
+  res.sendFile(path.join(__dirname, './docs.html'));
+});
+
 // Handles GET requests
 app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'client/build/index.html'));

@@ -12,7 +12,8 @@
     "cover": "nyc --reporter=lcov --reporter=text-summary npm test",
     "seed": "node utils/seed-database.js",
     "proxy": "concurrently \"npm run server\" \"npm run client\"",
-    "hash": "node utils/hash-password.js"
+    "hash": "node utils/hash-password.js",
+    "docs": "aglio -i apiHub.apib -o docs.html"
   },
   "repository": {
     "type": "git",
@@ -40,6 +41,8 @@
     "passport-local": "^1.0.0",
     "query-string": "^6.2.0",
     "redux-thunk": "^2.3.0",
+    "swagger-jsdoc": "^3.2.7",
+    "swagger-ui-express": "^4.0.2",
     "wurl": "^2.5.3"
   },
   "devDependencies": {
