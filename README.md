@@ -38,10 +38,10 @@ API Documentation can be found at the following link: https://warm-peak-72707.he
 ## A Special Thank You
 A very big thank you goes out to the following individuals who helped me create API Hub. It would not have been possible without you:
 
-- Capi Etheriel
-- Jesse Heaslip
+- [Capi Etheriel](https://github.com/barraponto)
+- [Jesse Heaslip](https://github.com/funador)
 - [Chris Klanac](https://github.com/cklanac)
-- Joe Turner
+- [Joe Turner](https://github.com/oampo)
 
 ## Related
 
