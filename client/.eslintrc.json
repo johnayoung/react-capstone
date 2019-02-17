@@ -4,6 +4,7 @@
   "rules": {
     "prettier/prettier": ["error"],
     "linebreak-style": [2, "windows"],
-    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": [0]
   }
 }

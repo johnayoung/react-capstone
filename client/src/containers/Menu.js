@@ -1,10 +1,10 @@
 import React from 'react';
-import MenuItem from '../components/MenuItem';
+import ConnectedMenuItem from '../components/MenuItem';
 
 export default function Menu(props) {
   const { menuItems } = props;
   const menuLinks = menuItems.map(item => (
-    <MenuItem name={item.name} link={item.link} key={item.key} passedProps={props} />
+    <ConnectedMenuItem name={item.name} link={item.link} key={item.key} passedProps={props} />
   ));
   return (
     <ul className="navbar-list flex list-reset items-center container mx-auto">

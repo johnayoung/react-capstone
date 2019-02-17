@@ -7,7 +7,8 @@ import Login from './Login';
 export function LoginPage(props) {
   // If we are logged in (which happens automatically when registration
   // is successful) redirect to the main browse area
-  if (props.loggedIn) {
+  const { loggedIn } = props;
+  if (loggedIn) {
     return <Redirect to="/browse" />;
   }
   return (

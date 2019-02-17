@@ -28,12 +28,14 @@ const RenderEndpoints = ({ fields, meta: { error, submitFailed }, values }) => (
       {submitFailed && error && <span>{error}</span>}
     </li>
     <div>
-      {fields.map((endpoint, index, fields) => (
-        <div className="mb-6 px-2 pb-6 bg-white rounded border shadow" key={index}>
-          <h2 className="text-center my-6">{`Endpoint #${index + 1}`}</h2>
+      {fields.map((endpoint, index) => (
+        <fieldset className="mb-6 px-2 pb-6 bg-white rounded border shadow" key={index}>
+          <legend className="text-center font-extrabold text-xl mb-6">
+            {`Endpoint #${index + 1}`}
+          </legend>
           <Endpoint endpoint={endpoint} index={index} fields={fields} formValues={values} />
           <FieldArray name={`${endpoint}.parameters`} component={RenderParameters} />
-        </div>
+        </fieldset>
       ))}
     </div>
   </ul>

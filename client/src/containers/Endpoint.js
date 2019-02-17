@@ -21,16 +21,9 @@ class Endpoint extends Component {
     let displayedEndpoint;
     let submittedUrl;
     let baseUrl;
-    if (this.props.currentEndpoint) {
-      const {
-        name,
-        description,
-        parameters,
-        protocol,
-        sub,
-        domain,
-        path
-      } = this.props.currentEndpoint;
+    const { currentEndpoint } = this.props;
+    if (currentEndpoint) {
+      const { name, description, parameters, protocol, sub, domain, path } = currentEndpoint;
       const { formValues } = this.props;
       if (formValues) {
         submittedUrl = urlBuilder(formValues);
@@ -47,9 +40,9 @@ class Endpoint extends Component {
             className="xl:px-12 w-full max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4"
             onSubmit={this.props.handleSubmit}
           >
-            <label className="block text-grey-darker text-sm font-bold mb-2">Base Url</label>
+            <h2 className="label-input">Base Url</h2>
             <p className="mb-4">{baseUrl}</p>
-            <label className="block text-grey-darker text-sm font-bold mb-2">Path</label>
+            <h2 className="label-input">Path</h2>
             <p className="mb-4">{path}</p>
             <ul className="list-reset mb-4">
               {parameters.map((param, index) => (
@@ -65,16 +58,12 @@ class Endpoint extends Component {
               ))}
             </ul>
             <div className="submittedUrl mb-4">
-              <label className="block text-grey-darker text-sm font-bold mb-2">
-                Submitted URL will be:
-              </label>
+              <h2 className="label-input">Submitted URL will be:</h2>
               <p>{submittedUrl}</p>
             </div>
-            <div>
-              <button className="btn btn-green" type="submit">
-                Submit
-              </button>
-            </div>
+            <button className="btn btn-green" type="submit">
+              Submit
+            </button>
           </form>
         </div>
       );
@@ -98,7 +87,6 @@ const connectedForm = reduxForm({
   form: 'endpointSubmit', // a unique identifier for this form
   // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
   onSubmit: (values, dispatch) => {
-    console.log(values);
     const builder = urlBuilder(values);
     return dispatch(userEndpoint(builder));
   },

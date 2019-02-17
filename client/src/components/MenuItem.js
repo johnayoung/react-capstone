@@ -16,8 +16,12 @@ export function MenuItem(props) {
     hideMobileMenu();
   };
   return (
-    <li className="navbar-item" onClick={name === 'Sign Out' ? () => logout() : hideMobileMenu}>
-      <Link to={link} className="navbar-link">
+    <li className="navbar-item">
+      <Link
+        to={link}
+        className="navbar-link"
+        onClick={name === 'Sign Out' ? () => logout() : hideMobileMenu}
+      >
         {name}
       </Link>
     </li>

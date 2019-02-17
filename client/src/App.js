@@ -21,10 +21,14 @@ class App extends Component {
       content = <Dashboard />;
     }
     return (
-      <main className="mx-auto">
-        <Header />
-        {content}
-      </main>
+      <>
+        <header role="banner">
+          <Header />
+        </header>
+        <main role="main" className="mx-auto">
+          {content}
+        </main>
+      </>
     );
   }
 }

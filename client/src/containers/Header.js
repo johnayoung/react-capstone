@@ -51,7 +51,7 @@ class Header extends Component {
 
   render() {
     return (
-      <nav className="navbar z-50 px-6 lg:px-32">
+      <nav role="navigation" aria-label="Main Navigation" className="navbar z-50 px-6 lg:px-32">
         <Link to="/">
           <Icon name="logo" className="fill-current text-green w-8 h-8 lg:w-12 lg:h-12 block" />
         </Link>

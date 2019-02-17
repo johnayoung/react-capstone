@@ -14,14 +14,9 @@ export const registerUser = user => dispatch => {
   return axios(config)
     .then(({ data }) => {
       console.log(data);
-      // return data.json()
       return data;
     })
     .catch(err => {
-      console.log(err);
-      console.log(err.response.data);
-      console.log(err.response.status);
-      console.log(err.response.headers);
       if (err.response.data.message === 'The username already exists') {
         throw new SubmissionError({
           _error: 'Username already exists'

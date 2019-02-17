@@ -20,11 +20,11 @@ export class CardContainer extends Component {
           <li
             key={id}
             className=" bg-white w-full p-4 border-t hover:bg-grey-lighter text-grey-darker"
-            onClick={() => this.props.dispatch(userEndpointClear())}
           >
             <Link
               to={`/${username}/${name}`}
               className="hover:bg-grey-lighter no-underline text-grey-darker"
+              onClick={() => this.props.dispatch(userEndpointClear())}
             >
               <CardContent cardName={name} cardImage="logo" cardDescription={description} />
             </Link>
@@ -62,11 +62,8 @@ export class CardContainer extends Component {
   }
 }
 
-CardContainer = reduxForm({
-  form: 'liveSearch', // a unique identifier for this form
-  // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
-  onSubmit: (values, dispatch) => console.log(values),
-  onChange: (values, dispatch) => console.log(values)
+const connectedCardContainer = reduxForm({
+  form: 'liveSearch' // a unique identifier for this form
 })(CardContainer);
 
 const selector = formValueSelector('liveSearch');
@@ -81,4 +78,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CardContainer);
+export default connect(mapStateToProps)(connectedCardContainer);
