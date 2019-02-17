@@ -21,6 +21,7 @@ const Login = props => {
             component={RenderField}
             label="Username"
             validate={[required, nonEmpty]}
+            autocomplete="username"
           />
         </div>
         <div className="mb-6">

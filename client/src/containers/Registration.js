@@ -34,6 +34,7 @@ const Registration = props => {
             component={RenderField}
             label="Username"
             validate={[required, nonEmpty, isTrimmed]}
+            autocomplete="username"
           />
         </div>
         <div className="mb-4">
@@ -43,6 +44,7 @@ const Registration = props => {
             component={RenderField}
             label="Password"
             validate={[required, passwordLength, isTrimmed]}
+            autocomplete="new-password"
           />
         </div>
         <div className="mb-4">
@@ -52,6 +54,7 @@ const Registration = props => {
             component={RenderField}
             label="Confirm Password"
             validate={[required, nonEmpty, matchesPassword]}
+            autocomplete="new-password"
           />
         </div>
         {error && (

@@ -12,24 +12,40 @@ const RenderField = props => {
     type,
     meta: { touched, error },
     placeholder,
-    select
+    select,
+    autocomplete
   } = props;
   let selector;
   if (!select) {
     selector = (
-      <div>
-        <input {...input} className="field-input" type={type} placeholder={placeholder || label} />
+      <>
+        <input
+          {...input}
+          className="field-input"
+          type={type}
+          aria-label={label}
+          aria-required="true"
+          placeholder={placeholder || label}
+          autoComplete={autocomplete}
+        />
         {touched && error && (
           <div className="mb-4 mt-2">
             <FieldError error={error} />
           </div>
         )}
-      </div>
+      </>
     );
   } else {
     selector = (
-      <div>
-        <select {...input} className="field-input" type={type} placeholder={label}>
+      <>
+        <select
+          {...input}
+          className="field-input"
+          type={type}
+          aria-label={label}
+          aria-required="true"
+          placeholder={label}
+        >
           {options.map((option, index) => {
             return (
               <option key={index} value={option}>
@@ -43,7 +59,7 @@ const RenderField = props => {
             <FieldError error={error} />
           </div>
         )}
-      </div>
+      </>
     );
   }
   return (
