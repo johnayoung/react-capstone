@@ -42,6 +42,7 @@
     "passport-local": "^1.0.0",
     "query-string": "^6.2.0",
     "redux-thunk": "^2.3.0",
+    "url-parse": "^1.4.4",
     "wurl": "^2.5.3"
   },
   "devDependencies": {

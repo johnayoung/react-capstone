@@ -10,7 +10,7 @@ export default class LandingPage extends Component {
         <div className="container flex flex-col lg:max-w-screen-lg mx-auto px-6 py-8 sm:py-16 md:py-24">
           <div className="flex flex-col md:flex-row">
             <div className="flex flex-col mb-6 md:w-1/2">
-              <div className="block">
+              <div className="block mb-4">
                 <Icon name="logo" className="fill-current w-8 h-8 text-grey-darker float-left" />
                 <p className="text-xl sm:text-2xl md:text-3xl font-bold text-grey-darker">
                   API Hub
