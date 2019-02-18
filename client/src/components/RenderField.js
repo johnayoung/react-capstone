@@ -12,11 +12,10 @@ const RenderField = props => {
     type,
     meta: { touched, error },
     placeholder,
-    select,
     autocomplete
   } = props;
   let selector;
-  if (!select) {
+  if (!options) {
     selector = (
       <>
         <input

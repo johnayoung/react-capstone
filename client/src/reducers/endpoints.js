@@ -11,7 +11,8 @@ import {
   USER_ENDPOINT_REQUEST,
   USER_ENDPOINT_SUCCESS,
   USER_ENDPOINT_ERROR,
-  USER_ENDPOINT_CLEAR
+  USER_ENDPOINT_CLEAR,
+  SET_INITIAL_FORM_VALUES
 } from '../actions/endpoints';
 
 const initialState = {
@@ -21,8 +22,11 @@ const initialState = {
   userEndpoint: null,
   loading: true,
   loadingCurrent: true,
+  loadingUserEndpoint: false,
   error: null,
-  newUrls: null
+  submitError: null,
+  newUrls: null,
+  initialValues: null
 };
 
 export default function reducer(state = initialState, action) {
@@ -53,7 +57,6 @@ export default function reducer(state = initialState, action) {
   if (action.type === SET_CURRENT_ENDPOINT_SUCCESS) {
     return Object.assign({}, state, {
       currentEndpoint: action.endpoint,
-      currentEndpointParams: action.endpoint.parameters,
       loadingCurrent: false
     });
   }
@@ -83,26 +86,31 @@ export default function reducer(state = initialState, action) {
   }
   if (action.type === USER_ENDPOINT_REQUEST) {
     return Object.assign({}, state, {
-      loading: true,
+      loadingUserEndpoint: true,
       userEndpoint: null,
-      error: null
+      submitError: null
     });
   }
   if (action.type === USER_ENDPOINT_SUCCESS) {
     return Object.assign({}, state, {
       userEndpoint: action.apiResponse,
-      loading: false
+      loadingUserEndpoint: false
     });
   }
   if (action.type === USER_ENDPOINT_ERROR) {
     return Object.assign({}, state, {
-      loading: false,
-      error: action.error1
+      loadingUserEndpoint: false,
+      submitError: action.error
     });
   }
   if (action.type === USER_ENDPOINT_CLEAR) {
     return Object.assign({}, state, {
       userEndpoint: null
+    });
+  }
+  if (action.type === SET_INITIAL_FORM_VALUES) {
+    return Object.assign({}, state, {
+      initialValues: action.endpoint
     });
   }
   return state;

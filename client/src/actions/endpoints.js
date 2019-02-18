@@ -54,6 +54,12 @@ export const fetchUserError = error => ({
   error
 });
 
+export const SET_INITIAL_FORM_VALUES = 'SET_INITIAL_FORM_VALUES';
+export const setInitialFormValues = endpoint => ({
+  type: SET_INITIAL_FORM_VALUES,
+  endpoint
+});
+
 export const fetchEndpoints = () => dispatch => {
   dispatch(fetchEndpointsRequest());
   const config = {
@@ -177,13 +183,11 @@ export const userEndpointClear = () => ({
 export const userEndpoint = urlString => dispatch => {
   // To avoid CORS issues, we must proxy request to the back end
   const config = {
-    method: 'post',
+    method: 'get',
     url: `${API_BASE_URL}/endpoints/proxy`,
     headers: {
-      'Content-Type': 'application/json'
-    },
-    data: {
-      urlString
+      'Content-Type': 'application/json',
+      'x-url-string': urlString
     }
   };
   dispatch(userEndpointRequest());
@@ -201,14 +205,32 @@ export const userEndpoint = urlString => dispatch => {
       // console.log(err.response.headers);
       const { message } = err.response.data;
       // console.log("Message is", message);
-      dispatch(fetchEndpointsError(message));
-      throw new SubmissionError({
-        _error: message
-      });
+      dispatch(userEndpointError(message));
+      // throw new SubmissionError({
+      //   _error: message
+      // });
     });
 };
 
 export const setCurrentEndpoint = () => dispatch => {
   dispatch(setCurrentEndpointRequest());
   return dispatch(setCurrentEndpointSuccess());
+};
+
+export const setFormValues = endpoint => dispatch => {
+  const { baseUrl, path, parameters } = endpoint;
+  const newParams = parameters.reduce((acc, cv) => {
+    if (cv.in === 'path') {
+      let newName;
+      newName = `path - ${cv.name}`;
+      acc[newName] = cv.default;
+    } else if (cv.in === 'query') {
+      let newName;
+      newName = `query - ${cv.name}`;
+      acc[newName] = cv.default;
+    }
+    return acc;
+  }, {});
+  const initialValues = { baseUrl, path, ...newParams };
+  return dispatch(setInitialFormValues(initialValues));
 };

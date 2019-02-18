@@ -52,11 +52,41 @@ const FieldArraysForm = props => {
 //   endpoints: [
 //     {
 //       name: 'Game of Thrones Characters',
-//       fullUrl: 'https://www.anapioficeandfire.com/api/characters',
+//       baseUrl: 'https://www.anapioficeandfire.com/api/characters',
 //       parameters: [
 //         {
-//           name: 'name',
-//           required: 'No'
+//           name: 'id',
+//           in: 'path',
+//           type: 'number',
+//           required: 'false',
+//           default: 1,
+//           description: 'Get a specific people resource',
+//           schema: {
+//             enum: ''
+//           }
+//         },
+//         {
+//           name: 'page',
+//           in: 'query',
+//           type: 'string',
+//           required: 'true',
+//           default: '1',
+//           description: 'Get a specific people resource by page',
+//           schema: {
+//             enum: ''
+//           }
+//         },
+//         {
+//           name: 'search',
+//           in: 'query',
+//           type: 'string',
+//           required: 'false',
+//           default: '',
+//           description:
+//             'All resources support a search parameter that filters the set of resources returned.',
+//           schema: {
+//             enum: ''
+//           }
 //         }
 //       ]
 //     }
@@ -66,10 +96,9 @@ const FieldArraysForm = props => {
 const connectedForm = withRouter(
   reduxForm({
     form: 'fieldArrays', // a unique identifier for this form
-    onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
-    // onSubmit: (values, dispatch) => console.log(values),
+    // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
+    onSubmit: (values, dispatch) => console.log(values),
     // initialValues,
-    enableReinitialize: true,
     validate
   })(FieldArraysForm)
 );

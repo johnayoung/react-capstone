@@ -6,9 +6,9 @@ import LandingPage from './LandingPage';
 import RegistrationPage from './RegistrationPage';
 import LoginPage from './LoginPage';
 import CardContainer from './CardContainer';
-import Endpoint from './Endpoint';
 import FieldArraysForm from './FieldArraysForm';
 import NotFound from './NotFound';
+import EndpointSubmit from './EndpointSubmit';
 
 export class Dashboard extends Component {
   content() {
@@ -22,7 +22,7 @@ export class Dashboard extends Component {
         <Route path="/signup" component={RegistrationPage} />
         <Route path="/login" component={LoginPage} />
         <Route path="/add" component={FieldArraysForm} />
-        <Route path="/:username/:endpointName" component={Endpoint} />
+        <Route path="/:username/:endpointName" component={EndpointSubmit} />
         <Route path="*" component={NotFound} />
       </Switch>
     );

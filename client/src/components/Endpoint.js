@@ -35,7 +35,7 @@ class Endpoint extends Component {
               <tbody>
                 <tr className="truncate">
                   <td className="max-w-xs w-1/2 truncate">{table.name}</td>
-                  <td className="max-w-xs w-1/2 truncate">{table.fullUrl}</td>
+                  <td className="max-w-xs w-1/2 truncate">{table.baseUrl}</td>
                 </tr>
               </tbody>
             </table>
@@ -102,10 +102,10 @@ class Endpoint extends Component {
               </div>
               <div className="mb-4">
                 <Field
-                  name={`${endpoint}.fullUrl`}
+                  name={`${endpoint}.baseUrl`}
                   type="url"
                   component={RenderField}
-                  label="Full Url"
+                  label="Base Url"
                   placeholder="https://..."
                 />
               </div>

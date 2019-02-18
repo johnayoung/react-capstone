@@ -1,7 +1,8 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
+const proxy = require('express-http-proxy');
+const app = require('express')();
 const axios = require('axios');
 
 const router = express.Router();
@@ -127,8 +128,15 @@ router.post('/', validBody, passport.authenticate('jwt', {session: false, failWi
 });
 
 // Front end proxy requests
-router.post('/proxy', (req, res, next) => {
-  const {urlString} = req.body;
+// (req) => {
+//   const string = req.get('x-url-string');
+//   console.log(string);
+//   return string;
+// }
+// app.use('/proxy', proxy('https://swapi.co/api/people/1?page=1'));
+router.get('/proxy', (req, res, next) => {
+  const urlString = req.get('x-url-string');
+  console.log(urlString);
   const config = {
     method: 'get',
     url: urlString,
@@ -140,9 +148,14 @@ router.post('/proxy', (req, res, next) => {
   axios(config)
     .then(response => {
       res.send(response.data);
+      // console.log(response.data);
     })
     .catch(err => {
-      console.log(err);
+      // console.log(err);
+      if (err) {
+        err = new Error('We are having trouble with the request');
+        err.status = 400;
+      }
       next(err);
     });
 

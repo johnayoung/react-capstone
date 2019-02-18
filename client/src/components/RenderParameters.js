@@ -11,7 +11,7 @@ const RenderParameters = props => {
   } = props;
   return (
     <fieldset className="mt-6">
-      <legend className="label-input">Query Params</legend>
+      <legend className="label-input">Parameters</legend>
       <ul className="list-reset">
         <li key="query-params-button" className="pb-4">
           <button
@@ -30,7 +30,7 @@ const RenderParameters = props => {
                 d="M17 11a1 1 0 0 1 0 2h-4v4a1 1 0 0 1-2 0v-4H7a1 1 0 0 1 0-2h4V7a1 1 0 0 1 2 0v4h4z"
               />
             </svg>
-            Add query param
+            Add Parameter
           </button>
         </li>
         {fields.map((parameter, index) => {

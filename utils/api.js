@@ -1,22 +1,21 @@
 'use strict';
 // Require is a node only piece. Remove this if you are pulling from client side
 const axios = require('axios');
-// const {CRYPTOCOMPARE_API_KEY} = require('../config');
 
-const base = {
+const config = {
   method: 'get',
-  //   baseURL: 'https://min-api.cryptocompare.com/data',
+  url: 'https://api.apis.guru/v2/list.json',
   //   headers: {'Apikey': CRYPTOCOMPARE_API_KEY},
-  responseType: 'json',
-};
-
-const api = {
-  get: function(baseSettings=base, requestObj) {
-    baseSettings.url = '/price';
-    return axios(baseSettings);
+  headers: {
+    'Content-Type': 'application/json'
   }
 };
 
-module.exports = {
-  get: api.get
-};
+axios(config)
+  .then(response => {
+    const apis = response.data;
+    console.log(Object.keys(apis));
+  })
+  .catch(err => {
+    console.log('something went wrong');
+  });

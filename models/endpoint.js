@@ -1,13 +1,14 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const url = require('url');
 const wurl = require('wurl');
+const Url = require('url-parse');
 
 const endpointSchema = new mongoose.Schema({
   name: {type: String, required: true, lowercase: true, trim: true},
   description: {type: String},
-  fullUrl: {type: String, required: true},
+  baseUrl: {type: String},
+  fullUrl: {type: String},
   method: {type: String, default: 'GET'},
   tld: {type: String},
   domain: {type: String},
@@ -40,14 +41,30 @@ endpointSchema.set('toJSON', {
 });
 
 endpointSchema.statics.parseURL = (uri) => {
+  const parsedUrl = new Url(uri);
+  const {
+    slashes,
+    protocol,
+    hash,
+    query,
+    pathname,
+    auth,
+    host,
+    port,
+    hostname,
+    password,
+    username,
+    origin,
+    href
+  } = parsedUrl;
   return {
     tld: wurl('tld', uri),
-    domain: wurl('domain', uri),
-    hostname: wurl('hostname', uri),
+    domain: wurl('domain', uri), // Strips out the subdomain
+    hostname,
     sub: wurl('sub', uri),
-    protocol: wurl('protocol', uri),
+    protocol,
     path: wurl('path', uri),
-    query: wurl('query', uri),
+    query,
     queryObj: wurl('?', uri),
   };
 };

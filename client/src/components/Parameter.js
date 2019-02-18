@@ -35,7 +35,7 @@ class Parameter extends Component {
               <tbody>
                 <tr className="truncate">
                   <td className="max-w-xs w-1/3 truncate">{table.name}</td>
-                  <td className="max-w-xs w-1/3 truncate">{table.value}</td>
+                  <td className="max-w-xs w-1/3 truncate">{table.in}</td>
                   <td className="max-w-xs w-1/3 truncate">{table.required}</td>
                 </tr>
               </tbody>
@@ -103,21 +103,21 @@ class Parameter extends Component {
                   label="Name"
                 />
               </div>
-              {/* <div className='mb-4'> 
-                            <Field
-                            name={`${parameter}.type`}
-                            type="text"
-                            component={RenderField}
-                            label={`Parameter #${index + 1}: Type`}
-                            props={{options: ['', 'input', 'list']}}
-                            />
-                        </div> */}
               <div className="mb-4">
                 <Field
-                  name={`${parameter}.value`}
+                  name={`${parameter}.in`}
                   type="text"
                   component={RenderField}
-                  label="Initial Value"
+                  label="In"
+                  props={{ options: ['path', 'query'] }}
+                />
+              </div>
+              <div className="mb-4">
+                <Field
+                  name={`${parameter}.default`}
+                  type="text"
+                  component={RenderField}
+                  label="Default"
                 />
               </div>
               <div className="mb-4">
@@ -126,7 +126,7 @@ class Parameter extends Component {
                   type="select"
                   component={RenderField}
                   label="Required"
-                  props={{ select: true, options: ['Yes', 'No'] }}
+                  props={{ options: ['true', 'false'] }}
                 />
               </div>
               <button
