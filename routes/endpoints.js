@@ -1,9 +1,9 @@
 'use strict';
 
 const express = require('express');
-const proxy = require('express-http-proxy');
-const app = require('express')();
 const axios = require('axios');
+const pathToRegexp = require('path-to-regexp');
+const parse = require('url').parse;
 
 const router = express.Router();
 const Endpoint = require('../models/endpoint');
@@ -13,20 +13,20 @@ const User = require('../models/user');
 const passport = require('passport');
 
 const { check, validationResult, body } = require('express-validator/check');
-const { sanitizeBody } = require('express-validator/filter');
 
 const validBody = [
   body('name')
     .not().isEmpty()
     .trim()
     .escape(),
-  check('fullUrl')
+  check('baseUrl')
     .isURL()
 ];
 
-function createEndpoint(name, description, fullUrl, parameters, userId) {
-  const parsedURI = Endpoint.parseURL(fullUrl);
-  const { domain } = parsedURI;
+function createEndpoint(name, description, baseUrl, parameters, userId) {
+  const parsedURI = Endpoint.parseURL(baseUrl);
+  const prettyName = Endpoint.prettify(name);
+  const { domain, path, protocolAndHost } = parsedURI;
   const favicon = `https://api.faviconkit.com/${domain}/144`;
 
   if (!description) {
@@ -35,8 +35,10 @@ function createEndpoint(name, description, fullUrl, parameters, userId) {
 
   return Object.assign({}, {
     name,
+    prettyName,
     description,
-    fullUrl,
+    baseUrl: protocolAndHost,
+    path,
     parameters,
     favicon,
     userId
@@ -94,12 +96,16 @@ router.get('/:username/:name', (req, res, next) => {
 
 /* ========== POST ENDPOINTS ========== */
 router.post('/', validBody, passport.authenticate('jwt', {session: false, failWithError: true}), (req, res, next) => {
-  const {name, description, fullUrl, parameters} = req.body;
+  const {name, description, baseUrl, parameters} = req.body;
   const userId = req.user.id;
   const username = req.user.username;
-  console.log(req.user);
+  // const testReq = 'https://www.google.com/path/:id?';
+  // const pathname = pathToRegexp.parse(testReq);
+  // const all = parse(testReq);
+  // console.log(all);
 
-  const newEndpoint = createEndpoint(name, description, fullUrl, parameters, userId);
+
+  const newEndpoint = createEndpoint(name, description, baseUrl, parameters, userId);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -109,8 +115,6 @@ router.post('/', validBody, passport.authenticate('jwt', {session: false, failWi
   Endpoint
     .create(newEndpoint)
     .then(endpoints => {
-      // endpoints = Object.assign({}, endpoints, {username});
-      // console.log('endpoints from post are', endpoints, 'username is', username);
       const response = Object.assign({}, endpoints, username);
       console.log('new response is', response);
       res.location(`${req.originalUrl}/${endpoints.id}`)
@@ -128,12 +132,6 @@ router.post('/', validBody, passport.authenticate('jwt', {session: false, failWi
 });
 
 // Front end proxy requests
-// (req) => {
-//   const string = req.get('x-url-string');
-//   console.log(string);
-//   return string;
-// }
-// app.use('/proxy', proxy('https://swapi.co/api/people/1?page=1'));
 router.get('/proxy', (req, res, next) => {
   const urlString = req.get('x-url-string');
   console.log(urlString);
@@ -148,10 +146,8 @@ router.get('/proxy', (req, res, next) => {
   axios(config)
     .then(response => {
       res.send(response.data);
-      // console.log(response.data);
     })
     .catch(err => {
-      // console.log(err);
       if (err) {
         err = new Error('We are having trouble with the request');
         err.status = 400;

@@ -12,7 +12,7 @@ const Code = props => {
     ? 'Pulled JSON will appear here'
     : JSON.stringify(userEndpoint, null, 2);
   return (
-    <div className="container m-2 text-s">
+    <div className="container m-2 text-xs">
       <Highlight className="json">{logic}</Highlight>
     </div>
   );

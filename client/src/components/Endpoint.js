@@ -102,6 +102,14 @@ class Endpoint extends Component {
               </div>
               <div className="mb-4">
                 <Field
+                  name={`${endpoint}.description`}
+                  type="text"
+                  component={RenderField}
+                  label="Description"
+                />
+              </div>
+              <div className="mb-4">
+                <Field
                   name={`${endpoint}.baseUrl`}
                   type="url"
                   component={RenderField}

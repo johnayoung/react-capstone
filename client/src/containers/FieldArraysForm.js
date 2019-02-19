@@ -47,58 +47,58 @@ const FieldArraysForm = props => {
 };
 
 // For testing purposes, we can input initial values to the form
-// const initialValues = {
-//   collectionName: 'Game of Thrones',
-//   endpoints: [
-//     {
-//       name: 'Game of Thrones Characters',
-//       baseUrl: 'https://www.anapioficeandfire.com/api/characters',
-//       parameters: [
-//         {
-//           name: 'id',
-//           in: 'path',
-//           type: 'number',
-//           required: 'false',
-//           default: 1,
-//           description: 'Get a specific people resource',
-//           schema: {
-//             enum: ''
-//           }
-//         },
-//         {
-//           name: 'page',
-//           in: 'query',
-//           type: 'string',
-//           required: 'true',
-//           default: '1',
-//           description: 'Get a specific people resource by page',
-//           schema: {
-//             enum: ''
-//           }
-//         },
-//         {
-//           name: 'search',
-//           in: 'query',
-//           type: 'string',
-//           required: 'false',
-//           default: '',
-//           description:
-//             'All resources support a search parameter that filters the set of resources returned.',
-//           schema: {
-//             enum: ''
-//           }
-//         }
-//       ]
-//     }
-//   ]
-// };
+const initialValues = {
+  collectionName: 'Game of Thrones',
+  endpoints: [
+    {
+      name: 'Game of Thrones Characters',
+      baseUrl: 'https://www.anapioficeandfire.com/api/characters/:id?',
+      description: 'A Character is an individual within the Ice And Fire universe.',
+      parameters: [
+        {
+          name: 'id',
+          in: 'path',
+          type: 'number',
+          required: 'false',
+          default: 1,
+          description: 'Get a specific people resource',
+          schema: {
+            enum: ''
+          }
+        },
+        {
+          name: 'name',
+          in: 'query',
+          type: 'string',
+          required: 'false',
+          default: '',
+          description: 'Characters with the given name are included in the response.',
+          schema: {
+            enum: ''
+          }
+        },
+        {
+          name: 'gender',
+          in: 'query',
+          type: 'string',
+          required: 'false',
+          default: '',
+          description: 'Characters with the given gender are included in the response.',
+          schema: {
+            enum: ''
+          }
+        }
+      ]
+    }
+  ]
+};
 
 const connectedForm = withRouter(
   reduxForm({
     form: 'fieldArrays', // a unique identifier for this form
-    // onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
-    onSubmit: (values, dispatch) => console.log(values),
-    // initialValues,
+    onSubmit: (values, dispatch) => dispatch(postEndpoint(values)),
+    // onSubmit: (values, dispatch) => console.log(values),
+    initialValues,
     validate
   })(FieldArraysForm)
 );

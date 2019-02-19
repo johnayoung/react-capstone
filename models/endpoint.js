@@ -3,12 +3,12 @@
 const mongoose = require('mongoose');
 const wurl = require('wurl');
 const Url = require('url-parse');
+const parse = require('url').parse;
 
 const endpointSchema = new mongoose.Schema({
   name: {type: String, required: true, lowercase: true, trim: true},
   description: {type: String},
   baseUrl: {type: String},
-  fullUrl: {type: String},
   method: {type: String, default: 'GET'},
   tld: {type: String},
   domain: {type: String},
@@ -41,32 +41,26 @@ endpointSchema.set('toJSON', {
 });
 
 endpointSchema.statics.parseURL = (uri) => {
-  const parsedUrl = new Url(uri);
+  const parsedUrl = parse(uri);
   const {
-    slashes,
     protocol,
-    hash,
-    query,
-    pathname,
-    auth,
-    host,
-    port,
     hostname,
-    password,
-    username,
-    origin,
-    href
+    href,
+    path
   } = parsedUrl;
   return {
-    tld: wurl('tld', uri),
-    domain: wurl('domain', uri), // Strips out the subdomain
     hostname,
-    sub: wurl('sub', uri),
+    domain: wurl('domain', uri),
     protocol,
-    path: wurl('path', uri),
-    query,
-    queryObj: wurl('?', uri),
+    path,
+    protocolAndHost: `${protocol}//${hostname}`
   };
+};
+
+endpointSchema.statics.prettify =  (str) => {
+  return str.split('-').map((part) => {
+    return part.charAt(0).toUpperCase() + part.slice(1);
+  }).join(' ');
 };
 
 endpointSchema.methods.serialize = () => {

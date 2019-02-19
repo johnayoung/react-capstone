@@ -36,7 +36,7 @@ class Parameter extends Component {
     const schema = (
       <div className="mb-4">
         <Field
-          name={`${parameter}.schema`}
+          name={`${parameter}.schema.enum`}
           type="text"
           component={RenderField}
           label="Schema"

@@ -111,49 +111,47 @@ export const postEndpoint = postObject => dispatch => {
   });
   dispatch(postEndpointRequest());
   const { endpoints } = postObject;
-  return (
-    axios
-      .all(
-        endpoints.map(endpoint => {
-          const slugName = slugify(endpoint.name);
-          return api.post('/endpoints', {
-            name: slugName,
-            fullUrl: endpoint.fullUrl,
-            parameters: endpoint.parameters
-          });
-        })
-      )
-      // return api.post('/endpoints', config.data)
-      .then(responses => {
-        const names = responses.map(response => response.data.name);
-        // eslint-disable-next-line no-undef
-        const decodedToken = jwtDecode(localStorage.authToken);
-        const { username } = decodedToken.user;
-        const newUrls = names.reduce((a, cv) => {
-          // eslint-disable-next-line no-undef
-          a.push(`https://${window.location.hostname}/${username}/${cv}`);
-          return a;
-        }, []);
-        return newUrls;
-      })
-      .then(newUrls => {
-        // const endpoint = response.data;
-        return dispatch(postEndpointSuccess(newUrls));
-      })
-      .then(() => {
-        return dispatch(fetchEndpoints());
-      })
-      .catch(err => {
-        // console.log(err.response.data);
-        // console.log(err.response.status);
-        // console.log(err.response.headers);
-        const { message } = err.response.data;
-        dispatch(postEndpointError(message));
-        throw new SubmissionError({
-          _error: 'Unauthorized'
+  return axios
+    .all(
+      endpoints.map(endpoint => {
+        const slugName = slugify(endpoint.name);
+        return api.post('/endpoints', {
+          name: slugName,
+          baseUrl: endpoint.baseUrl,
+          description: endpoint.description,
+          parameters: endpoint.parameters
         });
       })
-  );
+    )
+    .then(responses => {
+      const names = responses.map(response => response.data.name);
+      // eslint-disable-next-line no-undef
+      const decodedToken = jwtDecode(localStorage.authToken);
+      const { username } = decodedToken.user;
+      const newUrls = names.reduce((a, cv) => {
+        // eslint-disable-next-line no-undef
+        a.push(`https://${window.location.hostname}/${username}/${cv}`);
+        return a;
+      }, []);
+      return newUrls;
+    })
+    .then(newUrls => {
+      // const endpoint = response.data;
+      return dispatch(postEndpointSuccess(newUrls));
+    })
+    .then(() => {
+      return dispatch(fetchEndpoints());
+    })
+    .catch(err => {
+      // console.log(err.response.data);
+      // console.log(err.response.status);
+      // console.log(err.response.headers);
+      const { message } = err.response.data;
+      dispatch(postEndpointError(message));
+      throw new SubmissionError({
+        _error: 'Unauthorized'
+      });
+    });
 };
 
 // Actions around a user pulling an existing endpoint

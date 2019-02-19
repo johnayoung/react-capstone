@@ -24,7 +24,7 @@ class EndpointSubmit extends Component {
     let submittedUrl;
     const { currentEndpoint, handleSubmit, handleSearchSubmit, pristine, submitError } = this.props;
     if (currentEndpoint) {
-      const { name, description, parameters, baseUrl, path } = currentEndpoint;
+      const { name, prettyName, description, parameters, baseUrl, path } = currentEndpoint;
       const { formValues } = this.props;
       submittedUrl = urlBuilder({ baseUrl, path, parameters });
       if (!pristine) {
@@ -33,7 +33,7 @@ class EndpointSubmit extends Component {
       displayedEndpoint = (
         <div className="container pt-12 pb-8 lg:pt-28 w-full">
           <div className="mb-6 max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:px-12 xl:w-3/4">
-            <h1 className="mb-4">{name}</h1>
+            <h1 className="mb-4">{prettyName}</h1>
             <p className="mb-4 text-xl text-grey-dark">{description}</p>
           </div>
           <form
@@ -59,7 +59,7 @@ class EndpointSubmit extends Component {
             </ul>
             <div className="submittedUrl mb-4">
               <h2 className="label-input">Submitted URL will be:</h2>
-              <p>{submittedUrl}</p>
+              <p className="whitespace-normal text-xs">{submittedUrl}</p>
             </div>
             <button className="btn btn-green" type="submit">
               Submit
