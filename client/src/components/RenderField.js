@@ -8,6 +8,7 @@ const RenderField = props => {
   const {
     options,
     input,
+    textarea,
     label,
     type,
     meta: { touched, error },
@@ -15,26 +16,7 @@ const RenderField = props => {
     autocomplete
   } = props;
   let selector;
-  if (!options) {
-    selector = (
-      <>
-        <input
-          {...input}
-          className="field-input"
-          type={type}
-          aria-label={label}
-          aria-required="true"
-          placeholder={placeholder || label}
-          autoComplete={autocomplete}
-        />
-        {touched && error && (
-          <div className="mb-4 mt-2">
-            <FieldError error={error} />
-          </div>
-        )}
-      </>
-    );
-  } else {
+  if (options) {
     selector = (
       <>
         <select
@@ -55,6 +37,44 @@ const RenderField = props => {
         </select>
         {touched && error && (
           <div className="mb-4 mt-4">
+            <FieldError error={error} />
+          </div>
+        )}
+      </>
+    );
+  } else if (textarea) {
+    selector = (
+      <>
+        <textarea
+          {...input}
+          className="field-input"
+          type={type}
+          aria-label={label}
+          aria-required="true"
+          placeholder={placeholder || label}
+          autoComplete={autocomplete}
+        />
+        {touched && error && (
+          <div className="mb-4 mt-2">
+            <FieldError error={error} />
+          </div>
+        )}
+      </>
+    );
+  } else {
+    selector = (
+      <>
+        <input
+          {...input}
+          className="field-input"
+          type={type}
+          aria-label={label}
+          aria-required="true"
+          placeholder={placeholder || label}
+          autoComplete={autocomplete}
+        />
+        {touched && error && (
+          <div className="mb-4 mt-2">
             <FieldError error={error} />
           </div>
         )}

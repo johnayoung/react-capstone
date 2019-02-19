@@ -94,7 +94,7 @@ class Endpoint extends Component {
             }
           >
             <li
-              className="fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-16"
+              className="fixed pin-t bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 mt-20"
               key={index}
             >
               <div className="mb-4">
@@ -109,6 +109,18 @@ class Endpoint extends Component {
                   placeholder="https://..."
                 />
               </div>
+              <p className="p-2">
+                We accept path parameters here. Use a semi-colon in front of the path.
+              </p>
+              <p className="p-2">
+                Example: api.url.com/
+                <span className="font-bold">:dynamicpath</span>
+              </p>
+              <p className="p-2">Include a question mark to delineate an optional path</p>
+              <p className="p-2">
+                Example: api.url.com/
+                <span className="font-bold">:dynamicpath?</span>
+              </p>
               <button
                 className="ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex"
                 type="button"

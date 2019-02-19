@@ -3,12 +3,14 @@ import { Field } from 'redux-form';
 import RenderField from './RenderField';
 import get from '../utils/nestedValueGetter';
 import stringToPath from '../utils/stringToPath';
+import Toggle from './Toggle';
 
 class Parameter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isVisible: true
+      isVisible: true,
+      checked: false
     };
   }
 
@@ -24,9 +26,25 @@ class Parameter extends Component {
     });
   }
 
+  handleToggle() {
+    this.setState({ checked: !this.state.checked });
+  }
+
   render() {
     const { parameter, index, fields, formValues } = this.props;
     const table = get(stringToPath(parameter), formValues);
+    const schema = (
+      <div className="mb-4">
+        <Field
+          name={`${parameter}.schema`}
+          type="text"
+          component={RenderField}
+          label="Schema"
+          props={{ textarea: true }}
+          placeholder="One value per line"
+        />
+      </div>
+    );
     return (
       <div className="">
         <div className="flex flex-row items-center border-t border-b hover:bg-grey-lightest">
@@ -118,17 +136,33 @@ class Parameter extends Component {
                   type="text"
                   component={RenderField}
                   label="Default"
+                  placeholder="Default value"
                 />
               </div>
               <div className="mb-4">
                 <Field
                   name={`${parameter}.required`}
-                  type="select"
+                  type="text"
                   component={RenderField}
                   label="Required"
                   props={{ options: ['true', 'false'] }}
                 />
               </div>
+              <div className="mb-4">
+                <Field
+                  name={`${parameter}.description`}
+                  type="text"
+                  component={RenderField}
+                  label="Description"
+                />
+              </div>
+              <Toggle
+                name="enum"
+                label="Add Possible Values"
+                checked={this.state.checked}
+                onToggle={() => this.handleToggle()}
+              />
+              {this.state.checked && schema}
               <button
                 className="ml-2 bg-grey-lighter hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex"
                 type="button"

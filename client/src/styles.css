@@ -36,14 +36,116 @@
   * @import "components/forms";
   */
  
- /**
-  * This injects all of Tailwind's utility classes, generated based on your
-  * config file.
-  *
-  * If using `postcss-import`, use this import instead:
-  *
-  * @import "tailwindcss/utilities";
+  .cover-background {
+      background-image: url("./style/assets/hero-background.png");
+      background-attachment: fixed;
+      background-size: cover; 
+      z-index: 0;
+  }
+  
+  /*
+      Buttons
   */
+  
+  .btn {
+      @apply font-bold py-2 px-4 rounded;
+  }
+  
+  .btn:disabled {
+      @apply opacity-50 cursor-not-allowed
+  }
+  
+  .btn-green {
+      @apply bg-green-300 text-white;
+  }
+  
+  .btn-green:hover {
+      @apply bg-green-500;
+  }
+  
+  .btn-outline {
+      @apply bg-transparent border border-green-100 text-green-100 font-semibold 
+  }
+  
+  .btn-outline:hover {
+      @apply bg-green-300 text-white border-transparent
+  }
+  
+  /*
+      Navigation
+  */
+  .navbar {
+      @apply max-w-full w-screen shadow flex fixed pin-t pin-x h-16 items-center justify-center bg-white
+  }
+  
+  .navbar-list {
+      @apply p-4;
+  }
+  
+  .navbar-link {
+      @apply  pr-4 text-white no-underline;
+  }
+  
+  @screen sm {
+      .navbar-link {
+          @apply text-grey-darker
+      }
+  }
+  
+  .navbar-link:hover {
+      @apply  text-green no-underline;
+  }
+  
+  .navbarActive {
+      @apply border-green border-b-4
+  }
+  
+  /*
+      Forms
+  */
+  
+  .field-input {
+      @apply shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight
+  }
+  
+  .field-input:focus {
+      @apply outline-none shadow-outline
+  }
+  
+  .label-input {
+      @apply block text-grey-darker text-sm font-bold mb-2
+  }
+
+/* CHECKBOX TOGGLE SWITCH */
+.form-switch {
+    @apply relative select-none w-12 mr-2 leading-normal;
+}
+.form-switch-checkbox {
+    @apply hidden;
+}
+.form-switch-label {
+    @apply block overflow-hidden cursor-pointer bg-white border rounded-full h-6  shadow-inner;
+
+    transition: background-color 0.2s ease-in;
+}
+.form-switch-label:before {
+    @apply absolute block bg-white pin-y w-6 border rounded-full -ml-1;
+    
+    right: 50%;
+    content: "";
+    transition: all 0.2s ease-in;
+}
+.form-switch-checkbox:checked + .form-switch-label,
+.form-switch-checkbox:checked + .form-switch-label:before {
+ 
+}
+.form-switch-checkbox:checked + .form-switch-label {
+    @apply bg-green shadow-none;
+}
+.form-switch-checkbox:checked + .form-switch-label:before {
+    @apply pin-r;
+}
+
  @tailwind utilities;
  
  /**
@@ -60,83 +162,3 @@
   * @import "utilities/background-patterns";
   * @import "utilities/skew-transforms";
   */
-
-.cover-background {
-    background-image: url("./style/assets/hero-background.png");
-    background-attachment: fixed;
-    background-size: cover; 
-    z-index: 0;
-}
-
-/*
-    Buttons
-*/
-
-.btn {
-    @apply font-bold py-2 px-4 rounded;
-}
-
-.btn:disabled {
-    @apply opacity-50 cursor-not-allowed
-}
-
-.btn-green {
-    @apply bg-green-300 text-white;
-}
-
-.btn-green:hover {
-    @apply bg-green-500;
-}
-
-.btn-outline {
-    @apply bg-transparent border border-green-100 text-green-100 font-semibold 
-}
-
-.btn-outline:hover {
-    @apply bg-green-300 text-white border-transparent
-}
-
-/*
-    Navigation
-*/
-.navbar {
-    @apply max-w-full w-screen shadow flex fixed pin-t pin-x h-16 items-center justify-center bg-white
-}
-
-.navbar-list {
-    @apply p-4;
-}
-
-.navbar-link {
-    @apply  pr-4 text-white no-underline;
-}
-
-@screen sm {
-    .navbar-link {
-        @apply text-grey-darker
-    }
-}
-
-.navbar-link:hover {
-    @apply  text-green no-underline;
-}
-
-.navbarActive {
-    @apply border-green border-b-4
-}
-
-/*
-    Forms
-*/
-
-.field-input {
-    @apply shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight
-}
-
-.field-input:focus {
-    @apply outline-none shadow-outline
-}
-
-.label-input {
-    @apply block text-grey-darker text-sm font-bold mb-2
-}
