@@ -6,4 +6,9 @@ if (process.env.NODE_ENV === 'production') {
   API_BASE_URL = 'http://localhost:8080/api';
 }
 
-export default API_BASE_URL;
+// const location = window.history.location || window.location;
+
+export default {
+  API_BASE_URL
+  // location
+};
