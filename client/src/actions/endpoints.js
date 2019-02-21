@@ -68,10 +68,11 @@ export const fetchEndpoints = () => dispatch => {
     headers: {
       'Content-Type': 'application/json'
     }
-    // data: JSON.stringify(endpoints)
   };
+  console.log('we made it to fetch endpoints');
   return axios(config)
     .then(res => {
+      console.log('we made it to the response');
       const endpoints = res.data;
       return dispatch(fetchEndpointsSuccess(endpoints));
     })

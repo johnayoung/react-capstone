@@ -1,6 +1,9 @@
 'use strict';
 
 const express = require('express');
+const fs = require('fs');
+const https = require('https');
+const secure = require('express-force-https');
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -16,12 +19,14 @@ const endpointsRouter = require('./routes/endpoints');
 const authRouter = require('./routes/auth');
 
 const app = express();
+app.use(secure);
 app.use(cors());
 
 // Log all requests. Skip logging during testing
 app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'common', {
   skip: () => process.env.NODE_ENV === 'test'
 }));
+
 
 // Create a static webserver
 app.use(express.static(path.join(__dirname, 'client/build')));
@@ -67,6 +72,7 @@ app.use((err, req, res, next) => {
   
 app.startServer = function (port) {
   return new Promise((resolve, reject) => {
+
     this.listen(port, function () {
       this.stopServer = require('util').promisify(this.close);
       resolve(this);
@@ -86,7 +92,10 @@ if (require.main === module) {
       console.error(err);
     });
 
-  app.listen(PORT, function () {
+  https.createServer({
+    key: fs.readFileSync('server.key'),
+    cert: fs.readFileSync('server.crt')
+  }, app).listen(PORT, function () {
     console.info(`Server listening on ${this.address().port}`);
   }).on('error', err => {
     console.error(err);

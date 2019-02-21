@@ -155,5 +155,15 @@ A very big thank you goes out to the following individuals who helped me create 
 
 ## Related
 
+To use the website as an Office Add-in, you must do the following:
+
+1. Generate (or use a default) manifest.xml
+2. Include the Office JS CDN script in public/index.html
+3. Include an Office.onReady() function in the app's entry point
+4. npm i office-addin-validator office-toolbox 
+5. Include additional polyfills for IE11
+6. Add script to package json 'set HTTPS=true&&npm run start'
+7. Self-signed certificates for localhost
+
 ## License
 Honestly, do whatever you want with it. Just give attribution.

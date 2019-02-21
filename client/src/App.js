@@ -25,9 +25,9 @@ class App extends Component {
         <header role="banner">
           <Header />
         </header>
-        <main role="main" className="mx-auto">
+        <div role="main" className="mx-auto">
           {content}
-        </main>
+        </div>
       </>
     );
   }
