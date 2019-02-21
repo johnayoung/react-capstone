@@ -19,6 +19,7 @@
     "jwt-decode": "^2.2.0",
     "office-addin-validator": "^1.0.5",
     "office-toolbox": "^0.1.1",
+    "papaparse": "^4.6.3",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.2.0",
     "react": "^16.7.0",

@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter } from 'react-router-dom';
+import { BrowserRouter, HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createBrowserHistory from 'history/createBrowserHistory';
 // Polyfills
@@ -20,7 +20,16 @@ import * as serviceWorker from './serviceWorker';
 import './output.css';
 import './misc.css';
 
-// const history = createBrowserHistory();
+const app = Component => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <Component>
+        <App />
+      </Component>
+    </Provider>,
+    document.getElementById('root')
+  );
+};
 
 window.Office.onReady(info => {
   console.log('Office is now ready! Host info is: ', info);
@@ -31,15 +40,9 @@ window.Office.onReady(info => {
   String.prototype.repeat = repeat;
   Array.prototype.includes = arrayincludes;
   Object.assign = assign;
-}).then(() => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <HashRouter>
-        <App />
-      </HashRouter>
-    </Provider>,
-    document.getElementById('root')
-  );
+  return info;
+}).then(info => {
+  return info.host ? app(HashRouter) : app(HashRouter);
 });
 
 // If you want your app to work offline and load faster, you can change

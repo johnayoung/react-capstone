@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../components/icons/Index';
 import hero from '../style/assets/hero-browse-apis.gif';
+import OfficeButton from '../components/OfficeButton';
 
 export const LandingPage = () => {
   return (
@@ -26,6 +27,7 @@ export const LandingPage = () => {
                 </button>
               </Link>
               <p className="label-input">Tried by over 1 person. Aka, me.</p>
+              <OfficeButton />
             </div>
           </div>
           <div className="shadow-lg rounded-lg md:w-1/2">
