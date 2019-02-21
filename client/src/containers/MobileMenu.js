@@ -5,7 +5,7 @@ import ConnectedMenuItem from '../components/MenuItem';
 export default function MobileMenu(props) {
   const { hideMobileMenu, menuItems } = props;
   const menuLinks = menuItems.map(item => (
-    <ConnectedMenuItem name={item.name} link={item.link} key={item.key} passedProps={props} />
+    <ConnectedMenuItem name={item.name} link={item.path} key={item.key} passedProps={props} />
   ));
   return (
     <div className="hero-background fixed h-screen w-screen pin-t pin-l z-50">

@@ -13,11 +13,11 @@ class Header extends Component {
     this.state = {
       showMenu: false,
       menuItems: [
-        { name: 'Browse', link: '/browse', key: '0' },
-        { name: 'Add', link: '/add', key: '1' },
-        { name: 'Sign Up', link: '/signup', key: '2' },
-        { name: 'Login', link: '/login', key: '3' },
-        { name: 'Sign Out', link: '/login', key: '4' }
+        { name: 'Browse', path: '/browse', key: '0' },
+        { name: 'Add', path: '/add', key: '1' },
+        { name: 'Sign Up', path: '/signup', key: '2' },
+        { name: 'Login', path: '/login', key: '3' },
+        { name: 'Sign Out', path: '/login', key: '4' }
       ]
     };
   }
@@ -52,9 +52,9 @@ class Header extends Component {
   render() {
     return (
       <nav role="navigation" aria-label="Main Navigation" className="navbar z-50 px-6 lg:px-32">
-        <Link to="/">
+        {/* <Link to="/">
           <Icon name="logo" className="fill-current text-green w-8 h-8 lg:w-12 lg:h-12 block" />
-        </Link>
+        </Link> */}
         {!this.state.showMenu ? (
           <Menu
             menuItems={this.handleLinks()}

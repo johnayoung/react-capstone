@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Icon from '../components/icons/Index';
 import hero from '../style/assets/hero-browse-apis.gif';
 
-export const LandingPage = () => {
+const LandingPage = () => {
   return (
     <section className="h-screen w-screen flex sm:pt-8 md:pt-12 lg:pt-20 lg:cover-background">
       <div className="container flex flex-col lg:max-w-screen-lg mx-auto px-6 py-8 sm:py-16 md:py-24">
@@ -20,11 +20,11 @@ export const LandingPage = () => {
               <p className="text-xl sm:text-2xl text-grey-darkest leading-normal max-w-lg">
                 A (not so) Massive Online Repository for API Endpoints
               </p>
-              <Link to="/browse">
+              {/* <Link to="/browse">
                 <button className="btn btn-green mt-16 mb-8" type="button">
                   Browse APIs
                 </button>
-              </Link>
+              </Link> */}
               <p className="label-input">Tried by over 1 person. Aka, me.</p>
             </div>
           </div>

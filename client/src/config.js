@@ -8,7 +8,4 @@ if (process.env.NODE_ENV === 'production') {
 
 // const location = window.history.location || window.location;
 
-export default {
-  API_BASE_URL
-  // location
-};
+export default API_BASE_URL;

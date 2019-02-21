@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import UniversalRouter from 'universal-router';
 
 import LandingPage from './LandingPage';
 import RegistrationPage from './RegistrationPage';
@@ -15,17 +16,18 @@ export class Dashboard extends Component {
     if (this.props.loading) {
       return <div>Loading...</div>;
     }
-    return (
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/browse" component={CardContainer} />
-        <Route path="/signup" component={RegistrationPage} />
-        <Route path="/login" component={LoginPage} />
-        <Route path="/add" component={FieldArraysForm} />
-        <Route path="/:username/:endpointName" component={EndpointSubmit} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-    );
+    return <div>just a test</div>;
+    // return (
+    //   <Switch>
+    //     <Route exact path="/" component={LandingPage} />
+    //     <Route path="/browse" component={CardContainer} />
+    //     <Route path="/signup" component={RegistrationPage} />
+    //     <Route path="/login" component={LoginPage} />
+    //     <Route path="/add" component={FieldArraysForm} />
+    //     <Route path="/:username/:endpointName" component={EndpointSubmit} />
+    //     <Route path="*" component={NotFound} />
+    //   </Switch>
+    // );
   }
 
   render() {
@@ -40,4 +42,4 @@ const mapStateToProps = state => ({
   loading: state.endpoints.loading
 });
 
-export default withRouter(connect(mapStateToProps)(Dashboard));
+export default connect(mapStateToProps)(Dashboard);
