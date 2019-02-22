@@ -94,7 +94,8 @@ const mapStateToProps = state => {
     currentEndpoint: state.endpoints.currentEndpoint,
     initialValues: state.endpoints.initialValues,
     formValues: getFormValues('endpointSubmit')(state),
-    submitError: state.endpoints.submitError
+    submitError: state.endpoints.submitError,
+    environment: state.environment.environment
   };
 };
 

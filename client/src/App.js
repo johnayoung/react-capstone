@@ -6,10 +6,15 @@ import Header from './containers/Header';
 import { fetchEndpoints } from './actions/endpoints';
 import Dashboard from './containers/Dashboard';
 import FetchEndpointsError from './containers/FetchEndpointsError';
+import { setEnvironment } from './actions/environment';
 
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchEndpoints());
+    const { host } = this.props;
+    if (host === 'excel') {
+      this.props.dispatch(setEnvironment('excel'));
+    }
   }
 
   render() {
@@ -37,7 +42,8 @@ const mapStateToProps = state => ({
   hasAuthToken: state.auth.authToken !== null,
   loggedIn: state.auth.currentUser !== null,
   endpoints: state.endpoints.endpoints,
-  error: state.endpoints.error
+  error: state.endpoints.error,
+  environment: state.environment
 });
 
 export default withRouter(connect(mapStateToProps)(App));

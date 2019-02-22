@@ -8,6 +8,7 @@ import { userEndpointClear } from '../actions/endpoints';
 export class CardContainer extends Component {
   render() {
     const { searchBox } = this.props;
+    const { appName } = this.props.environment;
     const cards = this.props.endpoints
       .filter(endpoint => {
         return !searchBox ? endpoint : endpoint.name.toLowerCase().includes(searchBox);
@@ -35,14 +36,14 @@ export class CardContainer extends Component {
       <div className="cardList">
         <div className="searchHeader w-screen">
           <form className="hero-background p-6 flex flex-col items-center justify-center mb-20">
-            <h1 className="text-center font-semibold tracking-tight mb-1 text-white">API Hub</h1>
+            <h1 className="text-center font-semibold tracking-tight mb-1 text-white">{appName}</h1>
             <div className="max-w-sm mx-auto text-center mb-6">
               <p className="leading-tight text-green-lighter">
-                An easy way to find and connect to (a few) APIs
+                An easy way to connect to {appName} APIs
               </p>
             </div>
             <div className="flex flex-col items-center justify-center text-center w-full md:w-2/3 lg:w-1/2 bg-white px-4 py-6 rounded shadow-lg -mb-16">
-              <p className="label-input">Search thousands of API endpoints</p>
+              <p className="label-input">Search API endpoints</p>
               <Field
                 name="searchBox"
                 component="input"
@@ -74,7 +75,8 @@ function mapStateToProps(state) {
     endpoints: state.endpoints.endpoints,
     hasAuthToken: state.auth.authToken !== null,
     loggedIn: state.auth.currentUser !== null,
-    searchBox
+    searchBox,
+    environment: state.environment
   };
 }
 

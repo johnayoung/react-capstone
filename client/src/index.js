@@ -1,12 +1,12 @@
 import '@babel/polyfill';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, HashRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import createBrowserHistory from 'history/createBrowserHistory';
 // Polyfills
 /* eslint no-extend-native: 0 */
 // import 'es6-promise/auto';
+import 'whatwg-fetch';
 import 'core-js/fn/promise';
 import stringincludes from 'core-js/library/fn/string/virtual/includes';
 import arrayincludes from 'core-js/library/fn/array/virtual/includes';
@@ -20,11 +20,11 @@ import * as serviceWorker from './serviceWorker';
 import './output.css';
 import './misc.css';
 
-const app = Component => {
+const app = (Component, host) => {
   ReactDOM.render(
     <Provider store={store}>
       <Component>
-        <App />
+        <App host={host} />
       </Component>
     </Provider>,
     document.getElementById('root')
@@ -42,7 +42,7 @@ window.Office.onReady(info => {
   Object.assign = assign;
   return info;
 }).then(info => {
-  return info.host ? app(HashRouter) : app(HashRouter);
+  return info.host === 'Excel' ? app(HashRouter, 'excel') : app(HashRouter, 'web');
 });
 
 // If you want your app to work offline and load faster, you can change

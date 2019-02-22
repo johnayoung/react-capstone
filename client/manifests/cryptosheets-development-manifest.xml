@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0" xmlns:ov="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="TaskPaneApp">
+  <Id>b6216a3f-260c-42f0-a9b4-b2492328ad55</Id>
+  <Version>1.0.0.8</Version>
+  <ProviderName>Cryptosheets</ProviderName>
+  <DefaultLocale>en-US</DefaultLocale>
+  <DisplayName DefaultValue="Cryptosheets Development"></DisplayName>
+  <Description DefaultValue="Cryptosheets simplifies the process of accessing, aggregating, manipulating, and processing cryptocurrency data."></Description>
+  <IconUrl DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/icon-32.png"></IconUrl>
+  <HighResolutionIconUrl DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/hi-res-icon.png"></HighResolutionIconUrl>
+  <SupportUrl DefaultValue="https://cryptosheets.com/support"></SupportUrl>
+  <Hosts>
+    <Host Name="Workbook"></Host>
+  </Hosts>
+  <Requirements>
+    <Sets DefaultMinVersion="1.1">
+      <Set Name="ExcelApi" MinVersion="1.1"></Set>
+    </Sets>
+  </Requirements>
+  <DefaultSettings>
+    <SourceLocation DefaultValue="https://cryptosheets-excel-development.herokuapp.com/app"></SourceLocation>
+  </DefaultSettings>
+  <Permissions>ReadWriteDocument</Permissions>
+  <VersionOverrides xmlns="http://schemas.microsoft.com/office/taskpaneappversionoverrides" xsi:type="VersionOverridesV1_0">
+    <Hosts>
+      <Host xsi:type="Workbook">
+        <DesktopFormFactor>
+          <GetStarted>
+            <Title resid="get-started"/>
+            <Description resid="description"/>
+            <LearnMoreUrl resid="learn-more-url"/>
+          </GetStarted>
+          <FunctionFile resid="function-file-url"></FunctionFile>
+          <ExtensionPoint xsi:type="PrimaryCommandSurface">
+            <CustomTab id="cryptosheets-tab">
+              <Group id="primary-controls">
+                <Label resid="main-group-label"/>
+                <Icon>
+                  <bt:Image size="16" resid="dashboard-icon-16"/>
+                  <bt:Image size="20" resid="dashboard-icon-20"/>
+                  <bt:Image size="32" resid="dashboard-icon-32"/>
+                  <bt:Image size="40" resid="dashboard-icon-40"/>
+                  <bt:Image size="48" resid="dashboard-icon-48"/>
+                  <bt:Image size="64" resid="dashboard-icon-64"/>
+                  <bt:Image size="80" resid="dashboard-icon-80"/>
+                </Icon>
+                <Control xsi:type="Button" id="connect-button">
+                  <Label resid="view-dashboard"/>
+                  <Supertip>
+                    <Title resid="view-dashboard"/>
+                    <Description resid="view-dashboard-supertip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="dashboard-icon-16"/>
+                    <bt:Image size="20" resid="dashboard-icon-20"/>
+                    <bt:Image size="32" resid="dashboard-icon-32"/>
+                    <bt:Image size="40" resid="dashboard-icon-40"/>
+                    <bt:Image size="48" resid="dashboard-icon-48"/>
+                    <bt:Image size="64" resid="dashboard-icon-64"/>
+                    <bt:Image size="80" resid="dashboard-icon-80"/>
+                  </Icon>
+                  <Action xsi:type="ShowTaskpane">
+                    <TaskpaneId>MainPanel</TaskpaneId>
+                    <SourceLocation resid="app-url"/>
+                  </Action>
+                </Control>
+              </Group>
+              <Group id="resource-controls">
+                <Label resid="resource-group-label"/>
+                <Icon>
+                  <bt:Image size="16" resid="dashboard-icon-16"/>
+                  <bt:Image size="20" resid="dashboard-icon-20"/>
+                  <bt:Image size="32" resid="dashboard-icon-32"/>
+                  <bt:Image size="40" resid="dashboard-icon-40"/>
+                  <bt:Image size="48" resid="dashboard-icon-48"/>
+                  <bt:Image size="64" resid="dashboard-icon-64"/>
+                  <bt:Image size="80" resid="dashboard-icon-80"/>
+                </Icon>
+                <Control xsi:type="Button" id="need-help">
+                  <Label resid="need-help-label"/>
+                  <Supertip>
+                    <Title resid="need-help-label"/>
+                    <Description resid="resources-supertip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="need-help-icon-16"/>
+                    <bt:Image size="20" resid="need-help-icon-20"/>
+                    <bt:Image size="32" resid="need-help-icon-32"/>
+                    <bt:Image size="40" resid="need-help-icon-40"/>
+                    <bt:Image size="48" resid="need-help-icon-48"/>
+                    <bt:Image size="64" resid="need-help-icon-64"/>
+                    <bt:Image size="80" resid="need-help-icon-80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openHelp</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="community">
+                  <Label resid="community-label"/>
+                  <Supertip>
+                    <Title resid="community-label"/>
+                    <Description resid="resources-supertip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="community-icon-16"/>
+                    <bt:Image size="20" resid="community-icon-20"/>
+                    <bt:Image size="32" resid="community-icon-32"/>
+                    <bt:Image size="40" resid="community-icon-40"/>
+                    <bt:Image size="48" resid="community-icon-48"/>
+                    <bt:Image size="64" resid="community-icon-64"/>
+                    <bt:Image size="80" resid="community-icon-80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openCommunity</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="bug-reports">
+                  <Label resid="bug-reports-label"/>
+                  <Supertip>
+                    <Title resid="bug-reports-label"/>
+                    <Description resid="resources-supertip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="bug-reports-icon-16"/>
+                    <bt:Image size="20" resid="bug-reports-icon-20"/>
+                    <bt:Image size="32" resid="bug-reports-icon-32"/>
+                    <bt:Image size="40" resid="bug-reports-icon-40"/>
+                    <bt:Image size="48" resid="bug-reports-icon-48"/>
+                    <bt:Image size="64" resid="bug-reports-icon-64"/>
+                    <bt:Image size="80" resid="bug-reports-icon-80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openBugReports</FunctionName>
+                  </Action>
+                </Control>
+                <Control xsi:type="Button" id="feature-requests">
+                  <Label resid="feature-requests-label"/>
+                  <Supertip>
+                    <Title resid="feature-requests-label"/>
+                    <Description resid="resources-supertip"/>
+                  </Supertip>
+                  <Icon>
+                    <bt:Image size="16" resid="feature-request-icon-16"/>
+                    <bt:Image size="20" resid="feature-request-icon-20"/>
+                    <bt:Image size="32" resid="feature-request-icon-32"/>
+                    <bt:Image size="40" resid="feature-request-icon-40"/>
+                    <bt:Image size="48" resid="feature-request-icon-48"/>
+                    <bt:Image size="64" resid="feature-request-icon-64"/>
+                    <bt:Image size="80" resid="feature-request-icon-80"/>
+                  </Icon>
+                  <Action xsi:type="ExecuteFunction">
+                    <FunctionName>openFeatureRequests</FunctionName>
+                  </Action>
+                </Control>
+              </Group>
+              <Label resid="environment-name"/>
+            </CustomTab>
+          </ExtensionPoint>
+        </DesktopFormFactor>
+      </Host>
+    </Hosts>
+    <Resources>
+      <bt:Images>
+        <bt:Image id="dashboard-icon-16" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-16.png"/>
+        <bt:Image id="dashboard-icon-20" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-20.png"/>
+        <bt:Image id="dashboard-icon-32" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-32.png"/>
+        <bt:Image id="dashboard-icon-40" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-40.png"/>
+        <bt:Image id="dashboard-icon-48" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-48.png"/>
+        <bt:Image id="dashboard-icon-64" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-64.png"/>
+        <bt:Image id="dashboard-icon-80" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/view-dashboard-80.png"/>
+        <bt:Image id="need-help-icon-16" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-16.png"/>
+        <bt:Image id="need-help-icon-20" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-20.png"/>
+        <bt:Image id="need-help-icon-32" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-32.png"/>
+        <bt:Image id="need-help-icon-40" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-40.png"/>
+        <bt:Image id="need-help-icon-48" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-48.png"/>
+        <bt:Image id="need-help-icon-64" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-64.png"/>
+        <bt:Image id="need-help-icon-80" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/need-help-80.png"/>
+        <bt:Image id="community-icon-16" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-16.png"/>
+        <bt:Image id="community-icon-20" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-20.png"/>
+        <bt:Image id="community-icon-32" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-32.png"/>
+        <bt:Image id="community-icon-40" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-40.png"/>
+        <bt:Image id="community-icon-48" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-48.png"/>
+        <bt:Image id="community-icon-64" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-64.png"/>
+        <bt:Image id="community-icon-80" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/community-80.png"/>
+        <bt:Image id="bug-reports-icon-16" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-16.png"/>
+        <bt:Image id="bug-reports-icon-20" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-20.png"/>
+        <bt:Image id="bug-reports-icon-32" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-32.png"/>
+        <bt:Image id="bug-reports-icon-40" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-40.png"/>
+        <bt:Image id="bug-reports-icon-48" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-48.png"/>
+        <bt:Image id="bug-reports-icon-64" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-64.png"/>
+        <bt:Image id="bug-reports-icon-80" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/bug-reports-80.png"/>
+        <bt:Image id="feature-request-icon-16" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-16.png"/>
+        <bt:Image id="feature-request-icon-20" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-20.png"/>
+        <bt:Image id="feature-request-icon-32" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-32.png"/>
+        <bt:Image id="feature-request-icon-40" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-40.png"/>
+        <bt:Image id="feature-request-icon-48" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-48.png"/>
+        <bt:Image id="feature-request-icon-64" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-64.png"/>
+        <bt:Image id="feature-request-icon-80" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/assets/feature-request-80.png"/>
+      </bt:Images>
+      <bt:Urls>
+        <bt:Url id="app-url" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/app"/>
+        <bt:Url id="function-file-url" DefaultValue="https://cryptosheets-excel-development.herokuapp.com/index.html"/>
+        <bt:Url id="learn-more-url" DefaultValue="https://go.microsoft.com/fwlink/?LinkId=276812"/>
+      </bt:Urls>
+      <bt:ShortStrings>
+        <bt:String id="view-dashboard" DefaultValue="Dashboard"/>
+        <bt:String id="get-started" DefaultValue="Get started with Cryptosheets"/>
+        <bt:String id="environment-name" DefaultValue="Cryptosheets Development"/>
+        <bt:String id="main-group-label" DefaultValue="Main"/>
+        <bt:String id="resource-group-label" DefaultValue="Resources"/>
+        <bt:String id="need-help-label" DefaultValue="Help"/>
+        <bt:String id="community-label" DefaultValue="Community"/>
+        <bt:String id="bug-reports-label" DefaultValue="Bug Reports"/>
+        <bt:String id="feature-requests-label" DefaultValue="Feature Requests"/>
+      </bt:ShortStrings>
+      <bt:LongStrings>
+        <bt:String id="view-dashboard-supertip" DefaultValue="Click to Launch"/>
+        <bt:String id="resources-supertip" DefaultValue="View Resources"/>
+        <bt:String id="description" DefaultValue="Cryptosheets simplifies the process of accessing, aggregating, manipulating, and processing cryptocurrency data."/>
+      </bt:LongStrings>
+    </Resources>
+  </VersionOverrides>
+</OfficeApp>
