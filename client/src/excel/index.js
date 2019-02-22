@@ -36,14 +36,17 @@
 // ];
 import axios from 'axios';
 import Papa from 'papaparse';
+import doCSV from '../utils/flatten';
 
 const placeData = () => {
   return axios
-    .get('https://swapi.co/api/people')
+    .get('https://api.iextrading.com/1.0/stock/market/list/mostactive')
     .then(response => {
       const { data } = response;
       console.log('data is ', data);
-      const unparse = Papa.unparse(data.results);
+      const readyJson = doCSV(data);
+      console.log('readyjson is ', readyJson);
+      const unparse = Papa.unparse(readyJson);
       console.log('unparse is ', unparse);
       const parsed = Papa.parse(unparse);
       console.log('parsed is ', parsed);
@@ -67,6 +70,7 @@ const placeData = () => {
 
         range.values = data;
         range.format.font.bold = true;
+        range.format.autofitColumns();
 
         return context.sync().then(() => {
           console.log('success');
