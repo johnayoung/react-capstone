@@ -85,7 +85,8 @@ class EndpointSubmit extends Component {
 }
 
 const connectedForm = reduxForm({
-  form: 'endpointSubmit' // a unique identifier for this form
+  form: 'endpointSubmit', // a unique identifier for this form
+  enableReinitialize: true
 })(EndpointSubmit);
 
 const mapStateToProps = state => {

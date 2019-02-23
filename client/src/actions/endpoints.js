@@ -3,6 +3,8 @@ import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import API_BASE_URL from '../config';
 import slugify from '../utils/slugify';
+import setData from '../excel';
+import tryCatch from '../excel/functionHelper';
 
 export const FETCH_ENDPOINTS_REQUEST = 'FETCH_ENDPOINTS_REQUEST';
 export const fetchEndpointsRequest = () => ({
@@ -197,6 +199,9 @@ export const userEndpoint = urlString => dispatch => {
     })
     .then(data => {
       return dispatch(userEndpointSuccess(data));
+    })
+    .then(data => {
+      return setData(data.apiResponse);
     })
     .catch(err => {
       // console.log(err.response.data);

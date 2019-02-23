@@ -1,5 +1,5 @@
 import React from 'react';
-import placeData from '../excel/index';
+import setData from '../excel/index';
 
 function OfficeButton(props) {
   let ready;
@@ -9,7 +9,7 @@ function OfficeButton(props) {
   });
   if (ready) {
     content = (
-      <button className="btn bg-red text-white" onClick={() => placeData()}>
+      <button className="btn bg-red text-white" onClick={() => setData()}>
         Ready
       </button>
     );

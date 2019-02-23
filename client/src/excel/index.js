@@ -1,42 +1,37 @@
-import axios from 'axios';
-import Papa from 'papaparse';
-import doCSV from '../utils/flatten';
 import getRange from './getRange';
+import placeData from './placeData';
+import officeError from './error';
+import parse from './parse';
+import tryCatch from './functionHelper';
 
-const placeData = () => {
-  return axios
-    .get('https://api.apis.guru/v2/specs/1forge.com/0.0.1/swagger.json')
-    .then(response => {
-      const { data } = response;
-      console.log('data is ', data);
-      const readyJson = doCSV(data);
-      console.log('readyjson is ', readyJson);
-      const unparse = Papa.unparse(readyJson);
-      console.log('unparse is ', unparse);
-      const parsed = Papa.parse(unparse);
-      console.log('parsed is ', parsed);
-      const range = getRange();
-      return parsed.data;
-    })
-    .then(parsed => {
-      window.Excel.run(context => {
-        const data = parsed;
-        const sheet1 = context.workbook.worksheets.getItem('Sheet1');
-        const firstCell = sheet1.getCell(0, 0);
-        const lastCell = sheet1.getCell(data.length - 1, data[0].length - 1);
-        const range = firstCell.getBoundingRect(lastCell).insert('down');
+// async function setData(response) {
+//   const parsedData = parse(response);
+//   await window.Excel.run(async context => {
+//     const userSelectedRange = context.workbook.getSelectedRange();
+//     userSelectedRange.load(['address', 'rowIndex', 'columnIndex', 'worksheet']);
 
-        range.values = data;
-        range.format.font.bold = true;
-        range.format.autofitColumns();
+//     await context.sync().then(() => {
+//       const { rowIndex, columnIndex, worksheet } = userSelectedRange;
+//       const path = { row: rowIndex, col: columnIndex, worksheet };
+//       placeData(parsedData, path);
+//     });
+//   });
+// }
 
-        return context.sync().then(() => {
-          console.log('success');
-        });
-      }).catch(error => {
-        console.log(`Error: ${error}`);
-      });
+const setData = async response => {
+  await window.Excel.run(async context => {
+    const parsedData = parse(response);
+    // const range = await getRange();
+    const myWorkbook = context.workbook;
+    const activeCell = myWorkbook.getActiveCell();
+    activeCell.load(['address', 'rowIndex', 'columnIndex', 'worksheet']);
+
+    return context.sync().then(() => {
+      const { rowIndex, columnIndex, worksheet } = activeCell;
+      const path = { row: rowIndex, col: columnIndex, worksheet };
+      placeData(parsedData, path);
     });
+  });
 };
 
-export default placeData;
+export default setData;

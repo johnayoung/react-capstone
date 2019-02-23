@@ -1,15 +1,7 @@
-import officeError from './error';
+function run(context) {
+  const myWorkbook = context.workbook;
+  const activeCell = myWorkbook.getActiveCell();
+  activeCell.load(['address', 'rowIndex', 'columnIndex', 'worksheet']);
+}
 
-const getRange = () => {
-  window.Excel.run(context => {
-    const userSelectedRange = context.workbook.getSelectedRange();
-    userSelectedRange.load('address');
-    return context.sync().then(() => {
-      console.log(userSelectedRange.address);
-    });
-  }).catch(error => {
-    officeError(error);
-  });
-};
-
-export default getRange;
+export default run;
