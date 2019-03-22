@@ -71,10 +71,8 @@ export const fetchEndpoints = () => dispatch => {
       'Content-Type': 'application/json'
     }
   };
-  console.log('we made it to fetch endpoints');
   return axios(config)
     .then(res => {
-      console.log('we made it to the response');
       const endpoints = res.data;
       return dispatch(fetchEndpointsSuccess(endpoints));
     })
@@ -188,7 +186,8 @@ export const userEndpoint = urlString => dispatch => {
     url: `${API_BASE_URL}/endpoints/proxy`,
     headers: {
       'Content-Type': 'application/json',
-      'x-url-string': urlString
+      'x-url-string': urlString,
+      'Cache-Control': 'no-cache'
     }
   };
   dispatch(userEndpointRequest());

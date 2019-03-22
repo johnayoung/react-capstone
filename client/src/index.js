@@ -32,10 +32,6 @@ const app = (Component, host) => {
 };
 
 window.Office.onReady(info => {
-  console.log('Office is now ready! Host info is: ', info);
-
-  console.log('Load your polyfills');
-
   String.prototype.includes = stringincludes;
   String.prototype.repeat = repeat;
   Array.prototype.includes = arrayincludes;

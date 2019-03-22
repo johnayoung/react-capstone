@@ -1,1 +1,1 @@
-export default urlBuilder;
+console.log(arrayFrom(multiArray));

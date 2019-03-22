@@ -139,13 +139,14 @@ router.get('/proxy', (req, res, next) => {
     method: 'get',
     url: urlString,
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
     }
   };
 
   axios(config)
     .then(response => {
-      res.send(response.data);
+      res.set('Cache-Control', 'no-cache').send(response.data);
     })
     .catch(err => {
       if (err) {
