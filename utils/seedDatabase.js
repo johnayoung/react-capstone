@@ -1,16 +1,14 @@
 'use strict';
 
 const mongoose = require('mongoose');
-const { MONGODB_URI } = require('../config');
+const axios = require('axios');
+const { MONGODB_URI, SHEETY_API } = require('../config');
 const url = require('./url');
 const URI = require('urijs');
-const pathToRegexp = require('path-to-regexp');
 
 const User = require('../models/user');
 const { users } = require('../db/data');
-const { full } = require('../db/full');
 const Endpoint = require('../models/endpoint');
-// const {swapiEndpoint} = require('../db/swapi');
 
 const validateNumber = n => !isNaN(parseFloat(n)) && isFinite(n) && Number(n) == n;
 
@@ -18,11 +16,11 @@ const getType = v =>
   v === undefined ? 'undefined' : v === null ? 'null' : v.constructor.name.toLowerCase();
 
 function fullEndpoint(obj) {
-  let {category, collectionName, name, description, baseUrl, exampleCall, template, endpointKeys} = obj;
+  let {category, collectionName, name, path, description, baseUrl, exampleCall, template, endpointKeys} = obj;
   const {serializeParams, decodedUrl, keys} = url.extractParamsFromUrl(template);
-  const parsedURI = Endpoint.parseURL(baseUrl);
+  const parsedURI = Endpoint.parseURL(exampleCall);
   const prettyName = Endpoint.prettify(name);
-  const { domain, path, protocolAndHost } = parsedURI;
+  const { domain, protocolAndHost } = parsedURI;
   const favicon = `https://api.faviconkit.com/${domain}/144`;
 
   // Extract default values from example call
@@ -54,11 +52,13 @@ function fullEndpoint(obj) {
     exampleCall,
     template,
     endpointKeys
-  }, parsedURI);
+  });
 }
 
-const fullArray = arr => {
-  return arr.map(a => fullEndpoint(a));
+const fullArray = async sheetyUrl => {
+  const { data } = await axios.get(sheetyUrl);
+  console.log('WE HAVE DATA =========>', data);
+  return data.map(a => fullEndpoint(a));
 };
 
 console.log(`Connecting to mongodb at ${MONGODB_URI}`);
@@ -75,10 +75,13 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
     ]);
   })
   .then(() => {
+    return fullArray(SHEETY_API);
+  })
+  .then((response) => {
     console.info('Seeding Database...');
     return Promise.all([
       User.insertMany(users),
-      Endpoint.insertMany(fullArray(full))
+      Endpoint.insertMany(response)
     ]);
   })
   .then(results => {
@@ -90,5 +93,3 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
     console.error(err);
     return mongoose.disconnect();
   });
-
-// console.log(fullArray(full));
