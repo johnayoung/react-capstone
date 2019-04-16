@@ -6,10 +6,13 @@ const Url = require('url-parse');
 const parse = require('url').parse;
 
 const endpointSchema = new mongoose.Schema({
+  category: {type: String},
+  collectionName: {type: String},
   name: {type: String, required: true, lowercase: true, trim: true},
   description: {type: String},
   baseUrl: {type: String},
   method: {type: String, default: 'GET'},
+  endpointKeys: [{type: String}],
   tld: {type: String},
   domain: {type: String},
   hostname: {type: String},
@@ -35,6 +38,7 @@ endpointSchema.set('timestamps', true);
 endpointSchema.set('toJSON', {
   virtuals: true,
   transform: (doc, result) => {
+    delete result.endpointKeys;
     delete result._id;
     delete result.__v;
   }

@@ -272,8 +272,6 @@ const stockEndpoints = stockName.map((name, index) => {
   };
 }).map(newObj => createEndpoint(newObj.name, newObj.description, newObj.fullUrl, newObj.userId, newObj.parameters));
 
-console.log('stock endpoints are', stockEndpoints);
-
 module.exports = {
   users,
   stockEndpoints

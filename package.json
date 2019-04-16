@@ -45,7 +45,10 @@
     "path-match": "^1.2.4",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.2.0",
+    "quicktype": "^15.0.181",
     "redux-thunk": "^2.3.0",
+    "uri-templates": "^0.2.0",
+    "urijs": "^1.19.1",
     "url-parse": "^1.4.4",
     "wurl": "^2.5.3"
   },
