@@ -17,7 +17,7 @@ const getType = v =>
 
 function fullEndpoint(obj) {
   let {category, collectionName, name, path, description, baseUrl, exampleCall, template, endpointKeys} = obj;
-  const {serializeParams, decodedUrl, keys} = url.extractParamsFromUrl(template);
+  const {serializeParams, exampleParams} = url.extractParamsFromUrl(template, exampleCall);
   const parsedURI = Endpoint.parseURL(exampleCall);
   const prettyName = Endpoint.prettify(name);
   const { domain, protocolAndHost } = parsedURI;
@@ -27,12 +27,17 @@ function fullEndpoint(obj) {
   const { query } = URI.parse(exampleCall);
   const defaultValues = URI.parseQuery(query);
 
-  const paramsWithDefaults = Object.keys(defaultValues).reduce((arr, val) => {
-    const param = serializeParams.find(p => p.name === val);
-    const paramWithDefault = Object.assign({}, param, { default: defaultValues[val],  type: getType(defaultValues[val])});
-    arr.push(paramWithDefault);
-    return arr;
-  }, []);
+  const keys = Object.keys(defaultValues);
+  const paramsWithDefaults = serializeParams.reduce((a, val, i) => {
+    if (keys.includes(val.name)) {
+      const paramWithDefault = Object.assign({}, val, { default: defaultValues[val.name],  type: getType(defaultValues[val.name])});
+      a.push(paramWithDefault)
+    } else {
+      const paramWithoutDefault = Object.assign({}, val, {default: exampleParams[i+1], type: getType(exampleParams[i+1])})
+      a.push(paramWithoutDefault);
+    }
+    return a;
+  }, [])
 
   if (!description) {
     description = `An endpoint from ${domain}`;
@@ -75,7 +80,7 @@ mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useCreateIndex : true })
     ]);
   })
   .then(() => {
-    return fullArray(SHEETY_API);
+    return fullArray('https://api.sheety.co/4ea80e27-00fd-44b8-a675-0d4abe8b8ebe');
   })
   .then((response) => {
     console.info('Seeding Database...');
