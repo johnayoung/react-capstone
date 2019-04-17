@@ -3,7 +3,6 @@
 const express = require('express');
 const fs = require('fs');
 const https = require('https');
-const secure = require('express-force-https');
 const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -19,7 +18,6 @@ const endpointsRouter = require('./routes/endpoints');
 const authRouter = require('./routes/auth');
 
 const app = express();
-app.use(secure);
 app.use(cors());
 
 // Log all requests. Skip logging during testing
