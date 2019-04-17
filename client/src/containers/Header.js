@@ -14,7 +14,7 @@ class Header extends Component {
       showMenu: false,
       menuItems: [
         { name: 'Browse', link: '/browse', key: '0' },
-        { name: 'Add', link: '/add', key: '1' },
+        // { name: 'Add', link: '/add', key: '1' },
         { name: 'Sign Up', link: '/signup', key: '2' },
         { name: 'Login', link: '/login', key: '3' },
         { name: 'Sign Out', link: '/login', key: '4' }

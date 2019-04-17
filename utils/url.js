@@ -1,9 +1,10 @@
-'use strict';
-const parseurl = require('parseurl');
-const parse = require('url').parse;
-const pathToRegexp = require('path-to-regexp');
-const uriTemplates = require('uri-templates');
-const URI = require('urijs');
+"use strict";
+
+const parseurl = require("parseurl");
+const {parse} = require('url');
+const pathToRegexp = require("path-to-regexp");
+const uriTemplates = require("uri-templates");
+const URI = require("urijs");
 
 const extractParamsFromUrl = url => {
   // Create RFC 6570 template
@@ -28,18 +29,18 @@ const extractParamsFromUrl = url => {
   // Turn extracted parameters into what we need for database
   const serializeParams = keys.reduce((params, param) => {
     const { name, prefix, optional } = param;
-    const where = prefix === '/' ? 'path' : 'query';
-    const obj = { name, in: where, required: !optional, schema: { enum: ''}};
+    const where = prefix === "/" ? "path" : "query";
+    const obj = { name, in: where, required: !optional, schema: { enum: "" } };
     params.push(obj);
     return params;
   }, []);
 
-  console.log('varObj is ', varObj);
-  console.log('filledUrl is ', filledUrl);
-  console.log('decodedUrl is ', decodedUrl);
-  console.log('extracted params are ', keys);
-  console.log('serialized params are ', serializeParams);
-  return {varObj, filledUrl, decodedUrl, keys, serializeParams};
+  console.log("varObj is ", varObj);
+  console.log("filledUrl is ", filledUrl);
+  console.log("decodedUrl is ", decodedUrl);
+  console.log("extracted params are ", keys);
+  console.log("serialized params are ", serializeParams);
+  return { varObj, filledUrl, decodedUrl, keys, serializeParams };
 };
 
 module.exports = {

@@ -163,7 +163,7 @@ To use the website as an Office Add-in, you must do the following:
 4. npm i office-addin-validator office-toolbox 
 5. Include additional polyfills for IE11
 6. Add script to package json 'set HTTPS=true&&npm run start'
-7. Self-signed certificates for localhost
+7. Self-signed certificates for localhost (these are located in Thinkful -> local-cert-generator)
 
 ## License
 Honestly, do whatever you want with it. Just give attribution.

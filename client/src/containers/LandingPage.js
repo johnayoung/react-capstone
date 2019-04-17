@@ -30,8 +30,11 @@ export const LandingPage = props => {
                   Browse APIs
                 </button>
               </Link>
-              <p className="label-input">Tried by over 1 person. Aka, me.</p>
-              <OfficeButton />
+              <p className="label-input">
+                Need some help? Send us a message at{' '}
+                <a href="mailto:support@cryptosheets.com">support@cryptosheets.com</a>
+              </p>
+              {/* <OfficeButton /> */}
             </div>
           </div>
         </div>

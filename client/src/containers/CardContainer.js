@@ -15,7 +15,7 @@ export class CardContainer extends Component {
       })
       .filter(newEndpoint => newEndpoint !== null)
       .map(filteredEndpoint => {
-        const { id, userId, name, prettyName, description } = filteredEndpoint;
+        const { id, userId, name, prettyName, description, favicon } = filteredEndpoint;
         const { username } = userId;
         return (
           <li
@@ -27,7 +27,12 @@ export class CardContainer extends Component {
               className="hover:bg-grey-lighter no-underline text-grey-darker"
               onClick={() => this.props.dispatch(userEndpointClear())}
             >
-              <CardContent cardName={prettyName} cardImage="logo" cardDescription={description} />
+              <CardContent
+                cardName={prettyName}
+                // cardImage={favicon}
+                cardImage="logo"
+                cardDescription={description}
+              />
             </Link>
           </li>
         );

@@ -1,208 +1,34 @@
-// To parse this data:
-//
-//   const Convert = require("./file");
-//
-//   const coinMarketCap = Convert.toCoinMarketCap(json);
-//
-// These functions will throw an error if the JSON doesn't
-// match the expected interface, even if the JSON is valid.
+const axios = require("axios");
 
-// Converts JSON strings to/from your types
-// and asserts the results of JSON.parse at runtime
-function toCoinMarketCap(json) {
-  return cast(JSON.parse(json), a(r('CoinMarketCap')));
+// const keys = [CMC_KEY_1, CMC_KEY_2, CMC_KEY_3];
+const keys = process.env.CMC_KEYS.split(",");
+
+const randomKey = arr => arr[Math.floor(Math.random() * arr.length)];
+
+const urlString = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=1%2C2%2C10"
+
+const getEndpoint = urlString => {
+  
 }
 
-function coinMarketCapToJson(value) {
-  return JSON.stringify(uncast(value, a(r('CoinMarketCap'))), null, 2);
-}
-
-function invalidValue(typ, val) {
-  throw Error(`Invalid value ${JSON.stringify(val)} for type ${JSON.stringify(typ)}`);
-}
-
-function jsonToJSProps(typ) {
-  if (typ.jsonToJS === undefined) {
-    var map = {};
-    typ.props.forEach((p) => map[p.json] = { key: p.js, typ: p.typ });
-    typ.jsonToJS = map;
+axios({
+  url: ,
+  method: "GET",
+  // data: {
+  //   igdbId
+  // },
+  headers: {
+    "X-CMC_PRO_API_KEY": randomKey(keys),
+    "Content-Type": "application/json"
   }
-  return typ.jsonToJS;
-}
-
-function jsToJSONProps(typ) {
-  if (typ.jsToJSON === undefined) {
-    var map = {};
-    typ.props.forEach((p) => map[p.js] = { key: p.json, typ: p.typ });
-    typ.jsToJSON = map;
-  }
-  return typ.jsToJSON;
-}
-
-function transform(val, typ, getProps) {
-  function transformPrimitive(typ, val) {
-    if (typeof typ === typeof val) return val;
-    return invalidValue(typ, val);
-  }
-
-  function transformUnion(typs, val) {
-        // val must validate against one typ in typs
-    var l = typs.length;
-    for (var i = 0; i < l; i++) {
-      var typ = typs[i];
-      try {
-          return transform(val, typ, getProps);
-        } catch (_) {}
-    }
-    return invalidValue(typs, val);
-  }
-
-  function transformEnum(cases, val) {
-    if (cases.indexOf(val) !== -1) return val;
-    return invalidValue(cases, val);
-  }
-
-  function transformArray(typ, val) {
-        // val must be an array with no invalid elements
-    if (!Array.isArray(val)) return invalidValue('array', val);
-    return val.map(el => transform(el, typ, getProps));
-  }
-
-  function transformDate(typ, val) {
-    if (val === null) {
-      return null;
-    }
-    const d = new Date(val);
-    if (isNaN(d.valueOf())) {
-      return invalidValue('Date', val);
-    }
-    return d;
-  }
-
-  function transformObject(props, additional, val) {
-    if (val === null || typeof val !== 'object' || Array.isArray(val)) {
-      return invalidValue('object', val);
-    }
-    var result = {};
-    Object.getOwnPropertyNames(props).forEach(key => {
-      const prop = props[key];
-      const v = Object.prototype.hasOwnProperty.call(val, key) ? val[key] : undefined;
-      result[prop.key] = transform(v, prop.typ, getProps);
-    });
-    Object.getOwnPropertyNames(val).forEach(key => {
-      if (!Object.prototype.hasOwnProperty.call(props, key)) {
-          result[key] = transform(val[key], additional, getProps);
-        }
-    });
-    return result;
-  }
-
-  if (typ === 'any') return val;
-  if (typ === null) {
-    if (val === null) return val;
-    return invalidValue(typ, val);
-  }
-  if (typ === false) return invalidValue(typ, val);
-  while (typeof typ === 'object' && typ.ref !== undefined) {
-    typ = typeMap[typ.ref];
-  }
-  if (Array.isArray(typ)) return transformEnum(typ, val);
-  if (typeof typ === 'object') {
-    return typ.hasOwnProperty('unionMembers') ? transformUnion(typ.unionMembers, val)
-            : typ.hasOwnProperty('arrayItems')    ? transformArray(typ.arrayItems, val)
-            : typ.hasOwnProperty('props')         ? transformObject(getProps(typ), typ.additional, val)
-            : invalidValue(typ, val);
-  }
-    // Numbers can be parsed by Date but shouldn't be.
-  if (typ === Date && typeof val !== 'number') return transformDate(typ, val);
-  return transformPrimitive(typ, val);
-}
-
-function cast(val, typ) {
-  return transform(val, typ, jsonToJSProps);
-}
-
-function uncast(val, typ) {
-  return transform(val, typ, jsToJSONProps);
-}
-
-function a(typ) {
-  return { arrayItems: typ };
-}
-
-function u(...typs) {
-  return { unionMembers: typs };
-}
-
-function o(props, additional) {
-  return { props, additional };
-}
-
-function m(additional) {
-  return { props: [], additional };
-}
-
-function r(name) {
-  return { ref: name };
-}
-
-const typeMap = {
-  'CoinMarketCap': o([
-        { json: 'id', js: 'id', typ: 0 },
-        { json: 'name', js: 'name', typ: '' },
-        { json: 'symbol', js: 'symbol', typ: '' },
-        { json: 'slug', js: 'slug', typ: '' },
-        { json: 'circulating_supply', js: 'circulating_supply', typ: 3.14 },
-        { json: 'total_supply', js: 'total_supply', typ: 3.14 },
-        { json: 'max_supply', js: 'max_supply', typ: u(0, null) },
-        { json: 'date_added', js: 'date_added', typ: Date },
-        { json: 'num_market_pairs', js: 'num_market_pairs', typ: 0 },
-        { json: 'tags', js: 'tags', typ: a(r('Tag')) },
-        { json: 'platform', js: 'platform', typ: u(r('Platform'), null) },
-        { json: 'cmc_rank', js: 'cmc_rank', typ: 0 },
-        { json: 'last_updated', js: 'last_updated', typ: Date },
-        { json: 'quote', js: 'quote', typ: r('Quote') },
-  ], false),
-  'Platform': o([
-        { json: 'id', js: 'id', typ: 0 },
-        { json: 'name', js: 'name', typ: r('Name') },
-        { json: 'symbol', js: 'symbol', typ: r('Symbol') },
-        { json: 'slug', js: 'slug', typ: r('Slug') },
-        { json: 'token_address', js: 'token_address', typ: '' },
-  ], false),
-  'Quote': o([
-        { json: 'USD', js: 'USD', typ: r('Usd') },
-  ], false),
-  'Usd': o([
-        { json: 'price', js: 'price', typ: 3.14 },
-        { json: 'volume_24h', js: 'volume_24h', typ: 3.14 },
-        { json: 'percent_change_1h', js: 'percent_change_1h', typ: 3.14 },
-        { json: 'percent_change_24h', js: 'percent_change_24h', typ: 3.14 },
-        { json: 'percent_change_7d', js: 'percent_change_7d', typ: 3.14 },
-        { json: 'market_cap', js: 'market_cap', typ: 3.14 },
-        { json: 'last_updated', js: 'last_updated', typ: Date },
-  ], false),
-  'Name': [
-    'Ethereum',
-    'Omni',
-    'TRON',
-  ],
-  'Slug': [
-    'ethereum',
-    'omni',
-    'tron',
-  ],
-  'Symbol': [
-    'ETH',
-    'OMNI',
-    'TRX',
-  ],
-  'Tag': [
-    'mineable',
-  ],
-};
+})
+  .then(response => {
+    return response.data;
+  })
+  .then(response => {
+    console.log(response);
+  });
 
 module.exports = {
-  'coinMarketCapToJson': coinMarketCapToJson,
-  'toCoinMarketCap': toCoinMarketCap,
+  // symbolId
 };
