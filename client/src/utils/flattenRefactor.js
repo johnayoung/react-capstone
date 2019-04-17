@@ -40,242 +40,333 @@ const arrayFrom = json => {
 };
 
 const swapidata = {
-  count: 87,
-  next: 'https://swapi.co/api/people/?page=2',
-  previous: null,
-  results: [
+  status: {
+    timestamp: '2019-04-17T18:25:34.548Z',
+    error_code: 0,
+    error_message: null,
+    elapsed: 5,
+    credit_count: 1
+  },
+  data: [
     {
-      name: 'Luke Skywalker',
-      height: '172',
-      mass: '77',
-      hair_color: 'blond',
-      skin_color: 'fair',
-      eye_color: 'blue',
-      birth_year: '19BBY',
-      gender: 'male',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: [
-        'https://swapi.co/api/films/2/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/3/',
-        'https://swapi.co/api/films/1/',
-        'https://swapi.co/api/films/7/'
-      ],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: ['https://swapi.co/api/vehicles/14/', 'https://swapi.co/api/vehicles/30/'],
-      starships: ['https://swapi.co/api/starships/12/', 'https://swapi.co/api/starships/22/'],
-      created: '2014-12-09T13:50:51.644000Z',
-      edited: '2014-12-20T21:17:56.891000Z',
-      url: 'https://swapi.co/api/people/1/'
+      id: 3866,
+      name: 'CONUN',
+      symbol: 'CON',
+      slug: 'conun',
+      circulating_supply: null,
+      total_supply: 5000000000,
+      max_supply: null,
+      date_added: '2019-04-17T00:00:00.000Z',
+      num_market_pairs: 3,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: ''
+      },
+      cmc_rank: null,
+      last_updated: '2019-04-17T18:25:09.000Z',
+      quote: {
+        USD: {
+          price: 0.0482528919967,
+          volume_24h: 0,
+          percent_change_1h: null,
+          percent_change_24h: null,
+          percent_change_7d: null,
+          market_cap: 0,
+          last_updated: '2019-04-17T18:25:09.000Z'
+        }
+      }
     },
     {
-      name: 'C-3PO',
-      height: '167',
-      mass: '75',
-      hair_color: 'n/a',
-      skin_color: 'gold',
-      eye_color: 'yellow',
-      birth_year: '112BBY',
-      gender: 'n/a',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: [
-        'https://swapi.co/api/films/2/',
-        'https://swapi.co/api/films/5/',
-        'https://swapi.co/api/films/4/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/3/',
-        'https://swapi.co/api/films/1/'
-      ],
-      species: ['https://swapi.co/api/species/2/'],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-10T15:10:51.357000Z',
-      edited: '2014-12-20T21:17:50.309000Z',
-      url: 'https://swapi.co/api/people/2/'
+      id: 3868,
+      name: 'SignatureChain ',
+      symbol: 'SICA',
+      slug: 'signature-chain',
+      circulating_supply: null,
+      total_supply: 50000000000,
+      max_supply: null,
+      date_added: '2019-04-17T00:00:00.000Z',
+      num_market_pairs: 3,
+      tags: [],
+      platform: {
+        id: 1274,
+        name: 'Waves',
+        symbol: 'WAVES',
+        slug: 'waves',
+        token_address: '3Z4SBCZ2LRZLuDweUYJkypmjrWkcLuduxpf3Vj8FddSk'
+      },
+      cmc_rank: null,
+      last_updated: '2019-04-17T18:25:09.000Z',
+      quote: {
+        USD: {
+          price: 0.000013560659213,
+          volume_24h: 10614.5419004478,
+          percent_change_1h: null,
+          percent_change_24h: null,
+          percent_change_7d: null,
+          market_cap: 0,
+          last_updated: '2019-04-17T18:25:09.000Z'
+        }
+      }
     },
     {
-      name: 'R2-D2',
-      height: '96',
-      mass: '32',
-      hair_color: 'n/a',
-      skin_color: 'white, blue',
-      eye_color: 'red',
-      birth_year: '33BBY',
-      gender: 'n/a',
-      homeworld: 'https://swapi.co/api/planets/8/',
-      films: [
-        'https://swapi.co/api/films/2/',
-        'https://swapi.co/api/films/5/',
-        'https://swapi.co/api/films/4/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/3/',
-        'https://swapi.co/api/films/1/',
-        'https://swapi.co/api/films/7/'
-      ],
-      species: ['https://swapi.co/api/species/2/'],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-10T15:11:50.376000Z',
-      edited: '2014-12-20T21:17:50.311000Z',
-      url: 'https://swapi.co/api/people/3/'
+      id: 1839,
+      name: 'Binance Coin',
+      symbol: 'BNB',
+      slug: 'binance-coin',
+      circulating_supply: 141175490.242,
+      total_supply: 189175490.242,
+      max_supply: null,
+      date_added: '2017-07-25T00:00:00.000Z',
+      num_market_pairs: 148,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0xB8c77482e45F1F44dE1745F52C74426C631bDD52'
+      },
+      cmc_rank: 7,
+      last_updated: '2019-04-17T18:25:04.000Z',
+      quote: {
+        USD: {
+          price: 19.5396099426,
+          volume_24h: 166891615.596967,
+          percent_change_1h: -0.00617364,
+          percent_change_24h: -0.366324,
+          percent_change_7d: 6.42453,
+          market_cap: 2758514012.7840123,
+          last_updated: '2019-04-17T18:25:04.000Z'
+        }
+      }
     },
     {
-      name: 'Darth Vader',
-      height: '202',
-      mass: '136',
-      hair_color: 'none',
-      skin_color: 'white',
-      eye_color: 'yellow',
-      birth_year: '41.9BBY',
-      gender: 'male',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: [
-        'https://swapi.co/api/films/2/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/3/',
-        'https://swapi.co/api/films/1/'
-      ],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: [],
-      starships: ['https://swapi.co/api/starships/13/'],
-      created: '2014-12-10T15:18:20.704000Z',
-      edited: '2014-12-20T21:17:50.313000Z',
-      url: 'https://swapi.co/api/people/4/'
+      id: 825,
+      name: 'Tether',
+      symbol: 'USDT',
+      slug: 'tether',
+      circulating_supply: 2475513474.17801,
+      total_supply: 2750057493.36343,
+      max_supply: null,
+      date_added: '2015-02-25T00:00:00.000Z',
+      num_market_pairs: 2155,
+      tags: [],
+      platform: {
+        id: 83,
+        name: 'Omni',
+        symbol: 'OMNI',
+        slug: 'omni',
+        token_address: '31'
+      },
+      cmc_rank: 8,
+      last_updated: '2019-04-17T18:25:11.000Z',
+      quote: {
+        USD: {
+          price: 1.00678914179,
+          volume_24h: 11332253023.2745,
+          percent_change_1h: 0.0311329,
+          percent_change_24h: -0.173009,
+          percent_change_7d: -0.0426602,
+          market_cap: 2492320086.15726,
+          last_updated: '2019-04-17T18:25:11.000Z'
+        }
+      }
     },
     {
-      name: 'Leia Organa',
-      height: '150',
-      mass: '49',
-      hair_color: 'brown',
-      skin_color: 'light',
-      eye_color: 'brown',
-      birth_year: '19BBY',
-      gender: 'female',
-      homeworld: 'https://swapi.co/api/planets/2/',
-      films: [
-        'https://swapi.co/api/films/2/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/3/',
-        'https://swapi.co/api/films/1/',
-        'https://swapi.co/api/films/7/'
-      ],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: ['https://swapi.co/api/vehicles/30/'],
-      starships: [],
-      created: '2014-12-10T15:20:09.791000Z',
-      edited: '2014-12-20T21:17:50.315000Z',
-      url: 'https://swapi.co/api/people/5/'
+      id: 1518,
+      name: 'Maker',
+      symbol: 'MKR',
+      slug: 'maker',
+      circulating_supply: 1000000,
+      total_supply: 1000000,
+      max_supply: null,
+      date_added: '2017-01-29T00:00:00.000Z',
+      num_market_pairs: 63,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2'
+      },
+      cmc_rank: 20,
+      last_updated: '2019-04-17T18:25:02.000Z',
+      quote: {
+        USD: {
+          price: 619.913190099,
+          volume_24h: 1120528.55831691,
+          percent_change_1h: 0.191596,
+          percent_change_24h: -3.59308,
+          percent_change_7d: -13.4128,
+          market_cap: 619913190.099,
+          last_updated: '2019-04-17T18:25:02.000Z'
+        }
+      }
     },
     {
-      name: 'Owen Lars',
-      height: '178',
-      mass: '120',
-      hair_color: 'brown, grey',
-      skin_color: 'light',
-      eye_color: 'blue',
-      birth_year: '52BBY',
-      gender: 'male',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: [
-        'https://swapi.co/api/films/5/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/1/'
-      ],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-10T15:52:14.024000Z',
-      edited: '2014-12-20T21:17:50.317000Z',
-      url: 'https://swapi.co/api/people/6/'
+      id: 3635,
+      name: 'Crypto.com Chain',
+      symbol: 'CRO',
+      slug: 'crypto-com-chain',
+      circulating_supply: 5052511415.52512,
+      total_supply: 100000000000,
+      max_supply: null,
+      date_added: '2018-12-14T00:00:00.000Z',
+      num_market_pairs: 12,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0xa0b73e1ff0b80914ab6fe0444e65848c4c34450b'
+      },
+      cmc_rank: 23,
+      last_updated: '2019-04-17T18:25:08.000Z',
+      quote: {
+        USD: {
+          price: 0.0847274226252,
+          volume_24h: 661812.504687692,
+          percent_change_1h: 1.65456,
+          percent_change_24h: -0.925283,
+          percent_change_7d: 26.3865,
+          market_cap: 428086270.0218443,
+          last_updated: '2019-04-17T18:25:08.000Z'
+        }
+      }
     },
     {
-      name: 'Beru Whitesun lars',
-      height: '165',
-      mass: '75',
-      hair_color: 'brown',
-      skin_color: 'light',
-      eye_color: 'blue',
-      birth_year: '47BBY',
-      gender: 'female',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: [
-        'https://swapi.co/api/films/5/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/1/'
-      ],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-10T15:53:41.121000Z',
-      edited: '2014-12-20T21:17:50.319000Z',
-      url: 'https://swapi.co/api/people/7/'
+      id: 1697,
+      name: 'Basic Attention Token',
+      symbol: 'BAT',
+      slug: 'basic-attention-token',
+      circulating_supply: 1249416783.15753,
+      total_supply: 1500000000,
+      max_supply: null,
+      date_added: '2017-06-01T00:00:00.000Z',
+      num_market_pairs: 97,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0x0d8775f648430679a709e98d2b0cb6250d2887ef'
+      },
+      cmc_rank: 24,
+      last_updated: '2019-04-17T18:25:02.000Z',
+      quote: {
+        USD: {
+          price: 0.330503557711,
+          volume_24h: 49409827.6710417,
+          percent_change_1h: -0.0358619,
+          percent_change_24h: 5.01967,
+          percent_change_7d: 12.5147,
+          market_cap: 412936691.8973967,
+          last_updated: '2019-04-17T18:25:02.000Z'
+        }
+      }
     },
     {
-      name: 'R5-D4',
-      height: '97',
-      mass: '32',
-      hair_color: 'n/a',
-      skin_color: 'white, red',
-      eye_color: 'red',
-      birth_year: 'unknown',
-      gender: 'n/a',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: ['https://swapi.co/api/films/1/'],
-      species: ['https://swapi.co/api/species/2/'],
-      vehicles: [],
-      starships: [],
-      created: '2014-12-10T15:57:50.959000Z',
-      edited: '2014-12-20T21:17:50.321000Z',
-      url: 'https://swapi.co/api/people/8/'
+      id: 1808,
+      name: 'OmiseGO',
+      symbol: 'OMG',
+      slug: 'omisego',
+      circulating_supply: 140245398.245133,
+      total_supply: 140245398.245133,
+      max_supply: null,
+      date_added: '2017-07-14T00:00:00.000Z',
+      num_market_pairs: 163,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0xd26114cd6EE289AccF82350c8d8487fedB8A0C07'
+      },
+      cmc_rank: 28,
+      last_updated: '2019-04-17T18:25:03.000Z',
+      quote: {
+        USD: {
+          price: 1.92215612187,
+          volume_24h: 63921768.4580023,
+          percent_change_1h: 0.583812,
+          percent_change_24h: -0.128884,
+          percent_change_7d: -15.4491,
+          market_cap: 269573550.8009786,
+          last_updated: '2019-04-17T18:25:03.000Z'
+        }
+      }
     },
     {
-      name: 'Biggs Darklighter',
-      height: '183',
-      mass: '84',
-      hair_color: 'black',
-      skin_color: 'light',
-      eye_color: 'brown',
-      birth_year: '24BBY',
-      gender: 'male',
-      homeworld: 'https://swapi.co/api/planets/1/',
-      films: ['https://swapi.co/api/films/1/'],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: [],
-      starships: ['https://swapi.co/api/starships/12/'],
-      created: '2014-12-10T15:59:50.509000Z',
-      edited: '2014-12-20T21:17:50.323000Z',
-      url: 'https://swapi.co/api/people/9/'
+      id: 3408,
+      name: 'USD Coin',
+      symbol: 'USDC',
+      slug: 'usd-coin',
+      circulating_supply: 255896670.081527,
+      total_supply: 259875160.37,
+      max_supply: null,
+      date_added: '2018-10-08T00:00:00.000Z',
+      num_market_pairs: 138,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+      },
+      cmc_rank: 30,
+      last_updated: '2019-04-17T18:25:09.000Z',
+      quote: {
+        USD: {
+          price: 1.00381678154,
+          volume_24h: 32494608.241401,
+          percent_change_1h: -0.0656886,
+          percent_change_24h: -0.368396,
+          percent_change_7d: 0.048059,
+          market_cap: 256873371.76804167,
+          last_updated: '2019-04-17T18:25:09.000Z'
+        }
+      }
     },
     {
-      name: 'Obi-Wan Kenobi',
-      height: '182',
-      mass: '77',
-      hair_color: 'auburn, white',
-      skin_color: 'fair',
-      eye_color: 'blue-gray',
-      birth_year: '57BBY',
-      gender: 'male',
-      homeworld: 'https://swapi.co/api/planets/20/',
-      films: [
-        'https://swapi.co/api/films/2/',
-        'https://swapi.co/api/films/5/',
-        'https://swapi.co/api/films/4/',
-        'https://swapi.co/api/films/6/',
-        'https://swapi.co/api/films/3/',
-        'https://swapi.co/api/films/1/'
-      ],
-      species: ['https://swapi.co/api/species/1/'],
-      vehicles: ['https://swapi.co/api/vehicles/38/'],
-      starships: [
-        'https://swapi.co/api/starships/48/',
-        'https://swapi.co/api/starships/59/',
-        'https://swapi.co/api/starships/64/',
-        'https://swapi.co/api/starships/65/',
-        'https://swapi.co/api/starships/74/'
-      ],
-      created: '2014-12-10T16:16:29.192000Z',
-      edited: '2014-12-20T21:17:50.325000Z',
-      url: 'https://swapi.co/api/people/10/'
+      id: 1104,
+      name: 'Augur',
+      symbol: 'REP',
+      slug: 'augur',
+      circulating_supply: 11000000,
+      total_supply: 11000000,
+      max_supply: null,
+      date_added: '2015-10-27T00:00:00.000Z',
+      num_market_pairs: 66,
+      tags: [],
+      platform: {
+        id: 1027,
+        name: 'Ethereum',
+        symbol: 'ETH',
+        slug: 'ethereum',
+        token_address: '0x1985365e9f78359a9b6ad760e32412f4a445e862'
+      },
+      cmc_rank: 35,
+      last_updated: '2019-04-17T18:25:01.000Z',
+      quote: {
+        USD: {
+          price: 19.1119640326,
+          volume_24h: 7573494.70009003,
+          percent_change_1h: 0.032449,
+          percent_change_24h: 0.853935,
+          percent_change_7d: -6.4583,
+          market_cap: 210231604.3586,
+          last_updated: '2019-04-17T18:25:01.000Z'
+        }
+      }
     }
   ]
 };

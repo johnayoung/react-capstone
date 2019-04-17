@@ -6,6 +6,7 @@ const parse = response => {
   const readyJson = doCSV(data);
   const unparse = Papa.unparse(readyJson);
   const parsed = Papa.parse(unparse);
+
   return parsed.data;
 };
 

@@ -163,6 +163,7 @@ router.get("/proxy", (req, res, next) => {
       res.set("Cache-Control", "no-cache").send(response.data);
     })
     .catch(err => {
+      console.log("full error is ", err);
       if (err) {
         err = new Error("We are having trouble with the request");
         err.status = 400;

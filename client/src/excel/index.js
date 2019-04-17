@@ -21,6 +21,7 @@ import tryCatch from './functionHelper';
 const setData = async response => {
   await window.Excel.run(async context => {
     const parsedData = parse(response);
+    console.log('parsed data is ', parsedData);
     // const range = await getRange();
     const myWorkbook = context.workbook;
     const activeCell = myWorkbook.getActiveCell();

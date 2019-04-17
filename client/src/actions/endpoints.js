@@ -179,7 +179,7 @@ export const userEndpointClear = () => ({
   type: USER_ENDPOINT_CLEAR
 });
 
-export const userEndpoint = urlString => dispatch => {
+export const userEndpoint = (urlString, collectionName) => dispatch => {
   // To avoid CORS issues, we must proxy request to the back end
   const config = {
     method: 'get',
@@ -187,6 +187,7 @@ export const userEndpoint = urlString => dispatch => {
     headers: {
       'Content-Type': 'application/json',
       'x-url-string': urlString,
+      'x-collectionName': collectionName,
       'Cache-Control': 'no-cache'
     }
   };

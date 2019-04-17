@@ -24,7 +24,15 @@ class EndpointSubmit extends Component {
     let submittedUrl;
     const { currentEndpoint, handleSubmit, handleSearchSubmit, pristine, submitError } = this.props;
     if (currentEndpoint) {
-      const { name, prettyName, description, parameters, baseUrl, path } = currentEndpoint;
+      const {
+        name,
+        prettyName,
+        description,
+        parameters,
+        baseUrl,
+        path,
+        collectionName
+      } = currentEndpoint;
       const { formValues } = this.props;
       submittedUrl = urlBuilder({ baseUrl, path, parameters });
       if (!pristine) {
@@ -38,7 +46,7 @@ class EndpointSubmit extends Component {
           </div>
           <form
             className="xl:px-12 w-full max-w-lg mx-auto lg:ml-0 lg:mr-auto xl:mx-0 xl:w-3/4"
-            onSubmit={handleSubmit(values => handleSearchSubmit(values))}
+            onSubmit={handleSubmit(values => handleSearchSubmit(values, collectionName))}
           >
             <h2 className="label-input">Base Url</h2>
             <p className="mb-4">{baseUrl}</p>
@@ -105,9 +113,9 @@ const mapDispatchToProps = dispatch => {
     userEndpoint: urlString => dispatch(userEndpoint(urlString)),
     setCurrentEndpointSuccess: endpoint => dispatch(setCurrentEndpointSuccess(endpoint)),
     setFormValues: endpoint => dispatch(setFormValues(endpoint)),
-    handleSearchSubmit: values => {
+    handleSearchSubmit: (values, collectionName) => {
       const builder = urlBuilder(formBuilder(values));
-      return dispatch(userEndpoint(builder));
+      return dispatch(userEndpoint(builder, collectionName));
     }
   };
 };
