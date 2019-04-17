@@ -181,6 +181,9 @@ export const userEndpointClear = () => ({
 
 export const userEndpoint = (urlString, collectionName) => dispatch => {
   // To avoid CORS issues, we must proxy request to the back end
+  if (urlString[urlString.length - 1] === '?') {
+    urlString = urlString.slice(0, urlString.length - 1);
+  }
   const config = {
     method: 'get',
     url: `${API_BASE_URL}/endpoints/proxy`,
