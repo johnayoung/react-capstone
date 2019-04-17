@@ -43,8 +43,6 @@ function createEndpoint(name, description, baseUrl, parameters, userId) {
     favicon,
     userId
   }, parsedURI);
-
-//   return Object.assign({}, firstObj, {favicon});
 }
 
 /* ========== GET ENDPOINTS ========== */
