@@ -204,7 +204,12 @@ export const userEndpoint = (urlString, collectionName) => dispatch => {
       return dispatch(userEndpointSuccess(data));
     })
     .then(data => {
-      return setData(data.apiResponse);
+      window.Office.onReady(info => {
+        return info;
+      }).then(info => {
+        return info.host === 'Excel' ? setData(data.apiResponse) : '';
+      });
+      // return setData(data.apiResponse);
     })
     .catch(err => {
       // console.log(err.response.data);
