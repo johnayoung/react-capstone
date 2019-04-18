@@ -4,10 +4,9 @@ const pathToRegexp = require("path-to-regexp");
 const uriTemplates = require("uri-templates");
 const URI = require("urijs");
 
-const url =
-  "https://api.blockchain.info/charts/{chartName}{?timespan,rollingAverage,start,format,sampled}";
+const url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info{?id}";
 const tUrl =
-  "https://api.blockchain.info/charts/transactions-per-second?timespan=5weeks&rollingAverage=8hours&format=json";
+  "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=1,2,10";
 
 const extractParamsFromUrl = (url, exampleUrl) => {
   // Create RFC 6570 template
@@ -27,10 +26,10 @@ const extractParamsFromUrl = (url, exampleUrl) => {
   // Extract parameters from decoded URL
   const keys = [];
   const regexp = pathToRegexp(decodedUrl, keys);
-
   const uPath = URI.parse(decodedUrl).path;
   const uregexp = pathToRegexp(uPath);
   const tPath = URI.parse(exampleUrl).path;
+  console.log("we made it");
   const exampleParams = uregexp.exec(tPath);
 
   // Turn extracted parameters into what we need for database

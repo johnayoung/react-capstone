@@ -31,7 +31,10 @@ function fullEndpoint(obj) {
     template,
     endpointKeys
   } = obj;
-  const { serializeParams, exampleParams } = url.extractParamsFromUrl(template);
+  const { serializeParams, exampleParams } = url.extractParamsFromUrl(
+    template,
+    exampleCall
+  );
   const parsedURI = Endpoint.parseURL(exampleCall);
   const prettyName = Endpoint.prettify(name);
   const { domain, protocolAndHost } = parsedURI;
