@@ -8,6 +8,7 @@
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
     "server": "node server.js",
     "client": "node utils/client.js",
+    "dev": "nodemon server.js",
     "test": "cross-env NODE_ENV=test mocha",
     "cover": "nyc --reporter=lcov --reporter=text-summary npm test",
     "seed": "node utils/seed-database.js",
