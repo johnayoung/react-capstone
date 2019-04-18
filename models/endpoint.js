@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const wurl = require("wurl");
-const Url = require("url-parse");
 const { parse } = require("url");
 
 const endpointSchema = new mongoose.Schema(

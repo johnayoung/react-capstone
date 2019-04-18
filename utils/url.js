@@ -1,16 +1,7 @@
 /* eslint-disable no-nested-ternary */
-const parseurl = require("parseurl");
 const { parse } = require("url");
 const queryString = require("query-string");
 const pathToRegexp = require("path-to-regexp");
-const uriTemplates = require("uri-templates");
-const URI = require("urijs");
-
-const url = "https://api.iextrading.com/1.0/stock/{stockName}/logo";
-const rUrl =
-  "https://api.blockchain.info/charts/:chartName?:timespan=5weeks&:rollingAverage=8hours&:format=json";
-const tUrl =
-  "https://api.blockchain.info/charts/difficulty?timespan=5weeks&rollingAverage=8hours&format=json";
 
 const getType = v =>
   v === undefined
@@ -90,8 +81,6 @@ const extractParamsFromUrl = (url, exampleUrl) => {
   // console.log("serializedParams are ", serializeParams);
   // console.log("final parameters are ", parameters);
 };
-
-console.log(extractParamsFromUrl(rUrl, tUrl));
 
 module.exports = {
   extractParamsFromUrl

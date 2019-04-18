@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const axios = require("axios");
-const { MONGODB_URI, SHEETY_API } = require("../config");
+const { MONGODB_URI } = require("../config");
 const url = require("./url");
-const URI = require("urijs");
 
 const User = require("../models/user");
 const { users } = require("../db/data");

@@ -1,10 +1,21 @@
 {
+  "parser": "babel-eslint",
   "extends": ["airbnb", "prettier", "prettier/react"],
   "plugins": ["prettier"],
   "rules": {
+    "jsx-a11y/label-has-for": [0],
+    "no-return-assign": ["error", "except-parens"],
     "prettier/prettier": ["error"],
-    "linebreak-style": [2, "windows"],
-    "react/jsx-filename-extension": [0, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      0,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
     "react/prop-types": [0]
+  },
+  "env": {
+    "jest": true,
+    "browser": true
   }
 }
