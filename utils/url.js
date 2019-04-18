@@ -1,70 +1,97 @@
+/* eslint-disable no-nested-ternary */
 const parseurl = require("parseurl");
 const { parse } = require("url");
+const queryString = require("query-string");
 const pathToRegexp = require("path-to-regexp");
 const uriTemplates = require("uri-templates");
 const URI = require("urijs");
 
-const url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info{?id}";
+const url = "https://api.iextrading.com/1.0/stock/{stockName}/logo";
+const rUrl =
+  "https://api.blockchain.info/charts/:chartName?:timespan=5weeks&:rollingAverage=8hours&:format=json";
 const tUrl =
-  "https://pro-api.coinmarketcap.com/v1/cryptocurrency/info?id=1,2,10";
+  "https://api.blockchain.info/charts/difficulty?timespan=5weeks&rollingAverage=8hours&format=json";
+
+const getType = v =>
+  v === undefined
+    ? "undefined"
+    : v === null
+    ? "null"
+    : v.constructor.name.toLowerCase();
 
 const extractParamsFromUrl = (url, exampleUrl) => {
-  // Create RFC 6570 template
-  const template = uriTemplates(url);
+  // Extract parts from template URL
+  const tPathname = parse(url).pathname;
+  const tQuery = parse(url).query;
 
-  // Extract variables names from template
-  const { varNames } = template;
+  // Extract parts from example URL
+  const ePathname = parse(exampleUrl).pathname;
+  const eQuery = parse(exampleUrl).query;
 
-  // Fill url with varNames and decode back
-  const varObj = varNames.reduce((a, varr) => {
-    a[varr] = `:${varr}`;
-    return a;
-  }, {});
-  const filledUrl = template.fill(varObj);
-  const decodedUrl = URI.decode(filledUrl);
-
-  // Extract parameters from decoded URL
-  const keys = [];
-  const regexp = pathToRegexp(decodedUrl, keys);
-  const uPath = URI.parse(decodedUrl).path;
-  const uregexp = pathToRegexp(uPath);
-  const tPath = URI.parse(exampleUrl).path;
-  console.log("we made it");
-  const exampleParams = uregexp.exec(tPath);
-
-  // Turn extracted parameters into what we need for database
-  const serializeParams = keys.reduce((params, param) => {
-    const { name, prefix, optional } = param;
-    const where = prefix === "/" ? "path" : "query";
-    const obj = { name, in: where, required: !optional, schema: { enum: "" } };
+  // Extract pathname without query string
+  const pathKeys = [];
+  const pathRegexp = pathToRegexp(tPathname, pathKeys);
+  const pathExample = pathRegexp.exec(ePathname);
+  const sPath = pathKeys.reduce((params, param) => {
+    const { name, optional } = param;
+    const obj = { name, in: "path", required: !optional, schema: { enum: "" } };
     params.push(obj);
     return params;
   }, []);
 
-  console.log("varObj is ", varObj);
-  console.log("filledUrl is ", filledUrl);
-  console.log("decodedUrl is ", decodedUrl);
-  console.log("extracted params are ", keys);
-  console.log("serialized params are ", serializeParams);
-  console.log("exampleParams are ", exampleParams);
-  return {
-    varObj,
-    filledUrl,
-    decodedUrl,
-    keys,
-    serializeParams,
-    exampleParams
-  };
+  // Extract query
+  const queryKeys = [];
+  if (tQuery) {
+    // If we have a query string, then we run pathToRegexp on it
+    const queryRegexp = pathToRegexp(tQuery, queryKeys);
+  }
+  // const queryExample = queryRegexp.exec(eQuery);
+  const sQuery = queryKeys.reduce((params, param) => {
+    const { name, optional } = param;
+    const obj = {
+      name,
+      in: "query",
+      required: !optional,
+      schema: { enum: "" }
+    };
+    params.push(obj);
+    return params;
+  }, []);
+  const qn = queryKeys.map(q => q.name);
+  const qParsed = queryString.parse(eQuery);
+
+  // Combine path and query parameters
+  const serializeParams = sPath.concat(sQuery);
+
+  // Give default values to parameters
+  const parameters = serializeParams.reduce((a, val, i) => {
+    if (qn.includes(val.name)) {
+      const paramWithDefault = Object.assign({}, val, {
+        default: qParsed[val.name],
+        type: getType(qParsed[val.name])
+      });
+      a.push(paramWithDefault);
+    } else {
+      const paramWithoutDefault = Object.assign({}, val, {
+        default: pathExample[i + 1],
+        type: getType(pathExample[i + 1])
+      });
+      a.push(paramWithoutDefault);
+    }
+    return a;
+  }, []);
+
+  return { parameters };
+
+  // console.log("pathKeys are ", pathKeys);
+  // console.log("queryKeys are ", queryKeys);
+  // console.log("pathExample is ", pathExample);
+  // console.log("queryExample is ", queryExample);
+  // console.log("serializedParams are ", serializeParams);
+  // console.log("final parameters are ", parameters);
 };
 
-extractParamsFromUrl(url, tUrl);
-
-// const { query, path } = URI.parse(url);
-// console.log('path is ', path);
-// console.log('query is ', query);
-// const defaultValues = URI.parseQuery(query);
-
-// console.log(defaultValues);
+console.log(extractParamsFromUrl(rUrl, tUrl));
 
 module.exports = {
   extractParamsFromUrl

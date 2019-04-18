@@ -24,7 +24,7 @@ function createEndpoint(name, description, baseUrl, parameters, userId) {
   const parsedURI = Endpoint.parseURL(baseUrl);
   const prettyName = Endpoint.prettify(name);
   const { domain, path, protocolAndHost } = parsedURI;
-  const favicon = `https://api.faviconkit.com/${domain}/144`;
+  const favicon = `${baseUrl}favicon.ico`;
 
   if (!description) {
     description = `An endpoint from ${domain}`;

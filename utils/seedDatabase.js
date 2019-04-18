@@ -8,16 +8,6 @@ const User = require("../models/user");
 const { users } = require("../db/data");
 const Endpoint = require("../models/endpoint");
 
-const validateNumber = n =>
-  !isNaN(parseFloat(n)) && isFinite(n) && Number(n) == n;
-
-const getType = v =>
-  v === undefined
-    ? "undefined"
-    : v === null
-    ? "null"
-    : v.constructor.name.toLowerCase();
-
 function fullEndpoint(obj) {
   let {
     category,
@@ -31,40 +21,17 @@ function fullEndpoint(obj) {
     template,
     endpointKeys
   } = obj;
-  const { serializeParams, exampleParams } = url.extractParamsFromUrl(
-    template,
-    exampleCall
-  );
+  const { parameters } = url.extractParamsFromUrl(template, exampleCall);
   const parsedURI = Endpoint.parseURL(exampleCall);
   const prettyName = Endpoint.prettify(name);
   const { domain, protocolAndHost } = parsedURI;
-  const favicon = `https://api.faviconkit.com/${domain}/144`;
-
-  // Extract default values from example call
-  const { query } = URI.parse(exampleCall);
-  const defaultValues = URI.parseQuery(query);
-
-  const keys = Object.keys(defaultValues);
-  const paramsWithDefaults = serializeParams.reduce((a, val, i) => {
-    if (keys.includes(val.name)) {
-      const paramWithDefault = Object.assign({}, val, {
-        default: defaultValues[val.name],
-        type: getType(defaultValues[val.name])
-      });
-      a.push(paramWithDefault);
-    } else {
-      const paramWithoutDefault = Object.assign({}, val, {
-        default: exampleParams[i + 1],
-        type: getType(exampleParams[i + 1])
-      });
-      a.push(paramWithoutDefault);
-    }
-    return a;
-  }, []);
+  const favicon = `${baseUrl}favicon.ico`;
 
   if (!description) {
     description = `An endpoint from ${domain}`;
   }
+
+  console.log("PARAMETERS ARE ============>", parameters);
 
   return Object.assign(
     {},
@@ -77,7 +44,7 @@ function fullEndpoint(obj) {
       description,
       baseUrl: protocolAndHost,
       path,
-      parameters: paramsWithDefaults,
+      parameters,
       favicon,
       userId: "5c3f5ca9ec37422f44bdaa82",
       exampleCall,
