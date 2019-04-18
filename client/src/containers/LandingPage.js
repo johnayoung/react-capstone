@@ -6,7 +6,18 @@ import hero from '../style/assets/hero-browse-apis.gif';
 import OfficeButton from '../components/OfficeButton';
 
 export const LandingPage = props => {
-  const { appName, header, subheader } = props.environment;
+  const { appName, header, subheader, environment } = props.environment;
+  const message =
+    environment === 'web' ? (
+      <p className="label-input">
+        Created by <a href="https://jyoung.dev">John Young</a>
+      </p>
+    ) : (
+      <p className="label-input">
+        Need some help? Send us a message at{' '}
+        <a href="mailto:support@cryptosheets.com">support@cryptosheets.com</a>
+      </p>
+    );
   return (
     <section className="h-screen w-screen flex sm:pt-8 md:pt-12 lg:pt-20 lg:cover-background">
       <div className="container flex flex-col lg:max-w-screen-lg mx-auto px-6 py-8 sm:py-16 md:py-24">
@@ -30,11 +41,7 @@ export const LandingPage = props => {
                   Browse APIs
                 </button>
               </Link>
-              <p className="label-input">
-                Need some help? Send us a message at{' '}
-                <a href="mailto:support@cryptosheets.com">support@cryptosheets.com</a>
-              </p>
-              {/* <OfficeButton /> */}
+              {message}
             </div>
           </div>
         </div>

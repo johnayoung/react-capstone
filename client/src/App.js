@@ -12,7 +12,9 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch(fetchEndpoints());
     const { host } = this.props;
-    if (host === 'excel') {
+    if (host === 'web') {
+      this.props.dispatch(setEnvironment('web'));
+    } else {
       this.props.dispatch(setEnvironment('excel'));
     }
   }
