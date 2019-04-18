@@ -72,6 +72,7 @@ const Registration = props => {
           </button>
         </div>
       </form>
+      <a href="https://localhost:8080/api/auth/google">Sign In with Google</a>
     </div>
   );
 };

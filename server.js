@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const localStrategy = require("./passport/local");
 const jwtStrategy = require("./passport/jwt");
+const googleStrategy = require("./passport/google");
 
 const {
   NODE_ENV,
@@ -41,6 +42,7 @@ app.use(express.json());
 // Configure passport to utilize strategies
 passport.use(localStrategy);
 passport.use(jwtStrategy);
+passport.use(googleStrategy);
 
 // Mount routers
 app.use("/api/users", usersRouter);
