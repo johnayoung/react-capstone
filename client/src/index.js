@@ -16,6 +16,7 @@ import assign from 'core-js/es/object/assign';
 // import arrayincludes from 'core-js/library/fn/array/virtual/includes';
 // import repeat from 'core-js/library/fn/string/virtual/repeat';
 // import assign from 'core-js/library/fn/object/assign';
+import * as OfficeHelpers from '@microsoft/office-js-helpers';
 import App from './App';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
@@ -34,6 +35,12 @@ const app = (Component, host) => {
     document.getElementById('root')
   );
 };
+
+// const authenticator = new OfficeHelpers.Authenticator();
+// // register Google endpoint using
+// authenticator.endpoints.registerGoogleAuth(
+//   '380764449203-2p1sc78u60uc525rvuciddkf2tj986up.apps.googleusercontent.com'
+// );
 
 window.Office.onReady(info => {
   String.prototype.includes = stringincludes;

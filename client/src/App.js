@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 import Header from './containers/Header';
 import { fetchEndpoints } from './actions/endpoints';
 import Dashboard from './containers/Dashboard';
 import FetchEndpointsError from './containers/FetchEndpointsError';
 import { setEnvironment } from './actions/environment';
+
+// Font awesome icons for login
+library.add(fab);
 
 class App extends Component {
   componentDidMount() {

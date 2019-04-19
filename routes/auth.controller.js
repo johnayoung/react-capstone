@@ -1,5 +1,3 @@
-// lib/auth.controller.js
-
 exports.twitter = (req, res) => {
   const io = req.app.get("io");
   const user = {
@@ -7,15 +5,18 @@ exports.twitter = (req, res) => {
     photo: req.user.photos[0].value.replace(/_normal/, "")
   };
   io.in(req.session.socketId).emit("twitter", user);
+  res.end();
 };
 
 exports.google = (req, res) => {
+  console.log("we made it here, here is req", req);
   const io = req.app.get("io");
   const user = {
     name: req.user.displayName,
     photo: req.user.photos[0].value.replace(/sz=50/gi, "sz=250")
   };
   io.in(req.session.socketId).emit("google", user);
+  res.redirect(`https://localhost:3000?socketId=${req.session.socketId}`);
 };
 
 exports.facebook = (req, res) => {
@@ -26,6 +27,7 @@ exports.facebook = (req, res) => {
     photo: req.user.photos[0].value
   };
   io.in(req.session.socketId).emit("facebook", user);
+  res.end();
 };
 
 exports.github = (req, res) => {
@@ -35,4 +37,5 @@ exports.github = (req, res) => {
     photo: req.user.photos[0].value
   };
   io.in(req.session.socketId).emit("github", user);
+  res.end();
 };

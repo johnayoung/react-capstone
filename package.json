@@ -9,6 +9,7 @@
     "server": "node server.js",
     "client": "node utils/client.js",
     "dev": "nodemon server.js",
+    "windows": "cross-env NODE_ENV=windows nodemon server.js",
     "test": "cross-env NODE_ENV=test mocha",
     "cover": "nyc --reporter=lcov --reporter=text-summary npm test",
     "seed": "node utils/seed-database.js",

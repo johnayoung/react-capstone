@@ -1,5 +1,4 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const authController = require("./auth.controller");
@@ -21,17 +20,29 @@ function createAuthToken(user) {
   });
 }
 
-// This custom middleware allows us to attach the socket id to the session.
-// With the socket id attached we can send back the right user info to
-// the right socket
-const addSocketIdtoSession = (req, res, next) => {
+// This custom middleware allows us to attach the socket id to the session
+// With that socket id we can send back the right user info to the right
+// socket
+router.use((req, res, next) => {
   req.session.socketId = req.query.socketId;
   next();
-};
+});
 
+// Routes that are triggered by the callbacks from each OAuth provider once
+// the user has authenticated successfully
+router.get("/auth/google/callback", googleAuth, (req, res) => {
+  const io = req.app.get("io");
+  const user = {
+    name: req.user.displayName,
+    photo: req.user.photos[0].value.replace(/sz=50/gi, "sz=250")
+  };
+  const authToken = createAuthToken(user);
+  io.in(req.session.socketId).emit("google", user);
+  res.redirect(`https://localhost:3000?authToken=${authToken}`);
+});
+
+// Routes that are triggered on the client
 router.get("/auth/google", googleAuth);
-
-router.get("auth/google/callback", googleAuth, authController.google);
 
 router.post("/login", localAuth, function(req, res) {
   const authToken = createAuthToken(req.user);

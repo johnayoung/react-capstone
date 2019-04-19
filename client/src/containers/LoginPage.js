@@ -3,11 +3,12 @@ import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import './LoginPage.css';
 
 import Login from './Login';
 import API_BASE_URL from '../config';
 
-const socket = io(API_BASE_URL);
+const socket = io('https://localhost:8080');
 const providers = ['google'];
 
 export function LoginPage(props) {
@@ -21,7 +22,7 @@ export function LoginPage(props) {
     <div className="home flex justify-center items-center mx-auto h-full">
       {/* <Login /> */}
       <div className="wrapper mt-16">
-        <div className="container">
+        <div className="">
           {providers.map(provider => (
             <OAuth provider={provider} key={provider} socket={socket} />
           ))}
