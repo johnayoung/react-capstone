@@ -5,6 +5,7 @@ import { login } from '../actions/auth';
 import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
 import RenderField from '../components/RenderField';
 import Error from '../components/Error';
+import API_BASE_URL from '../config';
 
 const passwordLength = length({ min: 10, max: 72 });
 const matchesPassword = matches('password');
@@ -72,7 +73,7 @@ const Registration = props => {
           </button>
         </div>
       </form>
-      <a href="https://localhost:8080/api/auth/google">Sign In with Google</a>
+      <a href={`${API_BASE_URL}/auth/google`}>Sign In with Google</a>
     </div>
   );
 };

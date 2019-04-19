@@ -1,8 +1,14 @@
 import React from 'react';
+import io from 'socket.io-client';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
+import OAuth from '../components/OAuth';
 
 import Login from './Login';
+import API_BASE_URL from '../config';
+
+const socket = io(API_BASE_URL);
+const providers = ['google'];
 
 export function LoginPage(props) {
   // If we are logged in (which happens automatically when registration
@@ -13,7 +19,14 @@ export function LoginPage(props) {
   }
   return (
     <div className="home flex justify-center items-center mx-auto h-full">
-      <Login />
+      {/* <Login /> */}
+      <div className="wrapper mt-16">
+        <div className="container">
+          {providers.map(provider => (
+            <OAuth provider={provider} key={provider} socket={socket} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

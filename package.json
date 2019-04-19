@@ -16,23 +16,13 @@
     "hash": "node utils/hash-password.js",
     "docs": "aglio -i apiHub.apib -o docs.html"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/johnatspreadstreet/boilerplate.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/johnatspreadstreet/boilerplate/issues"
-  },
-  "homepage": "https://github.com/johnatspreadstreet/boilerplate#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
+    "express-session": "^1.16.1",
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.2",
@@ -45,6 +35,7 @@
     "passport-local": "^1.0.0",
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.4.2",
+    "socket.io": "^2.2.0",
     "wurl": "^2.5.3"
   },
   "devDependencies": {
@@ -52,12 +43,14 @@
     "chai-http": "^4.2.1",
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
-    "eslint": "^5.16.0",
+    "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-plugin-import": "^2.17.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
     "mocha": "^6.1.4",
     "prettier": "^1.17.0"
   }

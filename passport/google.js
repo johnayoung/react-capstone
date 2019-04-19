@@ -19,7 +19,7 @@ const googleStrategy = new GoogleStrategy(
   {
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://localhost:8080/api/auth/google/callback"
+    callbackURL: "http://localhost:8080/api/auth/google/callback"
   },
   (accessToken, refreshToken, profile, done) => {
     // const user = {

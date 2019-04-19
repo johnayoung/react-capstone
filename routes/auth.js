@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const { JWT_SECRET, JWT_EXPIRY } = require("../config");
 const jwt = require("jsonwebtoken");
+const authController = require("./auth.controller");
+const { JWT_SECRET, JWT_EXPIRY, CLIENT_ORIGIN } = require("../config");
 
 const router = express.Router();
 const User = require("../models/user");
@@ -20,33 +21,17 @@ function createAuthToken(user) {
   });
 }
 
+// This custom middleware allows us to attach the socket id to the session.
+// With the socket id attached we can send back the right user info to
+// the right socket
+const addSocketIdtoSession = (req, res, next) => {
+  req.session.socketId = req.query.socketId;
+  next();
+};
+
 router.get("/auth/google", googleAuth);
 
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", {
-    failureRedirect: `https://localhost:3000`,
-    session: false
-  }),
-  (req, res, next) => {
-    const { token, name, email } = req.user;
-    console.log("req.user is ", req.user);
-    const userObj = {
-      fullname: name,
-      email,
-      token,
-      username: email
-    };
-    User.create(userObj)
-      .then(response => {
-        console.log("user successfully created!", response);
-        res.redirect(`https://localhost:3000?token=${token}`);
-      })
-      .catch(err => {
-        next(err);
-      });
-  }
-);
+router.get("auth/google/callback", googleAuth, authController.google);
 
 router.post("/login", localAuth, function(req, res) {
   const authToken = createAuthToken(req.user);

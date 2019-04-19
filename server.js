@@ -3,28 +3,30 @@ const fs = require("fs");
 const https = require("https");
 const path = require("path");
 const cors = require("cors");
+const socketio = require("socket.io");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const passport = require("passport");
+const session = require("express-session");
 const localStrategy = require("./passport/local");
 const jwtStrategy = require("./passport/jwt");
 const googleStrategy = require("./passport/google");
 
-const {
-  NODE_ENV,
-  PORT,
-  MONGODB_URI,
-  LOCAL_SSL_KEY,
-  LOCAL_SSL_CRT
-} = require("./config");
+const { NODE_ENV, PORT, MONGODB_URI, SESSION_SECRET } = require("./config");
 const { dbConnect } = require("./db-mongoose");
 
 const usersRouter = require("./routes/users");
 const endpointsRouter = require("./routes/endpoints");
 const authRouter = require("./routes/auth");
 
+const certOptions = {
+  key: fs.readFileSync(path.resolve("certs/server.key")),
+  cert: fs.readFileSync(path.resolve("certs/server.crt"))
+};
+
 const app = express();
 app.use(cors());
+const server = https.createServer(certOptions, app);
 
 // Log all requests. Skip logging during testing
 app.use(
@@ -43,6 +45,21 @@ app.use(express.json());
 passport.use(localStrategy);
 passport.use(jwtStrategy);
 passport.use(googleStrategy);
+
+// saveUninitialized: true allows us to attach the socket id to the session
+// before we have athenticated the user
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true
+  })
+);
+
+// Connecting sockets to the server and adding them to the request
+// so that we can access them later in the controller
+const io = socketio(server);
+app.set("io", io);
 
 // Mount routers
 app.use("/api/users", usersRouter);
@@ -69,10 +86,14 @@ app.use(function(req, res, next) {
 // Custom Error Handler
 app.use((err, req, res, next) => {
   if (err.status) {
-    const errBody = Object.assign({}, err, { message: err.message });
+    const errBody = Object.assign({}, err, {
+      message: err.message
+    });
     res.status(err.status).json(errBody);
   } else {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({
+      message: "Internal Server Error"
+    });
   }
 });
 
@@ -86,7 +107,7 @@ app.startServer = function(port) {
 };
 
 function runServer(port = PORT) {
-  const server = app
+  server
     .listen(port, () => {
       console.info(`App listening on port ${server.address().port}`);
     })
@@ -119,7 +140,7 @@ if (require.main === module) {
   // Connect to DB and Listen for incoming connections
   dbConnect();
 
-  if (NODE_ENV === "development") {
+  if (NODE_ENV === "windows") {
     runServerHTTPS();
   } else {
     runServer();
