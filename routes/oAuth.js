@@ -5,32 +5,43 @@ const passport = require("passport");
 const jwt = require("jsonwebtoken");
 const authController = require("./auth.controller");
 const { JWT_SECRET, JWT_EXPIRY, CLIENT_ORIGIN } = require("../config");
+const User = require("../models/user");
 
 function createAuthToken(user) {
   return jwt.sign({ user }, JWT_SECRET, {
-    subject: user.name,
+    subject: user.email,
     expiresIn: JWT_EXPIRY
   });
 }
 
 // Setting up the passport middleware for each of the OAuth providers
 const twitterAuth = passport.authenticate("twitter");
-const googleAuth = passport.authenticate("google", { scope: ["profile"] });
+const googleAuth = passport.authenticate("google", { scope: ["profile", "email"] });
 const facebookAuth = passport.authenticate("facebook");
 const githubAuth = passport.authenticate("github");
 
 // Routes that are triggered by the callbacks from each OAuth provider once
 // the user has authenticated successfully
 router.get("/twitter/callback", twitterAuth, authController.twitter);
-router.get("/google/callback", googleAuth, (req, res) => {
-  const io = req.app.get("io");
+router.get("/google/callback", googleAuth, (req, res, next) => {
+  const options = { upsert: true, new: true, setDefaultsOnInsert: true };
   const user = {
-    name: req.user.displayName,
+    fullname: req.user.displayName,
+    email: req.user.emails[0].value,
+    username: req.user.displayName,
     photo: req.user.photos[0].value.replace(/sz=50/gi, "sz=250")
   };
-  const authToken = createAuthToken(user);
-  io.in(req.session.socketId).emit("google", user);
-  res.redirect(`https://localhost:3000?authToken=${authToken}`);
+  // io.in(req.session.socketId).emit("google", user);
+  return User.findOneAndUpdate({}, user, options)
+    .then(response => {
+      console.log("response is ", typeof response);
+      const authToken = createAuthToken(response);
+      res.redirect(`https://localhost:3000?authToken=${authToken}`);
+    })
+    .catch(err => {
+      console.error(err);
+      res.redirect(`https://localhost:3000/error`);
+    });
 });
 router.get("/facebook/callback", facebookAuth, authController.facebook);
 router.get("/github/callback", githubAuth, authController.github);
