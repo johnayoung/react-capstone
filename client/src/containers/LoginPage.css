@@ -60,6 +60,10 @@
   color: #757575;
 }
 
+.login-link {
+  text-decoration: none;
+}
+
 /* Loading Icon */
 .loading-wrapper, .loading {
   display: flex;

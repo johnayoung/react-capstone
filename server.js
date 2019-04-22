@@ -1,45 +1,37 @@
 const express = require("express");
-const fs = require("fs");
-const https = require("https");
 const path = require("path");
-const cors = require("cors");
-const socketio = require("socket.io");
-const morgan = require("morgan");
 const mongoose = require("mongoose");
+const chalk = require("chalk");
+const morgan = require("morgan");
 const passport = require("passport");
 const session = require("express-session");
-const localStrategy = require("./passport/local");
-const jwtStrategy = require("./passport/jwt");
+const cors = require("cors");
+const expressValidator = require("express-validator");
+const bodyParser = require("body-parser");
+const MongoStore = require("connect-mongo")(session);
+const lusca = require("lusca");
+const flash = require("express-flash");
 const passportInit = require("./passport/init");
 
-const { NODE_ENV, PORT, MONGODB_URI, SESSION_SECRET } = require("./config");
+const { PORT, SESSION_SECRET, MONGODB_URI, CLIENT_ORIGIN } = require("./config");
 const { dbConnect } = require("./db-mongoose");
 
 const usersRouter = require("./routes/users");
 const endpointsRouter = require("./routes/endpoints");
-const authRouter = require("./routes/auth");
-const oAuthRouter = require("./routes/oAuth");
-
-const certOptions = () => {
-  let certs;
-  if (process.env.NODE_ENV === "windows") {
-    certs = {
-      key: fs.readFileSync(path.resolve("certs/windows/server.key")),
-      cert: fs.readFileSync(path.resolve("certs/windows/server.crt"))
-    };
-  } else if (process.env.NODE_ENV === "development") {
-    certs = {
-      key: fs.readFileSync(path.resolve("certs/osx/server.key")),
-      cert: fs.readFileSync(path.resolve("certs/osx/server.crt"))
-    };
-  }
-
-  return certs;
-};
+const primaryRouter = require("./routes/primary");
 
 const app = express();
-app.use(cors());
-const server = https.createServer(certOptions(), app);
+
+// Connect to MongoDB
+mongoose.set("useFindAndModify", false);
+mongoose.set("useCreateIndex", true);
+mongoose.set("useNewUrlParser", true);
+mongoose.connect(MONGODB_URI);
+mongoose.connection.on("error", err => {
+  console.error(err);
+  console.log("%s MongoDB connection error. Please make sure MongoDB is running.", chalk.red("✗"));
+  process.exit();
+});
 
 // Log all requests. Skip logging during testing
 app.use(
@@ -51,46 +43,52 @@ app.use(
 // Create a static webserver
 app.use(express.static(path.join(__dirname, "client/build")));
 
-// Parse request body
-app.use(express.json());
-app.use(passport.initialize());
-passportInit();
-
-// Configure passport to utilize strategies
-// passport.use(localStrategy);
-// passport.use(jwtStrategy);
-// passport.use(googleStrategy);
-
-// saveUninitialized: true allows us to attach the socket id to the session
-// before we have athenticated the user
+// Express config
+app.set("host", process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0");
+app.set("port", process.env.PORT || 8080);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator());
 app.use(
   session({
-    secret: SESSION_SECRET,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    secret: SESSION_SECRET,
+    cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
+    store: new MongoStore({
+      url: MONGODB_URI,
+      autoReconnect: true
+    })
   })
 );
-
-// Connecting sockets to the server and adding them to the request
-// so that we can access them later in the controller
-const io = socketio(server);
-app.set("io", io);
+app.use(passport.initialize());
+app.use(passport.session());
+// app.use(flash());
+// app.use((req, res, next) => {
+//   if (req.path === "/api/upload") {
+//     next();
+//   } else {
+//     lusca.csrf()(req, res, next);
+//   }
+// });
+// app.use(lusca.xframe("SAMEORIGIN"));
+// app.use(lusca.xssProtection(true));
+// app.disable("x-powered-by");
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+// Accept requests from our client
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN
+  })
+);
 
 // Mount routers
 app.use("/api/users", usersRouter);
 app.use("/api/endpoints", endpointsRouter);
-app.use("/api", authRouter);
-app.use("/", oAuthRouter);
-
-// Serves up docs
-app.get("/api/docs", (req, res, next) => {
-  res.sendFile(path.join(__dirname, "./docs.html"));
-});
-
-// Handles GET requests
-// app.get("*", (req, res, next) => {
-//   res.sendFile(path.join(__dirname, "client/build/index.html"));
-// });
+app.use("/", primaryRouter);
 
 // Catch-all 404
 app.use(function(req, res, next) {
@@ -113,22 +111,14 @@ app.use((err, req, res, next) => {
   }
 });
 
-function runServer(port = PORT) {
-  server
-    .listen(port, () => {
-      console.info(`App listening on port ${server.address().port}`);
-    })
-    .on("error", err => {
-      console.error("Express failed to start");
-      console.error(err);
-    });
-}
-
-// Listen for incoming connections
-if (require.main === module) {
-  // Connect to DB and Listen for incoming connections
-  dbConnect();
-  runServer();
-}
+app.listen(app.get("port"), () => {
+  console.log(
+    "%s App is running at http://localhost:%d in %s mode",
+    chalk.green("✓"),
+    app.get("port"),
+    app.get("env")
+  );
+  console.log("  Press CTRL-C to stop\n");
+});
 
 module.exports = app; // Export for testing

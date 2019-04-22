@@ -8,7 +8,6 @@ import './LoginPage.css';
 import Login from './Login';
 import API_BASE_URL from '../config';
 
-const socket = io('https://localhost:8080');
 const providers = ['google'];
 
 export function LoginPage(props) {
@@ -24,7 +23,7 @@ export function LoginPage(props) {
       <div className="wrapper mt-16">
         <div className="">
           {providers.map(provider => (
-            <OAuth provider={provider} key={provider} socket={socket} />
+            <OAuth provider={provider} key={provider} />
           ))}
         </div>
       </div>
