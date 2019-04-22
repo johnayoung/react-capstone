@@ -12,6 +12,7 @@
   <AppDomains>
     <AppDomain>https://accounts.google.com/signin/oauth</AppDomain>
     <AppDomain>https://localhost:8080</AppDomain>
+    <AppDomain>https://884d7f77.ngrok.io</AppDomain>
   </AppDomains>
   <Hosts>
     <Host Name="Workbook"></Host>

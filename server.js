@@ -1,4 +1,6 @@
 const express = require("express");
+const fs = require("fs");
+const https = require("https");
 const path = require("path");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
@@ -11,7 +13,6 @@ const bodyParser = require("body-parser");
 const MongoStore = require("connect-mongo")(session);
 const lusca = require("lusca");
 const flash = require("express-flash");
-const passportInit = require("./passport/init");
 
 const { PORT, SESSION_SECRET, MONGODB_URI, CLIENT_ORIGIN } = require("./config");
 const { dbConnect } = require("./db-mongoose");
@@ -19,6 +20,23 @@ const { dbConnect } = require("./db-mongoose");
 const usersRouter = require("./routes/users");
 const endpointsRouter = require("./routes/endpoints");
 const primaryRouter = require("./routes/primary");
+
+const certOptions = () => {
+  let certs;
+  if (process.env.NODE_ENV === "windows") {
+    certs = {
+      key: fs.readFileSync(path.resolve("certs/windows/server.key")),
+      cert: fs.readFileSync(path.resolve("certs/windows/server.crt"))
+    };
+  } else if (process.env.NODE_ENV === "development") {
+    certs = {
+      key: fs.readFileSync(path.resolve("certs/osx/server.key")),
+      cert: fs.readFileSync(path.resolve("certs/osx/server.crt"))
+    };
+  }
+
+  return certs;
+};
 
 const app = express();
 
@@ -44,7 +62,6 @@ app.use(
 app.use(express.static(path.join(__dirname, "client/build")));
 
 // Express config
-app.set("host", process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0");
 app.set("port", process.env.PORT || 8080);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -75,7 +92,7 @@ app.use(passport.session());
 // app.use(lusca.xssProtection(true));
 // app.disable("x-powered-by");
 app.use((req, res, next) => {
-  res.locals.user = req.user;
+  res.locals.user = req.user || null;
   next();
 });
 // Accept requests from our client
@@ -111,14 +128,24 @@ app.use((err, req, res, next) => {
   }
 });
 
-app.listen(app.get("port"), () => {
-  console.log(
-    "%s App is running at http://localhost:%d in %s mode",
-    chalk.green("✓"),
-    app.get("port"),
-    app.get("env")
-  );
-  console.log("  Press CTRL-C to stop\n");
-});
+const server = https.createServer(certOptions(), app);
+
+function runServer(port = PORT) {
+  server
+    .listen(port, () => {
+      console.info(`App listening on port ${server.address().port}`);
+    })
+    .on("error", err => {
+      console.error("Express failed to start");
+      console.error(err);
+    });
+}
+
+// Listen for incoming connections
+if (require.main === module) {
+  // Connect to DB and Listen for incoming connections
+  dbConnect();
+  runServer();
+}
 
 module.exports = app; // Export for testing

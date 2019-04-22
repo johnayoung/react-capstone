@@ -29,16 +29,14 @@ export default class OAuth extends Component {
           </div>
         ) : (
           <div className="button-wrapper fadein-fast">
-            <button
-              type="button"
-              className={`${provider} ${disabled} button login-button text-white font-bold py-2 px-4 text-2xl`}
+            <a
+              // className={`${provider} ${disabled} button login-button text-white font-bold py-2 px-4 text-2xl no-underline`}
+              href={`${API_URL}/${provider}`}
             >
-              <a className="login-link" href={`${API_URL}/auth/${provider}`}>
-                {' '}
-                <FontAwesomeIcon icon={['fab', provider]} className="mr-4" />
-                Login with Google
-              </a>
-            </button>
+              {' '}
+              <FontAwesomeIcon icon={['fab', provider]} className="mr-4" />
+              Login with Google
+            </a>
           </div>
         )}
       </div>

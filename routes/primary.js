@@ -1,5 +1,7 @@
 const express = require("express");
 const passport = require("passport");
+const querystring = require("querystring");
+const { CLIENT_ORIGIN } = require("../config");
 
 const router = express.Router();
 
@@ -26,13 +28,13 @@ router.get(
 );
 
 /* ========== OAUTH AUTHENTICATION ROUTES ========== */
-router.get("/auth/google", passport.authenticate("google", { scope: "profile email" }));
-router.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/login" }),
-  (req, res) => {
-    res.redirect(req.session.returnTo || "/");
-  }
-);
+const googleAuth = passport.authenticate("google", {
+  scope: ["profile", "email"],
+  failureRedirect: `${CLIENT_ORIGIN}/login`
+});
+router.get("/google/callback", googleAuth, (req, res, next) => {
+  res.redirect(`${CLIENT_ORIGIN}`);
+});
+router.get("/google", googleAuth);
 
 module.exports = router;

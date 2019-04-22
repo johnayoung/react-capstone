@@ -1,11 +1,11 @@
 require("dotenv").config();
 
-const providers = ["twitter", "google", "facebook", "github"];
+const providers = ["google"];
 
 const callbacks = providers.map(provider => {
   return process.env.NODE_ENV === "production"
     ? `https://https://warm-peak-72707.herokuapp.com/${provider}/callback`
-    : `https://884d7f77.ngrok.io/${provider}/callback`;
+    : `https://localhost:8080/${provider}/callback`;
 });
 
 const [googleURL] = callbacks;
@@ -13,7 +13,7 @@ const [googleURL] = callbacks;
 exports.CLIENT_ORIGIN =
   process.env.NODE_ENV === "production"
     ? "https://warm-peak-72707.herokuapp.com"
-    : ["https://127.0.0.1:3000", "https://localhost:3000", "https://884d7f77.ngrok.io"];
+    : "https://localhost:3000";
 
 module.exports = {
   PORT: process.env.PORT || 8080,
@@ -29,11 +29,12 @@ module.exports = {
   CMC_KEYS: process.env.CMC_KEYS,
   LOCAL_SSL_KEY: "../../local-cert-generator/server.key",
   LOCAL_SSL_CRT: "../../local-cert-generator/server.crt",
-  GOOGLE_ID: process.env.GOOGLE_CLIENT_ID,
-  GOOGLE_SECRET: process.env.GOOGLE_CLIENT_SECRET,
+  GOOGLE_ID: process.env.GOOGLE_ID,
+  GOOGLE_SECRET: process.env.GOOGLE_SECRET,
   GOOGLE_CONFIG: {
-    clientID: process.env.GOOGLE_CLIENT_ID,
-    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: googleURL
+    clientID: process.env.GOOGLE_ID,
+    clientSecret: process.env.GOOGLE_SECRET,
+    callbackURL: googleURL,
+    passReqToCallback: true
   }
 };
