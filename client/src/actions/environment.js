@@ -29,12 +29,6 @@ export const setEnvironment = environment => ({
 export default function reducer(state = initialState, action) {
   if (action.type === SET_ENVIRONMENT) {
     const { environment } = action;
-    console.log({
-      environment: action.environment,
-      appName: environmentDetails[environment].appName,
-      header: environmentDetails[environment].header,
-      subheader: environmentDetails[environment].subheader
-    });
     return Object.assign({}, state, {
       environment: action.environment,
       appName: environmentDetails[environment].appName,

@@ -78,8 +78,8 @@ passport.use(
             user.google = profile.id;
             user.tokens.push({ kind: "google", accessToken });
             user.profile.name = user.profile.name || profile.displayName;
-            user.profile.gender = user.profile.gender || profile._json.gender;
-            user.profile.picture = user.profile.picture || profile._json.image.url;
+            // user.profile.gender = user.profile.gender || profile._json.gender;
+            // user.profile.picture = user.profile.picture || profile._json.image.url;
             user.save(err => {
               done(err, user);
             });

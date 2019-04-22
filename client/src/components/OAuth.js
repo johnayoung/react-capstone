@@ -30,7 +30,7 @@ export default class OAuth extends Component {
         ) : (
           <div className="button-wrapper fadein-fast">
             <a
-              // className={`${provider} ${disabled} button login-button text-white font-bold py-2 px-4 text-2xl no-underline`}
+              className={`${provider} ${disabled} button login-button text-white font-bold py-2 px-4 text-2xl no-underline`}
               href={`${API_URL}/${provider}`}
             >
               {' '}
