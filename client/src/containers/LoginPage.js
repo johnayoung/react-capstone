@@ -21,6 +21,8 @@ export function LoginPage(props) {
     <div className="home flex justify-center items-center mx-auto h-full">
       {/* <Login /> */}
       <div className="wrapper mt-16">
+        <Login />
+        <p className="m-8 text-2xl text-center font-bold">or</p>
         <div className="">
           {providers.map(provider => (
             <OAuth provider={provider} key={provider} />

@@ -73,7 +73,6 @@ const Registration = props => {
           </button>
         </div>
       </form>
-      <a href={`${API_BASE_URL}/auth/google`}>Sign In with Google</a>
     </div>
   );
 };
