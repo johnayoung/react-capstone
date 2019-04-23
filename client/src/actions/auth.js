@@ -2,7 +2,8 @@ import jwtDecode from 'jwt-decode';
 import { SubmissionError } from 'redux-form';
 import axios from 'axios';
 
-import API_BASE_URL from '../config';
+import { API_BASE_URL, API_URL } from '../config';
+
 import { normalizeResponseErrors } from './utils';
 import { saveAuthToken, clearAuthToken } from '../localStorage';
 
@@ -44,16 +45,16 @@ const storeAuthInfo = (authToken, dispatch) => {
   saveAuthToken(authToken);
 };
 
-export const login = (username, password) => dispatch => {
+export const login = (email, password) => dispatch => {
   dispatch(authRequest());
   const config = {
     method: 'post',
-    url: `${API_BASE_URL}/login`,
+    url: `${API_URL}/login`,
     headers: {
       'Content-Type': 'application/json'
     },
     data: JSON.stringify({
-      username,
+      email,
       password
     })
   };
@@ -81,7 +82,7 @@ export const login = (username, password) => dispatch => {
 
 export const refreshAuthToken = () => (dispatch, getState) => {
   dispatch(authRequest());
-  const authToken = getState().auth.authToken;
+  const { authToken } = getState().auth;
   return fetch(`${API_BASE_URL}/refresh`, {
     method: 'POST',
     headers: {

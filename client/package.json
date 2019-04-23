@@ -28,6 +28,7 @@
     "path-to-regexp": "^3.0.0",
     "query-string": "^6.4.2",
     "react": "^16.8.6",
+    "react-cookie": "^3.1.2",
     "react-dom": "^16.8.6",
     "react-fontawesome": "^1.6.1",
     "react-highlight": "^0.12.0",

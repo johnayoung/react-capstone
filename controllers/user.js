@@ -3,9 +3,18 @@ const crypto = require("crypto");
 const nodemailer = require("nodemailer");
 const passport = require("passport");
 const _ = require("lodash");
+const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const { CLIENT_ORIGIN, JWT_EXPIRY, JWT_SECRET } = require("../config");
 
 const randomBytesAsync = promisify(crypto.randomBytes);
+
+function createAuthToken(user) {
+  return jwt.sign({ user }, JWT_SECRET, {
+    subject: user.email,
+    expiresIn: JWT_EXPIRY
+  });
+}
 
 /**
  * POST /login
@@ -19,24 +28,31 @@ exports.postLogin = (req, res, next) => {
   const errors = req.validationErrors();
 
   if (errors) {
-    req.flash("errors", errors);
-    return res.redirect("/login");
+    const err = new Error(errors);
+    err.status = 422;
+    err.reason = "ValidationError";
+    return next(err);
   }
 
   passport.authenticate("local", (err, user, info) => {
     if (err) {
+      console.log("we have an error in auth", err);
       return next(err);
     }
     if (!user) {
-      req.flash("errors", info);
-      return res.redirect("/login");
+      const nf = new Error("Email not found");
+      nf.status = 404;
+      nf.reason = "ValidationError";
+      nf.location = "email";
+      return next(nf);
     }
     req.logIn(user, err => {
       if (err) {
         return next(err);
       }
-      req.flash("success", { msg: "Success! You are logged in." });
-      res.redirect(req.session.returnTo || "/");
+      req.session.username = req.body.username;
+      console.log(req.session);
+      res.end();
     });
   })(req, res, next);
 };

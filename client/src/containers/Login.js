@@ -3,7 +3,7 @@ import { Field, reduxForm, focus } from 'redux-form';
 import RenderField from '../components/RenderField';
 import Error from '../components/Error';
 import { login } from '../actions/auth';
-import { required, nonEmpty } from '../validators';
+import { required, nonEmpty, email } from '../validators';
 
 const Login = props => {
   const { error, handleSubmit, pristine, submitting } = props;
@@ -16,12 +16,12 @@ const Login = props => {
       >
         <div className="mb-4">
           <Field
-            name="username"
+            name="email"
             type="text"
             component={RenderField}
-            label="Username"
-            validate={[required, nonEmpty]}
-            autocomplete="username"
+            label="Email"
+            validate={[required, nonEmpty, email]}
+            autocomplete="email"
           />
         </div>
         <div className="mb-6">
@@ -51,6 +51,6 @@ const Login = props => {
 
 export default reduxForm({
   form: 'login',
-  onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username')),
-  onSubmit: (values, dispatch) => dispatch(login(values.username, values.password))
+  onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'email')),
+  onSubmit: (values, dispatch) => dispatch(login(values.email, values.password))
 })(Login);

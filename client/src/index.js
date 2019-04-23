@@ -12,6 +12,7 @@ import stringincludes from 'core-js/es/string/virtual/includes';
 import arrayincludes from 'core-js/es/array/virtual/includes';
 import repeat from 'core-js/es/string/virtual/repeat';
 import assign from 'core-js/es/object/assign';
+import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import store from './store';
 import * as serviceWorker from './serviceWorker';
@@ -23,9 +24,11 @@ import './misc.css';
 const app = (Component, host) => {
   ReactDOM.render(
     <Provider store={store}>
-      <Component>
-        <App host={host} />
-      </Component>
+      <CookiesProvider>
+        <Component>
+          <App host={host} />
+        </Component>
+      </CookiesProvider>
     </Provider>,
     document.getElementById('root')
   );

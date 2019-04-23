@@ -71,7 +71,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     secret: SESSION_SECRET,
-    cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
+    cookie: { maxAge: 1209600000, httpOnly: false }, // two weeks in milliseconds
     store: new MongoStore({
       url: MONGODB_URI,
       autoReconnect: true

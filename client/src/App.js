@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { withCookies, Cookies } from 'react-cookie';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import queryString from 'query-string';
 import Header from './containers/Header';
 import { fetchEndpoints } from './actions/endpoints';
 import Dashboard from './containers/Dashboard';
@@ -23,11 +23,8 @@ class App extends Component {
     } else {
       this.props.dispatch(setEnvironment('excel'));
     }
-    const query = queryString.parse(window.location.search);
-    console.log('query is ', query);
-    if (query.authToken) {
-      window.localStorage.setItem('authToken', query.authToken);
-    }
+    console.log(this.props);
+    console.log(this.props.cookies.cookies);
   }
 
   render() {
@@ -59,4 +56,4 @@ const mapStateToProps = state => ({
   environment: state.environment
 });
 
-export default withRouter(connect(mapStateToProps)(App));
+export default withRouter(withCookies(connect(mapStateToProps)(App)));

@@ -2,7 +2,7 @@ import React from 'react';
 import { Field, reduxForm, focus } from 'redux-form';
 import { registerUser } from '../actions/users';
 import { login } from '../actions/auth';
-import { required, nonEmpty, matches, length, isTrimmed } from '../validators';
+import { required, nonEmpty, matches, length, isTrimmed, email } from '../validators';
 import RenderField from '../components/RenderField';
 import Error from '../components/Error';
 import API_BASE_URL from '../config';
@@ -30,12 +30,12 @@ const Registration = props => {
         </div>
         <div className="mb-4">
           <Field
-            name="username"
+            name="email"
             type="text"
             component={RenderField}
-            label="Username"
-            validate={[required, nonEmpty, isTrimmed]}
-            autocomplete="username"
+            label="Email"
+            validate={[required, nonEmpty, isTrimmed, email]}
+            autocomplete="email"
           />
         </div>
         <div className="mb-4">
@@ -50,7 +50,7 @@ const Registration = props => {
         </div>
         <div className="mb-4">
           <Field
-            name="passwordConfirm"
+            name="confirmPassword"
             type="password"
             component={RenderField}
             label="Confirm Password"
@@ -80,9 +80,9 @@ const Registration = props => {
 export default reduxForm({
   form: 'registration',
   onSubmit: (values, dispatch) => {
-    const { username, password, fullname } = values;
-    const user = { username, password, fullname };
-    return dispatch(registerUser(user)).then(() => dispatch(login(username, password)));
+    const { email, password, confirmPassword, fullname } = values;
+    const user = { email, password, confirmPassword, fullname };
+    return dispatch(registerUser(user)).then(() => dispatch(login(email, password)));
   },
   onSubmitFail: (errors, dispatch) => dispatch(focus('registration', Object.keys(errors)[0]))
 })(Registration);

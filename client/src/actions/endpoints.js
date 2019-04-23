@@ -1,7 +1,7 @@
 import { SubmissionError } from 'redux-form';
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
-import API_BASE_URL from '../config';
+import { API_BASE_URL, API_URL } from '../config';
 import slugify from '../utils/slugify';
 import setData from '../excel';
 import tryCatch from '../excel/functionHelper';

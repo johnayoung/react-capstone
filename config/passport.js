@@ -30,6 +30,7 @@ passport.use(
       }
       user.comparePassword(password, (err, isMatch) => {
         if (err) {
+          console.log("do we have an error?", err);
           return done(err);
         }
         if (isMatch) {

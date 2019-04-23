@@ -5,7 +5,7 @@ const providers = ["google"];
 const callbacks = providers.map(provider => {
   return process.env.NODE_ENV === "production"
     ? `https://https://warm-peak-72707.herokuapp.com/${provider}/callback`
-    : `https://localhost:8080/${provider}/callback`;
+    : `https://127.0.0.1:8080/${provider}/callback`;
 });
 
 const [googleURL] = callbacks;
@@ -13,11 +13,11 @@ const [googleURL] = callbacks;
 exports.CLIENT_ORIGIN =
   process.env.NODE_ENV === "production"
     ? "https://warm-peak-72707.herokuapp.com"
-    : "https://localhost:3000";
+    : "https://127.0.0.1:3000";
 
 module.exports = {
   PORT: process.env.PORT || 8080,
-  CLIENT_ORIGIN: process.env.CLIENT_ORIGIN || "https://localhost:3000",
+  CLIENT_ORIGIN: process.env.CLIENT_ORIGIN || "https://127.0.0.1:3000",
   SESSION_SECRET: process.env.SESSION_SECRET,
   NODE_ENV: process.env.NODE_ENV || "development",
   MONGODB_URI:

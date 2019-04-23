@@ -3,10 +3,18 @@ const crypto = require("crypto");
 const mongoose = require("mongoose");
 
 delete mongoose.connection.models.User;
+const randomUsername =
+  Math.random()
+    .toString(36)
+    .substring(2, 15) +
+  Math.random()
+    .toString(36)
+    .substring(2, 15);
 
 const userSchema = new mongoose.Schema(
   {
     email: { type: String, unique: true },
+    username: String,
     password: String,
     passwordResetToken: String,
     passwordResetExpires: Date,
@@ -49,6 +57,7 @@ userSchema.pre("save", function save(next) {
         return next(err);
       }
       user.password = hash;
+      user.username = randomUsername;
       next();
     });
   });
