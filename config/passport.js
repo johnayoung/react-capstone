@@ -4,7 +4,7 @@ const { OAuth2Strategy: GoogleStrategy } = require("passport-google-oauth");
 const _ = require("lodash");
 const { GOOGLE_CONFIG } = require("../config");
 
-const User = require("../models/User");
+const User = require("../models/user");
 
 passport.serializeUser((user, done) => {
   done(null, user.id);

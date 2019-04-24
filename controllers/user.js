@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 const passport = require("passport");
 const _ = require("lodash");
 const jwt = require("jsonwebtoken");
-const User = require("../models/User");
+const User = require("../models/user");
 const { CLIENT_ORIGIN, JWT_EXPIRY, JWT_SECRET } = require("../config");
 
 const randomBytesAsync = promisify(crypto.randomBytes);
