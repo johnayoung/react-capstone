@@ -4,7 +4,7 @@ const providers = ["google"];
 
 const callbacks = providers.map(provider => {
   return process.env.NODE_ENV === "production"
-    ? `https://https://warm-peak-72707.herokuapp.com/${provider}/callback`
+    ? `https://warm-peak-72707.herokuapp.com/${provider}/callback`
     : `https://localhost:8080/${provider}/callback`;
 });
 
