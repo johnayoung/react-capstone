@@ -10,7 +10,7 @@
     "client": "node utils/client.js",
     "dev": "nodemon server.js",
     "windows": "cross-env NODE_ENV=windows nodemon server.js",
-    "test": "cross-env NODE_ENV=test mocha",
+    "test": "cross-env NODE_ENV=test mocha --exit --timeout 5000",
     "cover": "nyc --reporter=lcov --reporter=text-summary npm test",
     "seed": "node utils/seed-database.js",
     "proxy": "concurrently \"npm run server\" \"npm run client\"",
