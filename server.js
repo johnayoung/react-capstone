@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs");
+const http = require("http");
 const https = require("https");
 const path = require("path");
 const mongoose = require("mongoose");
@@ -71,7 +72,7 @@ app.use(
     resave: true,
     saveUninitialized: true,
     secret: SESSION_SECRET,
-    cookie: { maxAge: 1209600000, httpOnly: false }, // two weeks in milliseconds
+    cookie: { maxAge: 1209600000 }, // two weeks in milliseconds
     store: new MongoStore({
       url: MONGODB_URI,
       autoReconnect: true
@@ -128,7 +129,12 @@ app.use((err, req, res, next) => {
   }
 });
 
-const server = https.createServer(certOptions(), app);
+let server;
+if (process.env.NODE_ENV === "production") {
+  server = http.createServer(app);
+} else {
+  server = https.createServer(certOptions(), app);
+}
 
 function runServer(port = PORT) {
   server

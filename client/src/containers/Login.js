@@ -1,4 +1,5 @@
 import React from 'react';
+import { useCookies } from 'react-cookie';
 import { Field, reduxForm, focus } from 'redux-form';
 import RenderField from '../components/RenderField';
 import Error from '../components/Error';
@@ -6,6 +7,7 @@ import { login } from '../actions/auth';
 import { required, nonEmpty, email } from '../validators';
 
 const Login = props => {
+  const [cookies, setCookie] = useCookies(['name']);
   const { error, handleSubmit, pristine, submitting } = props;
   return (
     <div className="w-full max-w-xs">

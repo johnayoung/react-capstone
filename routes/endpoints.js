@@ -104,13 +104,7 @@ router.post(
     // const all = parse(testReq);
     // console.log(all);
 
-    const newEndpoint = createEndpoint(
-      name,
-      description,
-      baseUrl,
-      parameters,
-      userId
-    );
+    const newEndpoint = createEndpoint(name, description, baseUrl, parameters, userId);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -129,9 +123,7 @@ router.post(
       .catch(err => {
         // Check for duplicate entry in Mongo
         if (err.code === 11000) {
-          err = new Error(
-            "An endpoint you created with that name already exists"
-          );
+          err = new Error("An endpoint you created with that name already exists");
           err.status = 400;
         }
         next(err);
@@ -155,8 +147,10 @@ router.get("/proxy", (req, res, next) => {
 
   if (configs[collectionName]) {
     Object.assign(config, configs[collectionName]);
-    console.log("config is now ", config);
   }
+
+  console.log(req.session);
+  console.log(req.body);
 
   axios(config)
     .then(response => {

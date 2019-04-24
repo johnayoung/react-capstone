@@ -50,9 +50,9 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      req.session.username = req.body.username;
-      console.log(req.session);
-      res.end();
+
+      res.cookie(req.session.cookie);
+      res.send(req.session.cookie);
     });
   })(req, res, next);
 };
