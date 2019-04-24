@@ -130,7 +130,7 @@ app.use((err, req, res, next) => {
 });
 
 let server;
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production" || process.env.NODE_ENV === "test") {
   server = http.createServer(app);
 } else {
   server = https.createServer(certOptions(), app);
