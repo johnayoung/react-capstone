@@ -5,7 +5,7 @@ const { parse } = require("url");
 const endpointSchema = new mongoose.Schema(
   {
     category: { type: String },
-    collectionName: { type: String },
+    collectionName: { type: mongoose.Schema.Types.ObjectId, ref: "Collection" },
     apiDocumentation: { type: String },
     name: { type: String, required: true, lowercase: true, trim: true },
     description: { type: String },
@@ -68,10 +68,6 @@ endpointSchema.statics.prettify = str => {
       return part.charAt(0).toUpperCase() + part.slice(1);
     })
     .join(" ");
-};
-
-endpointSchema.methods.serialize = () => {
-  return console.log("this is working");
 };
 
 module.exports = mongoose.model("Endpoint", endpointSchema);

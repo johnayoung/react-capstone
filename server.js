@@ -20,6 +20,7 @@ const { dbConnect } = require("./db-mongoose");
 
 const usersRouter = require("./routes/users");
 const endpointsRouter = require("./routes/endpoints");
+const collectionsRouter = require("./routes/collections");
 const primaryRouter = require("./routes/primary");
 
 const certOptions = () => {
@@ -106,6 +107,7 @@ app.use(
 // Mount routers
 app.use("/api/users", usersRouter);
 app.use("/api/endpoints", endpointsRouter);
+app.use("/api/collections", collectionsRouter);
 app.use("/", primaryRouter);
 
 // Catch-all 404

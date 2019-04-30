@@ -9,6 +9,7 @@ import CardContainer from './CardContainer';
 import FieldArraysForm from './FieldArraysForm';
 import NotFound from './NotFound';
 import EndpointSubmit from './EndpointSubmit';
+import Collections from '../components/collections/Collections';
 
 export class Dashboard extends Component {
   content() {
@@ -19,6 +20,7 @@ export class Dashboard extends Component {
       <Switch>
         <Route exact path="/" component={LandingPage} />
         <Route path="/browse" component={CardContainer} />
+        <Route path="/collections" component={Collections} />
         <Route path="/signup" component={RegistrationPage} />
         <Route path="/login" component={LoginPage} />
         {/* <Route path="/add" component={FieldArraysForm} /> */}

@@ -1,17 +1,10 @@
-import '@babel/polyfill';
+// import '@babel/polyfill';
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// Polyfills
-/* eslint no-extend-native: 0 */
-// import 'es6-promise/auto';
-import 'whatwg-fetch';
-import 'core-js/es/promise';
-import stringincludes from 'core-js/es/string/virtual/includes';
-import arrayincludes from 'core-js/es/array/virtual/includes';
-import repeat from 'core-js/es/string/virtual/repeat';
-import assign from 'core-js/es/object/assign';
 import { CookiesProvider } from 'react-cookie';
 import App from './App';
 import store from './store';
@@ -35,10 +28,6 @@ const app = (Component, host) => {
 };
 
 window.Office.onReady(info => {
-  String.prototype.includes = stringincludes;
-  String.prototype.repeat = repeat;
-  Array.prototype.includes = arrayincludes;
-  Object.assign = assign;
   return info;
 }).then(info => {
   return info.host === 'Excel' ? app(HashRouter, 'excel') : app(HashRouter, 'web');
